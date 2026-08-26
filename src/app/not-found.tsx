@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { PageMotion } from "@/components/page-motion";
 
 export const metadata: Metadata = {
   title: "Not found",
@@ -8,19 +9,30 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-dvh px-5 pt-14 pb-16 sm:px-6 sm:pt-20 sm:pb-24">
-      <article className="mx-auto max-w-2xl animate-rise">
-        <p className="text-[12px] tracking-wide text-accent uppercase">404</p>
-        <h1 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">Page not found</h1>
-        <p className="mt-4 max-w-[42ch] text-pretty text-muted-foreground">
+    <PageMotion>
+      <article className="mx-auto max-w-3xl">
+        <p className="text-[11px] tracking-[0.22em] text-signal uppercase" data-intro>
+          404
+        </p>
+        <h1 className="mt-4 text-4xl leading-none font-medium tracking-[-0.04em] sm:text-5xl" data-intro>
+          Page not found
+        </h1>
+        <div className="reveal-line mt-8 h-px w-full bg-linear-to-r from-accent via-border to-transparent" />
+        <p className="mt-6 max-w-[42ch] text-pretty text-muted-foreground" data-intro>
           This path is not part of the site. Start from the homepage or browse writing.
         </p>
-        <nav aria-label="Recovery links" className="mt-8 flex flex-wrap gap-4 text-[12px] text-muted-foreground">
-          <Link href="/" className="hover:text-accent">home</Link>
-          <Link href="/blog" className="hover:text-accent">writing</Link>
-          <a href="/sitemap.xml" className="hover:text-accent">sitemap</a>
+        <nav aria-label="Recovery links" className="mt-8 flex flex-wrap gap-4 text-[12px] text-muted-foreground" data-intro>
+          <Link href="/" className="hover:text-accent">
+            home
+          </Link>
+          <Link href="/blog" className="hover:text-accent">
+            writing
+          </Link>
+          <a href="/sitemap.xml" className="hover:text-accent">
+            sitemap
+          </a>
         </nav>
       </article>
-    </main>
+    </PageMotion>
   );
 }
