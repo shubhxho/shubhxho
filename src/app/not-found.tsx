@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { PageMotion } from "@/components/page-motion";
+import { FadeIn } from "@/components/fade-in";
 
 export const metadata: Metadata = {
   title: "Not found",
@@ -9,30 +9,17 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <PageMotion>
-      <article className="mx-auto max-w-3xl">
-        <p className="text-[11px] tracking-[0.22em] text-signal uppercase" data-intro>
-          404
+    <main className="flex flex-1 flex-col justify-center px-6 py-16 sm:px-8">
+      <FadeIn className="mx-auto max-w-3xl">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight">page not found</h1>
+        <p className="mb-6 max-w-md text-base text-muted-foreground">
+          this path is not part of the site.
         </p>
-        <h1 className="mt-4 text-4xl leading-none font-medium tracking-[-0.04em] sm:text-5xl" data-intro>
-          Page not found
-        </h1>
-        <div className="reveal-line mt-8 h-px w-full bg-linear-to-r from-accent via-border to-transparent" />
-        <p className="mt-6 max-w-[42ch] text-pretty text-muted-foreground" data-intro>
-          This path is not part of the site. Start from the homepage or browse writing.
+        <p className="text-sm">
+          [ <Link href="/" className="bracket-link">home</Link> ]{" "}
+          [ <Link href="/blog" className="bracket-link">blog</Link> ]
         </p>
-        <nav aria-label="Recovery links" className="mt-8 flex flex-wrap gap-4 text-[12px] text-muted-foreground" data-intro>
-          <Link href="/" className="hover:text-accent">
-            home
-          </Link>
-          <Link href="/blog" className="hover:text-accent">
-            writing
-          </Link>
-          <a href="/sitemap.xml" className="hover:text-accent">
-            sitemap
-          </a>
-        </nav>
-      </article>
-    </PageMotion>
+      </FadeIn>
+    </main>
   );
 }

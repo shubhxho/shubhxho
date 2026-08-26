@@ -2,14 +2,12 @@
 
 @theme inline {
   --font-mono: var(--font-jetbrains-face);
-  --color-background: #07080c;
-  --color-foreground: #e8eaef;
-  --color-muted-foreground: #8b919e;
-  --color-surface: #11131a;
-  --color-border: #242833;
-  --color-accent: #5ec8ff;
-  --color-accent-soft: #163247;
-  --color-signal: #ffb454;
+  --color-background: #fafafa;
+  --color-foreground: #111111;
+  --color-muted-foreground: #666666;
+  --color-surface: #f0f0f0;
+  --color-border: #e5e5e5;
+  --color-accent: #111111;
 }
 
 html,
@@ -20,103 +18,80 @@ body {
 
 body {
   font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  background-image:
-    radial-gradient(ellipse 90% 55% at 15% -10%, color-mix(in oklab, var(--color-accent) 16%, transparent), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 95% 5%, color-mix(in oklab, var(--color-signal) 10%, transparent), transparent 50%),
-    linear-gradient(180deg, #0b0d14 0%, var(--color-background) 40%, #05060a 100%);
-  background-attachment: fixed;
-}
-
-body::before {
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.35;
-  background-image:
-    linear-gradient(color-mix(in oklab, var(--color-border) 65%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--color-border) 65%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, black, transparent 75%);
 }
 
 ::selection {
-  background-color: var(--color-accent-soft);
-  color: var(--color-accent);
+  background-color: #111111;
+  color: #fafafa;
 }
 
 ::-moz-selection {
-  background-color: var(--color-accent-soft);
-  color: var(--color-accent);
+  background-color: #111111;
+  color: #fafafa;
 }
 
 a {
   color: inherit;
-  text-underline-offset: 3px;
+  text-underline-offset: 2px;
 }
 
-.site-shell {
-  position: relative;
-  z-index: 1;
+.link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  transition: color 150ms ease;
 }
 
-.hero-letter {
-  display: inline-block;
-  will-change: transform, opacity;
+.link:hover {
+  color: #666666;
 }
 
-.reveal-line {
-  transform-origin: left center;
+.bracket-link {
+  transition: color 150ms ease;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-letter {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+.bracket-link:hover {
+  color: #666666;
 }
 
 .prose {
-  color: var(--color-muted-foreground);
-  font-size: 0.9375rem;
-  line-height: 1.8;
+  color: var(--color-foreground);
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
 
 .prose > * + * {
-  margin-top: 1.25rem;
+  margin-top: 1.1rem;
 }
 
 .prose h2,
 .prose h3 {
   color: var(--color-foreground);
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 .prose h2 {
-  margin-top: 2rem;
-  font-size: 1.125rem;
+  margin-top: 1.75rem;
+  font-size: 0.875rem;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
 }
 
 .prose h3 {
-  margin-top: 1.5rem;
-  font-size: 1rem;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
 }
 
 .prose a {
-  color: var(--color-accent);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
 }
 
 .prose a:hover {
-  color: var(--color-signal);
+  color: #666666;
 }
 
 .prose strong {
-  color: var(--color-foreground);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .prose ul,
@@ -125,21 +100,19 @@ a {
 }
 
 .prose li + li {
-  margin-top: 0.4rem;
+  margin-top: 0.35rem;
 }
 
 .prose blockquote {
-  border-left: 2px solid var(--color-accent);
-  color: var(--color-foreground);
+  border-left: 2px solid var(--color-border);
+  color: var(--color-muted-foreground);
   padding-left: 1rem;
 }
 
 .prose code {
-  border-radius: 0.25rem;
   background-color: var(--color-surface);
-  padding: 0.1rem 0.35rem;
-  color: var(--color-accent);
-  font-size: 0.875em;
+  padding: 0.05rem 0.3rem;
+  font-size: 0.85em;
 }
 
 .prose ol {
@@ -153,10 +126,9 @@ a {
 .prose pre {
   overflow-x: auto;
   border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
-  background-color: #05060a;
-  padding: 1rem;
-  color: #e8eaef;
+  background-color: #111111;
+  padding: 0.9rem;
+  color: #fafafa;
 }
 
 .prose pre code {
@@ -167,6 +139,4 @@ a {
 
 .prose img {
   width: 100%;
-  border-radius: 0.75rem;
-  outline: 1px solid var(--color-border);
 }

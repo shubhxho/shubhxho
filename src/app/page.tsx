@@ -1,42 +1,37 @@
 import { HomeView } from "@/components/home-view";
-import { formatPostDate, getAllPosts } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 const projects = [
   {
-    title: "Blender artworks",
-    description: "3D studies, stills, and experiments",
-    year: "Ongoing",
-    href: "https://gallery.shubhxho.com",
-    tag: "visual",
-  },
-  {
     title: "wolfpdf",
-    description: "Wolfenstein 3D in a PDF",
-    year: "2026",
+    description: "wolfenstein 3d running inside a pdf.",
     href: "https://github.com/shubhxho/wolfpdf",
-    tag: "systems",
+    role: "systems experiment",
   },
   {
     title: "kinetic",
-    description: "A native macOS robotics simulator",
-    year: "2026",
+    description: "a native macos robotics simulator.",
     href: "https://github.com/shubhxho/kinetic",
-    tag: "robotics",
-  },
-  {
-    title: "polymarket-model",
-    description: "Prediction-market research and tooling",
-    year: "2026",
-    href: "https://github.com/shubhxho/polymarket-model",
-    tag: "ai",
+    role: "robotics",
   },
   {
     title: "sable",
-    description: "A 265kb Rust chess engine",
-    year: "2026",
+    description: "a 265kb rust chess engine.",
     href: "https://github.com/shubhxho/sable",
-    tag: "engines",
+    role: "engines",
+  },
+  {
+    title: "polymarket-model",
+    description: "prediction-market research and tooling.",
+    href: "https://github.com/shubhxho/polymarket-model",
+    role: "ai research",
+  },
+  {
+    title: "blender artworks",
+    description: "3d studies, stills, and experiments.",
+    href: "https://gallery.shubhxho.com",
+    role: "visual work",
   },
 ] as const;
 
@@ -85,7 +80,6 @@ export default function Home() {
     slug: post.slug,
     title: post.title,
     description: post.description,
-    dateLabel: formatPostDate(post.date),
   }));
 
   return (

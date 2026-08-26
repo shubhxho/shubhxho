@@ -85,7 +85,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07080c",
+  themeColor: "#fafafa",
 };
 
 export default function RootLayout({
@@ -110,7 +110,7 @@ export default function RootLayout({
           title={`${site.name} updates`}
         />
       </head>
-      <body className="isolate overflow-x-hidden font-mono text-[15px] leading-7 text-foreground">
+      <body className="flex min-h-dvh flex-col overflow-x-hidden bg-background font-mono text-foreground">
         <Header />
         {children}
         <Footer />
