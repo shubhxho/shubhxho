@@ -9,6 +9,7 @@ const projects = [
     href: "https://github.com/shubhxho/wolfpdf",
     role: "systems experiment",
     tip: "rust · pdf · 2026",
+    metric: "pdf runtime",
   },
   {
     title: "kinetic",
@@ -16,6 +17,7 @@ const projects = [
     href: "https://github.com/shubhxho/kinetic",
     role: "robotics",
     tip: "macos · simulation · 2026",
+    metric: "sim stack",
   },
   {
     title: "sable",
@@ -23,13 +25,15 @@ const projects = [
     href: "https://github.com/shubhxho/sable",
     role: "engines",
     tip: "rust · chess · 265kb",
+    metric: "265kb",
   },
   {
     title: "polymarket-model",
-    description: "prediction-market research, modeling, and tooling.",
+    description: "prediction-market research, modeling, and tooling with a quant edge.",
     href: "https://github.com/shubhxho/polymarket-model",
     role: "ai research",
     tip: "markets · modeling · research",
+    metric: "quant / ml",
   },
   {
     title: "blender artworks",
@@ -37,6 +41,7 @@ const projects = [
     href: "https://gallery.shubhxho.com",
     role: "visual work",
     tip: "blender · stills · ongoing",
+    metric: "visual",
   },
 ] as const;
 

@@ -37,7 +37,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <main className="flex-1 px-6 py-12 sm:px-8 sm:py-16">
-      <FadeIn className="mx-auto max-w-2xl">
+      <FadeIn className="mx-auto max-w-3xl">
         <p className="mb-8 text-sm">
           [{" "}
           <Link href="/blog" className="bracket-link">
@@ -45,7 +45,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </Link>{" "}
           ]
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-signal">
           {formatPostDate(post.date).toLowerCase()} · {post.readingTime}
         </p>
         <h1 className="mt-2 mb-3 text-[1.75rem] leading-tight font-bold tracking-tight text-pretty sm:text-3xl">

@@ -7,11 +7,12 @@ export function TrustPage({ slug }: { slug: TrustPageSlug }) {
 
   return (
     <main className="flex-1 px-6 py-12 sm:px-8 sm:py-16">
-      <FadeIn className="mx-auto max-w-2xl">
+      <FadeIn className="mx-auto max-w-3xl">
+        <p className="mb-3 text-[11px] tracking-[0.22em] text-signal uppercase">{page.title}</p>
         <h1 className="mb-7 text-[1.75rem] font-bold tracking-tight sm:text-3xl">
           {page.heading.toLowerCase()}
         </h1>
-        <div className="max-w-xl space-y-5 text-[15px] leading-7 sm:text-base">
+        <div className="max-w-xl space-y-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
           {page.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}

@@ -14,15 +14,18 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#fafafa",
-          color: "#111111",
+          background: "#05070b",
+          color: "#e8edf5",
           padding: 80,
         }}
       >
-        <div style={{ fontSize: 72, fontWeight: 700 }}>shubh gupta</div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: "#666666" }}>
-          <span>robots · systems · unusual software</span>
-          <span>shubhxho.com</span>
+        <div style={{ fontSize: 22, letterSpacing: 4, color: "#7dffb3", textTransform: "uppercase" }}>
+          systems · robotics · ai
+        </div>
+        <div style={{ fontSize: 84, letterSpacing: -4, fontWeight: 700 }}>shubh gupta</div>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: "#8b95a8" }}>
+          <span>unusual software from khagaria</span>
+          <span style={{ color: "#4db0ff" }}>shubhxho.com</span>
         </div>
       </div>
     ),

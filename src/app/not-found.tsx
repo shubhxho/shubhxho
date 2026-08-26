@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="flex flex-1 flex-col justify-center px-6 py-20 sm:px-8">
-      <FadeIn className="mx-auto max-w-2xl">
+      <FadeIn className="mx-auto max-w-3xl">
+        <p className="mb-3 text-[11px] tracking-[0.22em] text-signal uppercase">404</p>
         <h1 className="mb-4 text-[1.75rem] font-bold tracking-tight sm:text-3xl">page not found</h1>
         <p className="mb-8 max-w-md text-[15px] text-muted-foreground sm:text-base">
           this path is not part of the site.

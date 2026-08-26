@@ -17,10 +17,10 @@ export function Header() {
   if (pathname === "/") return null;
 
   return (
-    <header className="px-6 pt-10 sm:px-8">
-      <div className="mx-auto flex max-w-2xl items-baseline justify-between gap-4 text-sm">
+    <header className="border-b border-border/80 px-6 pt-8 pb-4 sm:px-8">
+      <div className="mx-auto flex max-w-3xl items-baseline justify-between gap-4 text-sm">
         <Tip tip="shubhxho.com">
-          <Link href="/" className="font-bold hover:text-muted-foreground">
+          <Link href="/" className="font-bold hover:text-accent">
             {site.handle}
           </Link>
         </Tip>
@@ -31,8 +31,8 @@ export function Header() {
                 href={link.href}
                 className={
                   pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
-                    ? "text-foreground"
-                    : "hover:text-foreground"
+                    ? "text-accent"
+                    : "hover:text-accent"
                 }
               >
                 {link.label}
