@@ -1,28 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-inter-face",
-  display: "swap",
-});
-
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-face",
-  display: "swap",
-});
-
-const ibm = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-ibm-face",
+  variable: "--font-jetbrains-face",
   display: "swap",
 });
 
@@ -100,7 +85,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fafafa",
+  themeColor: "#f6f4ef",
 };
 
 export default function RootLayout({
@@ -109,10 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang={site.language}
-      className={`${inter.variable} ${instrument.variable} ${ibm.variable} antialiased`}
-    >
+    <html lang={site.language} className={`${jetbrains.variable} antialiased`}>
       <head>
         <link rel="describedby" href="/llms.txt" type="text/markdown" />
         <link
@@ -128,7 +110,7 @@ export default function RootLayout({
           title={`${site.name} updates`}
         />
       </head>
-      <body className="isolate overflow-x-hidden font-inter">
+      <body className="isolate overflow-x-hidden font-mono text-[15px] leading-7 text-foreground">
         <Header />
         {children}
         <Footer />

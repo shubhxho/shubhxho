@@ -1,0 +1,11 @@
+---
+title: Growth is a building discipline
+description: What a growth role taught me about attention, feedback, and useful products.
+date: 2024-01-01
+---
+
+Working in growth changed how I think about making things. Distribution is not an afterthought. It is a way of listening.
+
+The useful questions are simple: who has this problem, how do they describe it, and what makes them come back? Good answers improve the product as much as any technical decision.
+
+I still like building from first principles. I now pair that instinct with the habit of getting a real project in front of real people early.

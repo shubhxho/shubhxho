@@ -16,7 +16,7 @@ export function getNotFoundMarkdown(pathname: string) {
 
 ## Where to look next
 
-- [Homepage](https://shubhxho.com/): biography and current timeline
+- [Homepage](https://shubhxho.com/): biography, projects, and writing
 - [Sitemap](https://shubhxho.com/sitemap.xml): canonical indexable pages
 - [Agent instructions](https://shubhxho.com/llms.txt): machine-readable site guide
 - [Full Markdown profile](https://shubhxho.com/profile.md): complete public profile

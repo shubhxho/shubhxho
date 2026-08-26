@@ -277,7 +277,7 @@ export const timeline: TimelineEntry[] = [
   },
   {
     date: "01.01.25",
-    description: "JEE mains 2025. 198/360, 98.2%ile",
+    description: "Wins ELMO, NPHO, and NCHO; attends RMO camp",
   },
   {
     date: "08.01.24",
@@ -316,15 +316,16 @@ export const timeline: TimelineEntry[] = [
     date: "01.01.24",
     description: (
       <>
-        Growth intern at{" "}
+        Joins{" "}
         <a
           className="underline"
           href="https://microagi.ai"
           target="_blank"
           rel="noreferrer"
         >
-          microagi
-        </a>
+          MicroAGI
+        </a>{" "}
+        in a growth role
       </>
     ),
   },
@@ -350,7 +351,7 @@ export const timeline: TimelineEntry[] = [
   },
   {
     date: "01.01.21",
-    description: "NPHO, NCHO, INMO camp, NTSE scholar",
+    description: "NTSE scholar",
   },
   {
     date: "01.01.19",

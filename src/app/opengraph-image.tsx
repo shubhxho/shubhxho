@@ -14,22 +14,22 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#fafafa",
+          background: "#f6f4ef",
           color: "#171717",
           padding: 80,
         }}
       >
-        <div style={{ fontSize: 72, letterSpacing: -2 }}>shubh.</div>
+        <div style={{ fontSize: 72, letterSpacing: -2 }}>shubhxho</div>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             fontSize: 28,
-            color: "#737373",
+            color: "#5c5c5c",
           }}
         >
-          <span>hacker from khagaria</span>
-          <span style={{ color: "#fb6e1c" }}>s/x</span>
+          <span>engineer · hacker · builder</span>
+          <span style={{ color: "#0f6e56" }}>shubh.</span>
         </div>
       </div>
     ),
