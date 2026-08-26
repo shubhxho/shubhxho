@@ -8,30 +8,35 @@ const projects = [
     description: "wolfenstein 3d running inside a pdf — a systems toy that should not work, but does.",
     href: "https://github.com/shubhxho/wolfpdf",
     role: "systems experiment",
+    tip: "rust · pdf · 2026",
   },
   {
     title: "kinetic",
     description: "a native macos robotics simulator for trying ideas before touching hardware.",
     href: "https://github.com/shubhxho/kinetic",
     role: "robotics",
+    tip: "macos · simulation · 2026",
   },
   {
     title: "sable",
     description: "a 265kb rust chess engine focused on small binaries and clear search.",
     href: "https://github.com/shubhxho/sable",
     role: "engines",
+    tip: "rust · chess · 265kb",
   },
   {
     title: "polymarket-model",
     description: "prediction-market research, modeling, and tooling.",
     href: "https://github.com/shubhxho/polymarket-model",
     role: "ai research",
+    tip: "markets · modeling · research",
   },
   {
     title: "blender artworks",
     description: "3d studies, stills, and experiments collected in the gallery.",
     href: "https://gallery.shubhxho.com",
     role: "visual work",
+    tip: "blender · stills · ongoing",
   },
 ] as const;
 
@@ -80,6 +85,7 @@ export default function Home() {
     slug: post.slug,
     title: post.title,
     description: post.description,
+    tip: `${post.readingTime} · open note`,
   }));
 
   return (

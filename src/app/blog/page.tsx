@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
+import { Tip } from "@/components/hover-tip";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
@@ -23,16 +24,23 @@ export default function BlogPage() {
         </p>
         <div className="space-y-7">
           {posts.map((post) => (
-            <article key={post.slug}>
+            <article key={post.slug} className="group">
               <p className="text-xs text-muted-foreground">
                 {formatPostDate(post.date).toLowerCase()} · {post.readingTime}
               </p>
               <h2 className="mt-1.5 text-[15px] leading-6 sm:text-base">
-                <Link href={`/blog/${post.slug}`} className="font-bold hover:text-muted-foreground">
-                  {post.title.toLowerCase()}
-                </Link>
+                <Tip tip={`${post.readingTime} · open note`} as="span">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="font-bold transition-colors group-hover:text-muted-foreground"
+                  >
+                    {post.title.toLowerCase()}
+                  </Link>
+                </Tip>
               </h2>
-              <p className="mt-1 max-w-xl text-sm leading-6 text-muted-foreground">{post.description}</p>
+              <p className="mt-1 max-w-xl text-sm leading-6 text-muted-foreground transition-colors group-hover:text-foreground/70">
+                {post.description}
+              </p>
             </article>
           ))}
         </div>

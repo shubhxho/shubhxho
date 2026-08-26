@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { HoverTipProvider } from "@/components/hover-tip";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -111,9 +112,11 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-background font-mono text-foreground">
-        <Header />
-        {children}
-        <Footer />
+        <HoverTipProvider>
+          <Header />
+          {children}
+          <Footer />
+        </HoverTipProvider>
       </body>
     </html>
   );
