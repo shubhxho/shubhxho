@@ -5,31 +5,31 @@ import { site } from "@/lib/site";
 const projects = [
   {
     title: "wolfpdf",
-    description: "wolfenstein 3d running inside a pdf.",
+    description: "wolfenstein 3d running inside a pdf — a systems toy that should not work, but does.",
     href: "https://github.com/shubhxho/wolfpdf",
     role: "systems experiment",
   },
   {
     title: "kinetic",
-    description: "a native macos robotics simulator.",
+    description: "a native macos robotics simulator for trying ideas before touching hardware.",
     href: "https://github.com/shubhxho/kinetic",
     role: "robotics",
   },
   {
     title: "sable",
-    description: "a 265kb rust chess engine.",
+    description: "a 265kb rust chess engine focused on small binaries and clear search.",
     href: "https://github.com/shubhxho/sable",
     role: "engines",
   },
   {
     title: "polymarket-model",
-    description: "prediction-market research and tooling.",
+    description: "prediction-market research, modeling, and tooling.",
     href: "https://github.com/shubhxho/polymarket-model",
     role: "ai research",
   },
   {
     title: "blender artworks",
-    description: "3d studies, stills, and experiments.",
+    description: "3d studies, stills, and experiments collected in the gallery.",
     href: "https://gallery.shubhxho.com",
     role: "visual work",
   },

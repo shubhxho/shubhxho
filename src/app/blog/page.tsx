@@ -16,24 +16,24 @@ export default function BlogPage() {
 
   return (
     <main className="flex-1 px-6 py-12 sm:px-8 sm:py-16">
-      <FadeIn className="mx-auto max-w-3xl">
-        <h1 className="mb-2 text-3xl font-bold tracking-tight">blog</h1>
-        <p className="mb-8 max-w-xl text-base text-muted-foreground">
+      <FadeIn className="mx-auto max-w-2xl">
+        <h1 className="mb-2 text-[1.75rem] font-bold tracking-tight sm:text-3xl">blog</h1>
+        <p className="mb-10 max-w-xl text-[15px] text-muted-foreground sm:text-base">
           short notes on building, learning, and shipping useful work.
         </p>
-        <div className="space-y-6">
+        <div className="space-y-7">
           {posts.map((post) => (
-            <div key={post.slug}>
-              <p className="text-sm text-muted-foreground">
+            <article key={post.slug}>
+              <p className="text-xs text-muted-foreground">
                 {formatPostDate(post.date).toLowerCase()} · {post.readingTime}
               </p>
-              <p className="mt-1 text-base">
+              <h2 className="mt-1.5 text-[15px] leading-6 sm:text-base">
                 <Link href={`/blog/${post.slug}`} className="font-bold hover:text-muted-foreground">
                   {post.title.toLowerCase()}
                 </Link>
-              </p>
-              <p className="mt-1 max-w-xl text-sm text-muted-foreground">{post.description}</p>
-            </div>
+              </h2>
+              <p className="mt-1 max-w-xl text-sm leading-6 text-muted-foreground">{post.description}</p>
+            </article>
           ))}
         </div>
       </FadeIn>

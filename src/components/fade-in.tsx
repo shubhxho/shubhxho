@@ -11,11 +11,14 @@ export function FadeIn({ children, className = "" }: { children: ReactNode; clas
     if (!root) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const targets = Array.from(root.children);
+    if (!targets.length) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        root.children,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: 0.05 },
+        targets,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.04 },
       );
     }, root);
 

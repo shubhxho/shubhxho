@@ -4,9 +4,9 @@
   --font-mono: var(--font-jetbrains-face);
   --color-background: #fafafa;
   --color-foreground: #111111;
-  --color-muted-foreground: #666666;
-  --color-surface: #f0f0f0;
-  --color-border: #e5e5e5;
+  --color-muted-foreground: #737373;
+  --color-surface: #f3f3f3;
+  --color-border: #eaeaea;
   --color-accent: #111111;
 }
 
@@ -18,6 +18,8 @@ body {
 
 body {
   font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-feature-settings: "ss01" on, "calt" on;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
@@ -32,35 +34,42 @@ body {
 
 a {
   color: inherit;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 1px solid #111111;
+  outline-offset: 3px;
 }
 
 .link {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
-  transition: color 150ms ease;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: color 160ms ease, text-decoration-color 160ms ease;
 }
 
 .link:hover {
-  color: #666666;
+  color: #737373;
+  text-decoration-color: currentColor;
 }
 
 .bracket-link {
-  transition: color 150ms ease;
+  transition: color 160ms ease;
 }
 
 .bracket-link:hover {
-  color: #666666;
+  color: #737373;
 }
 
 .prose {
   color: var(--color-foreground);
-  font-size: 0.875rem;
-  line-height: 1.7;
+  font-size: 0.9375rem;
+  line-height: 1.75;
 }
 
 .prose > * + * {
-  margin-top: 1.1rem;
+  margin-top: 1.15rem;
 }
 
 .prose h2,
@@ -70,24 +79,26 @@ a {
 }
 
 .prose h2 {
-  margin-top: 1.75rem;
-  font-size: 0.875rem;
+  margin-top: 2rem;
+  font-size: 0.9375rem;
   text-decoration-line: underline;
   text-underline-offset: 4px;
 }
 
 .prose h3 {
-  margin-top: 1.25rem;
-  font-size: 0.875rem;
+  margin-top: 1.35rem;
+  font-size: 0.9375rem;
 }
 
 .prose a {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
 }
 
 .prose a:hover {
-  color: #666666;
+  color: #737373;
+  text-decoration-color: currentColor;
 }
 
 .prose strong {
@@ -100,7 +111,7 @@ a {
 }
 
 .prose li + li {
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .prose blockquote {
@@ -112,7 +123,7 @@ a {
 .prose code {
   background-color: var(--color-surface);
   padding: 0.05rem 0.3rem;
-  font-size: 0.85em;
+  font-size: 0.88em;
 }
 
 .prose ol {
@@ -127,7 +138,7 @@ a {
   overflow-x: auto;
   border: 1px solid var(--color-border);
   background-color: #111111;
-  padding: 0.9rem;
+  padding: 1rem;
   color: #fafafa;
 }
 

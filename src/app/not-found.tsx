@@ -9,15 +9,27 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="flex flex-1 flex-col justify-center px-6 py-16 sm:px-8">
-      <FadeIn className="mx-auto max-w-3xl">
-        <h1 className="mb-4 text-3xl font-bold tracking-tight">page not found</h1>
-        <p className="mb-6 max-w-md text-base text-muted-foreground">
+    <main className="flex flex-1 flex-col justify-center px-6 py-20 sm:px-8">
+      <FadeIn className="mx-auto max-w-2xl">
+        <h1 className="mb-4 text-[1.75rem] font-bold tracking-tight sm:text-3xl">page not found</h1>
+        <p className="mb-8 max-w-md text-[15px] text-muted-foreground sm:text-base">
           this path is not part of the site.
         </p>
-        <p className="text-sm">
-          [ <Link href="/" className="bracket-link">home</Link> ]{" "}
-          [ <Link href="/blog" className="bracket-link">blog</Link> ]
+        <p className="flex flex-wrap gap-x-2 gap-y-1 text-sm">
+          <span>
+            [{" "}
+            <Link href="/" className="bracket-link">
+              home
+            </Link>{" "}
+            ]
+          </span>
+          <span>
+            [{" "}
+            <Link href="/blog" className="bracket-link">
+              blog
+            </Link>{" "}
+            ]
+          </span>
         </p>
       </FadeIn>
     </main>
