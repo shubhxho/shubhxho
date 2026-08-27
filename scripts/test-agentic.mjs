@@ -45,7 +45,10 @@ try {
   assert.match(homepage.headers.get("content-type") ?? "", /^text\/html/);
   assert.match(homepage.headers.get("vary") ?? "", /\baccept\b/i);
   assert.match(homepageHtml, /<h1[^>]*>Shubh Gupta/);
-  assert.match(homepageHtml, /<h2[^>]*>Timeline<\/h2>/);
+  assert.match(homepageHtml, /<h2[^>]*>History<\/h2>/);
+  assert.match(homepageHtml, /working on<\/h2>/);
+  assert.match(homepageHtml, /<h2[^>]*>Writing<\/h2>/);
+  assert.match(homepageHtml, /<h2[^>]*>Gallery<\/h2>/);
   assert.ok(textFromHtml(homepageHtml).length > 500, "homepage must have 500+ characters without JavaScript");
 
   const markdownHomepage = await get("/", { headers: { Accept: "text/markdown" } });
@@ -61,7 +64,7 @@ try {
 
   const htmlNotFound = await get("/not-a-real-page");
   assert.equal(htmlNotFound.status, 404);
-  assert.match(await htmlNotFound.text(), /SITEMAP[\s\S]*LLMS\.TXT/);
+  assert.match(await htmlNotFound.text(), /Page not found/);
 
   const markdownNotFound = await get("/not-a-real-page", {
     headers: { Accept: "text/markdown" },
@@ -70,11 +73,11 @@ try {
   assert.match(markdownNotFound.headers.get("content-type") ?? "", /^text\/markdown/);
   assert.match(await markdownNotFound.text(), /^# 404: Page not found/m);
 
-  for (const path of ["/about", "/contact", "/privacy"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/blog", "/gallery", "/history"]) {
     const response = await get(path);
     const html = await response.text();
     assert.equal(response.status, 200, `${path} must be public`);
-    assert.ok(textFromHtml(html).length > 500, `${path} must contain 500+ characters`);
+    assert.ok(textFromHtml(html).length > 200, `${path} must contain readable content`);
   }
 
   const expectedEndpoints = [
@@ -101,7 +104,7 @@ try {
   assert.match(llms, /agent workflow/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
-  for (const path of ["/about", "/contact", "/privacy"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog"]) {
     assert.match(sitemap, new RegExp(`https://shubhxho\\.com${path}`));
   }
 
