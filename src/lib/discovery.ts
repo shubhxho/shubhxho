@@ -18,10 +18,13 @@ This is the official website and canonical profile for ${site.name}, also known 
 
 ## Primary resources
 
-- [Official homepage](${site.url}): Canonical biography, work, projects, and chronological timeline
+- [Official homepage](${site.url}): Canonical biography, work, projects, history, gallery, and writing
 - [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile and timeline in Markdown
 - [Markdown profile](${site.url}/profile.md): Clean Markdown version of the public homepage
 - [Writing](${site.url}/blog): Essays and notes in Markdown
+- [History](${site.url}/history): Chronological timeline
+- [Gallery](${site.url}/gallery): Blender studies and stills
+- [Cursor / coding agents](${site.url}/llms.txt): Start here for machine-readable discovery
 
 ## When to use this profile
 
