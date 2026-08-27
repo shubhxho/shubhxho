@@ -1,0 +1,43 @@
+---
+title: Prediction markets and modeling
+description: Notes on polymarket-model — research tooling, uncertainty, and building with market data.
+date: 2026-08-17
+---
+
+[polymarket-model](https://github.com/shubhxho/polymarket-model) is research and tooling around prediction markets — how prices move, what they imply, and where models help or hurt.
+
+Prediction markets are interesting because they compress belief into a number you can argue with. Unlike a poll, a price has skin in the game. Unlike a model output, a market price reflects aggregation across participants with different information.
+
+## Why I started
+
+I wanted a workspace to:
+
+- Pull and normalize market data without re-scraping the same glue code every week
+- Test simple forecasting ideas against realized outcomes
+- Compare model confidence to market-implied probabilities
+
+The project grew alongside conversations with people building in the space, including work with the Polymarket founder. That context pushed the tooling toward practical questions: calibration, liquidity effects, how news propagates into odds.
+
+## What "model" means here
+
+Not a single neural net claiming to beat the market. The repo is closer to a **lab bench**:
+
+- Scripts and notebooks for exploration
+- Reproducible pipelines for historical analysis
+- Clear boundaries between backtest and live decision-making
+
+Markets punish overconfidence quickly. The code tries to reflect that humility — log what you assumed, version your data, separate research from deployment.
+
+## Lessons so far
+
+**Liquidity is part of the signal.** Thin markets move on small trades. A model that ignores volume tells a incomplete story.
+
+**Resolution rules matter.** The same headline can mean different things depending on how a contract settles. Read the fine print before you train on labels.
+
+**Tools should be boring.** Exciting UI, boring data layer. Most of the work is cleaning timestamps and aligning event streams.
+
+## Open direction
+
+Prediction markets sit at the intersection of economics, ML, and product design. I am still learning which questions deserve code and which deserve a short note instead.
+
+The repository is public. If you are working on forecasting, market microstructure, or decision tools under uncertainty, it may save you an afternoon of setup — or give you a place to push back on my assumptions.

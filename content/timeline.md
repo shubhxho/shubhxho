@@ -1,0 +1,30 @@
+---
+title: Timeline
+---
+
+- **2026-08-18** — Ships [wolfpdf](https://github.com/shubhxho/wolfpdf), wolfenstein 3d in a pdf
+- **2026-08-17** — Builds [polymarket-model](https://github.com/shubhxho/polymarket-model) with the polymarket founder
+- **2026-08-16** — Ships [kinetic](https://github.com/shubhxho/kinetic), a native macos robotics simulator
+- **2026-08-10** — Writes [sable](https://github.com/shubhxho/sable), a 265kb rust chess engine
+- **2026-08-01** — HFT intern at [Hudson River Trading](https://www.hudsonrivertrading.com/)
+- **2026-08-01** — Research assistant at [Stanford](https://www.stanford.edu/) on venture capital and neuroscience
+- **2026-07-20** — Ships [invoice](https://github.com/shubhxho/invoice), a cli for issuing invoices
+- **2026-06-01** — Neurodivergent fellow at [Palantir](https://www.palantir.com/)
+- **2026-06-01** — Joins the [a16z](https://a16z.com/) alpha fellowship
+- **2026-02-01** — Emergent Ventures grantee. $15k to make robots more awesome
+- **2026-02-01** — Resident at [Hashed House Delhi](https://x.com/HashedEM/status/2026310333963636953)
+- **2026-01-01** — Drops out of [Imperial College London](https://www.imperial.ac.uk/)
+- **2025-12-01** — Reviews a bunch of projects for terminal craft
+- **2025-10-08** — Makes an [ai film](https://x.com/shubhxho/status/1978473438361891260/) for localhost. it goes viral
+- **2025-09-01** — Organizes the first hackathon in Khagaria w/ yubico, jukebox, [gen.xyz](https://hackclub.com), monster
+- **2025-08-01** — Best in class at [CodeDay Dehradun](https://codeday.sh/kronos)
+- **2025-08-01** — Makes a corexy 3d printer from scratch in a week
+- **2025-01-01** — Wins ELMO, NPHO, and NCHO; attends RMO camp
+- **2024-08-01** — Volunteers at [Hack Club](https://hackclub.com)
+- **2024-01-01** — Writes [goirc](https://github.com/shubhisroking/goirc), a tui irc client in go
+- **2024-01-01** — Joins [MicroAGI](https://microagi.ai) in a growth role
+- **2023-01-01** — Ships a custom rom and orangefox recovery for the [realme narzo 30a](https://xdaforums.com/t/pixelexperience-unofficial-for-realme-narzo30a-narzo-20.4413309/)
+- **2022-01-01** — DECA world championship winner
+- **2021-01-01** — NTSE scholar
+- **2019-01-01** — Starts coding. android first, then everything else
+- **2007-01-01** — Shubh is born in Khagaria

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { TrustPage } from "@/components/trust-page";
+import { getPage } from "@/lib/content";
 import { site } from "@/lib/site";
-import { trustPages } from "@/lib/trust";
+
+const page = getPage("privacy");
 
 export const metadata: Metadata = {
-  title: trustPages.privacy.title,
-  description: trustPages.privacy.description,
+  title: page.title,
+  description: page.description,
   alternates: { canonical: "/privacy" },
   openGraph: { url: `${site.url}/privacy` },
 };

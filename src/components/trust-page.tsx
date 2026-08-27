@@ -1,51 +1,32 @@
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
-import { trustPages, type TrustPageSlug } from "@/lib/trust";
+import { MarkdownArticle } from "@/components/markdown-article";
+import type { ContentPageSlug } from "@/lib/content";
+import { getPage } from "@/lib/content";
 
-export function TrustPage({ slug }: { slug: TrustPageSlug }) {
-  const page = trustPages[slug];
+export function TrustPage({ slug }: { slug: ContentPageSlug }) {
+  const page = getPage(slug);
 
   return (
-    <main className="flex-1 px-6 py-12 sm:px-8 sm:py-16">
-      <FadeIn className="mx-auto max-w-3xl">
-        <p className="mb-3 text-[11px] tracking-[0.22em] text-signal uppercase">{page.title}</p>
-        <h1 className="mb-7 text-[1.75rem] font-bold tracking-tight sm:text-3xl">
-          {page.heading.toLowerCase()}
+    <main className="flex-1 px-5 py-14 sm:px-6 sm:py-20">
+      <FadeIn className="site-shell">
+        <h1 className="mb-8 text-[clamp(1.8rem,5vw,2.6rem)] leading-[1.15] font-bold tracking-tight">
+          {page.heading}
         </h1>
-        <div className="max-w-xl space-y-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
-          {page.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-        <p className="mt-10 flex flex-wrap gap-x-2 gap-y-1 text-sm">
-          <span>
-            [{" "}
-            <Link href="/about" className="bracket-link">
-              about
-            </Link>{" "}
-            ]
-          </span>
-          <span>
-            [{" "}
-            <Link href="/contact" className="bracket-link">
-              contact
-            </Link>{" "}
-            ]
-          </span>
-          <span>
-            [{" "}
-            <Link href="/privacy" className="bracket-link">
-              privacy
-            </Link>{" "}
-            ]
-          </span>
-          <span>
-            [{" "}
-            <Link href="/blog" className="bracket-link">
-              blog
-            </Link>{" "}
-            ]
-          </span>
+        <MarkdownArticle content={page.content} />
+        <p className="mt-10 flex flex-wrap gap-x-3 gap-y-2 text-sm">
+          <Link href="/about" className="ink-link">
+            about
+          </Link>
+          <Link href="/contact" className="ink-link">
+            contact
+          </Link>
+          <Link href="/privacy" className="ink-link">
+            privacy
+          </Link>
+          <Link href="/blog" className="ink-link">
+            writing
+          </Link>
         </p>
       </FadeIn>
     </main>

@@ -36,22 +36,20 @@ export default async function PostPage({ params }: PostPageProps) {
   if (!post) notFound();
 
   return (
-    <main className="flex-1 px-6 py-12 sm:px-8 sm:py-16">
-      <FadeIn className="mx-auto max-w-3xl">
+    <main className="flex-1 px-5 py-14 sm:px-6 sm:py-20">
+      <FadeIn className="site-shell">
         <p className="mb-8 text-sm">
-          [{" "}
-          <Link href="/blog" className="bracket-link">
-            all writing
-          </Link>{" "}
-          ]
+          <Link href="/blog" className="ink-link">
+            ← all writing
+          </Link>
         </p>
-        <p className="text-xs text-signal">
-          {formatPostDate(post.date).toLowerCase()} · {post.readingTime}
+        <p className="text-xs text-muted-foreground">
+          {formatPostDate(post.date)} · {post.readingTime}
         </p>
-        <h1 className="mt-2 mb-3 text-[1.75rem] leading-tight font-bold tracking-tight text-pretty sm:text-3xl">
-          {post.title.toLowerCase()}
+        <h1 className="mt-3 mb-4 text-[clamp(1.8rem,5vw,2.6rem)] leading-[1.15] font-bold tracking-tight text-pretty">
+          {post.title}
         </h1>
-        <p className="mb-10 max-w-xl text-[15px] text-muted-foreground sm:text-base">{post.description}</p>
+        <p className="mb-10 max-w-xl text-sm leading-7 text-muted-foreground">{post.description}</p>
         <MarkdownArticle content={post.content} />
       </FadeIn>
     </main>

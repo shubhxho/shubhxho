@@ -3,16 +3,19 @@ import { site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="mt-auto px-6 pb-10 sm:px-8">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-baseline justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground">
+    <footer className="mt-auto pb-10">
+      <div className="site-shell flex flex-wrap items-baseline justify-between gap-3 border-t border-border px-5 pt-5 text-xs text-muted-foreground sm:px-6">
         <p>
           © {new Date().getFullYear()} {site.handle}
         </p>
         <nav aria-label="Site information" className="flex gap-3">
-          <Link href="/privacy" className="hover:text-accent">
+          <Link href="/contact" className="ink-link text-foreground">
+            contact
+          </Link>
+          <Link href="/privacy" className="ink-link text-foreground">
             privacy
           </Link>
-          <a href="/feed.xml" className="hover:text-accent">
+          <a href="/feed.xml" className="ink-link text-foreground">
             rss
           </a>
         </nav>

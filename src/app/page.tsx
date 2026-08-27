@@ -1,51 +1,8 @@
 import { HomeView } from "@/components/home-view";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getGalleryImages, getHomeContent, getProjects } from "@/lib/content";
 import { site } from "@/lib/site";
 
-const projects = [
-  {
-    title: "wolfpdf",
-    description: "wolfenstein 3d running inside a pdf — a systems toy that should not work, but does.",
-    href: "https://github.com/shubhxho/wolfpdf",
-    role: "systems experiment",
-    tip: "rust · pdf · 2026",
-    metric: "pdf runtime",
-  },
-  {
-    title: "kinetic",
-    description: "a native macos robotics simulator for trying ideas before touching hardware.",
-    href: "https://github.com/shubhxho/kinetic",
-    role: "robotics",
-    tip: "macos · simulation · 2026",
-    metric: "sim stack",
-  },
-  {
-    title: "sable",
-    description: "a 265kb rust chess engine focused on small binaries and clear search.",
-    href: "https://github.com/shubhxho/sable",
-    role: "engines",
-    tip: "rust · chess · 265kb",
-    metric: "265kb",
-  },
-  {
-    title: "polymarket-model",
-    description: "prediction-market research, modeling, and tooling with a quant edge.",
-    href: "https://github.com/shubhxho/polymarket-model",
-    role: "ai research",
-    tip: "markets · modeling · research",
-    metric: "quant / ml",
-  },
-  {
-    title: "blender artworks",
-    description: "3d studies, stills, and experiments collected in the gallery.",
-    href: "https://gallery.shubhxho.com",
-    role: "visual work",
-    tip: "blender · stills · ongoing",
-    metric: "visual",
-  },
-] as const;
-
-const structuredData = {
+const structuredData = (projects: ReturnType<typeof getProjects>) => ({
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -83,22 +40,29 @@ const structuredData = {
       })),
     },
   ],
-};
+});
 
 export default function Home() {
-  const posts = getAllPosts().slice(0, 3).map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    description: post.description,
-    tip: `${post.readingTime} · open note`,
-  }));
+  const home = getHomeContent();
+  const projects = getProjects();
+  const gallery = getGalleryImages();
+  const posts = getAllPosts()
+    .slice(0, home.writingPreviewCount)
+    .map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      description: post.description,
+      tip: `${post.readingTime} · open note`,
+    }));
 
   return (
     <>
-      <HomeView projects={[...projects]} posts={posts} />
+      <HomeView home={home} projects={projects} gallery={gallery} posts={posts} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\u003c") }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData(projects)).replace(/</g, "\u003c"),
+        }}
       />
     </>
   );

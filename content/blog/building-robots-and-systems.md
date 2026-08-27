@@ -1,0 +1,54 @@
+---
+title: Building robots and systems
+description: How software, hardware, and research fit together in how I think about robotics.
+date: 2026-07-20
+---
+
+Robotics is not one skill. It is a stack of failures that have to happen in the right order.
+
+You need mechanical intuition — how forces transmit, why backlash ruins your repeatability. You need electronics — power, noise, the smell of a driver that is about to give up. You need software — control loops that run on time, simulators that lie usefully, logs that tell the truth when something breaks at 2am.
+
+I do not treat these as separate hobbies. They are one discipline viewed from different angles.
+
+## Software first, hardware honest
+
+My default loop:
+
+1. **Simulate** — kinetic or similar, to kill bad ideas cheaply
+2. **Prototype** — 3D printed parts, off-the-shelf actuators, janky but real
+3. **Instrument** — log everything the first time it moves unsupervised
+4. **Rewrite** — the controller, not the presentation slide
+
+Simulation saves money. Hardware saves you from believing your model. You need both or you optimize fantasies.
+
+## Tools over manifestos
+
+I am skeptical of robotics projects that start with a manifesto and end without a motor spinning. The interesting questions are specific:
+
+- Can this gripper handle compliant objects without force sensing?
+- What update rate do you actually need for this gait?
+- Where does sim-to-real transfer break for this material?
+
+Each question deserves a repo, not a thread.
+
+## AI in the loop
+
+AI shows up in my robotics work less as "replace the planner" and more as:
+
+- Perception pipelines that have to run on constrained hardware
+- Learning from demonstration when classical control is tedious to tune
+- Research adjacent tooling — see polymarket-model for a different flavor of uncertainty
+
+The mistake is bolting a model onto a robot that does not yet move reliably. Get the baseline behavior boring first.
+
+## Why the EV grant matters
+
+The Emergent Ventures grant is explicit: **make robots more awesome**. Awesome here means capability ordinary people can use — not a lab demo that wins a video contest and never ships again.
+
+That aligns with how I already work from Khagaria: limited shop access, high ingenuity budget, internet as collaborators.
+
+## Closing thought
+
+Systems engineering and robotics reward the same temperament — patience, precise measurement, willingness to delete beautiful code that the physical world rejects.
+
+If you are building in this space, [email me](mailto:shubh@shubhxho.com). I am especially interested in simulators, low-cost arms, and control software that documents its assumptions.

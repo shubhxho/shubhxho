@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { TrustPage } from "@/components/trust-page";
+import { getPage } from "@/lib/content";
 import { site } from "@/lib/site";
-import { trustPages } from "@/lib/trust";
+
+const page = getPage("contact");
 
 export const metadata: Metadata = {
-  title: trustPages.contact.title,
-  description: trustPages.contact.description,
+  title: page.title,
+  description: page.description,
   alternates: { canonical: "/contact" },
   openGraph: { url: `${site.url}/contact` },
 };

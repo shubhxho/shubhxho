@@ -1,0 +1,48 @@
+---
+title: The path so far
+description: A chronological map of the work, places, and bets that shaped how I build.
+date: 2026-08-05
+---
+
+This is not a resume. It is the chain of projects and places that explain why my homepage looks the way it does.
+
+## 2026 — depth over breadth
+
+The year started loud and stayed busy:
+
+- **Emergent Ventures grant** — $15k to make robots more awesome. Permission to treat hardware as a first-class research path, not a side quest.
+- **Hashed House Delhi** — a resident stretch surrounded by people building on crypto and frontier tech. Good pressure to ship.
+- **a16z alpha fellowship** — early exposure to how investors think about products, not just code.
+- **Palantir neurodivergent fellowship** — enterprise software at a scale I had not seen from Khagaria.
+- **Hudson River Trading internship** — HFT as a masterclass in latency, correctness, and systems discipline.
+- **Stanford research assistant** — venture capital and neuroscience, a odd pairing that sharpened how I read evidence.
+- **Dropped out of Imperial College London** — a deliberate bet that the next few years are better spent building in the open than collecting credentials.
+
+Projects shipped in the same stretch: [invoice](https://github.com/shubhxho/invoice) (CLI for issuing invoices), [sable](https://github.com/shubhxho/sable) (265kb chess engine), [kinetic](https://github.com/shubhxho/kinetic) (robotics simulator), [polymarket-model](https://github.com/shubhxho/polymarket-model), and [wolfpdf](https://github.com/shubhxho/wolfpdf).
+
+## 2025 — community and making in public
+
+- Organized the **first hackathon in Khagaria** with Yubico, Jukebox, gen.xyz, and Monster Energy — proof that events can start where you are, not where VCs already fly.
+- **Best in class at CodeDay Dehradun** and a week-long sprint to build a **CoreXY 3D printer from scratch**.
+- Won **ELMO, NPHO, and NCHO**; attended **RMO camp** — math competition years that trained patience and proof-shaped thinking.
+- An **AI film for localhost** went viral — a reminder that creative work and technical work share an audience if the story lands.
+
+## 2024 — growth as a building discipline
+
+Joined [MicroAGI](https://microagi.ai) in a growth role. Wrote [goirc](https://github.com/shubhisroking/goirc), a TUI IRC client in Go. Volunteered at [Hack Club](https://hackclub.com).
+
+Growth work changed how I ship: distribution is listening. The product improves when you know who feels the pain and how they describe it. I wrote more about that in [Growth is a building discipline](/blog/growth-is-a-building-discipline).
+
+## Earlier — foundations
+
+- **Custom ROM and OrangeFox recovery** for the Realme Narzo 30A — Android modding as an introduction to low-level systems.
+- **DECA world championship** and **NTSE scholar** — early confidence that structured competition rewards preparation.
+- **Started coding in 2019** — Android first, then everything else.
+
+## What I take from the timeline
+
+No single job title captures the work. The pattern is simpler: find a hard problem, build a trace (repo, demo, write-up), put it in public, let the next project inherit the lessons.
+
+Khagaria stays the anchor. The internet supplies the rest — mentors, collaborators, weird opportunities that find you because something you shipped was searchable.
+
+If you are early and reading this from a town that is not on the map: the path is not linear, but it is legible in hindsight. Keep the traces.

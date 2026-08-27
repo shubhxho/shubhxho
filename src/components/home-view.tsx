@@ -1,19 +1,9 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { FadeIn } from "@/components/fade-in";
 import { Tip } from "@/components/hover-tip";
+import type { GalleryImage, HomeContent, Project } from "@/lib/content-types";
 import { site } from "@/lib/site";
-
-export type HomeProject = {
-  title: string;
-  description: string;
-  href: string;
-  role: string;
-  tip: string;
-  metric: string;
-};
 
 export type HomePost = {
   slug: string;
@@ -23,209 +13,139 @@ export type HomePost = {
 };
 
 type HomeViewProps = {
-  projects: HomeProject[];
+  home: HomeContent;
+  projects: Project[];
+  gallery: GalleryImage[];
   posts: HomePost[];
 };
 
-function BracketLink({
-  href,
-  children,
-  tip,
-  external = false,
-}: {
-  href: string;
-  children: ReactNode;
-  tip: string;
-  external?: boolean;
-}) {
-  if (external) {
-    return (
-      <Tip tip={tip} as="span">
-        [{" "}
-        <a href={href} target="_blank" rel="noreferrer" className="bracket-link">
-          {children}
-        </a>{" "}
-        ]
-      </Tip>
-    );
-  }
+export function HomeView({ home, projects, gallery, posts }: HomeViewProps) {
+  const previewGallery = gallery.slice(0, 6);
 
   return (
-    <Tip tip={tip} as="span">
-      [{" "}
-      <Link href={href} className="bracket-link">
-        {children}
-      </Link>{" "}
-      ]
-    </Tip>
-  );
-}
-
-export function HomeView({ projects, posts }: HomeViewProps) {
-  return (
-    <main className="flex flex-1 flex-col px-6 py-16 sm:px-8 sm:py-20">
-      <FadeIn className="mx-auto w-full max-w-3xl">
-        <p className="mb-4 text-[11px] tracking-[0.22em] text-signal uppercase">
-          shubhxho · systems · robotics · ai
-        </p>
-
-        <Tip tip="engineer · hacker · builder from khagaria">
-          <h1 className="mb-5 text-[clamp(2.4rem,8vw,4.2rem)] leading-[0.95] font-bold tracking-[-0.05em]">
-            {site.name.toLowerCase()}
+    <main className="flex flex-1 flex-col">
+      <FadeIn className="site-shell px-5 pt-14 pb-16 sm:px-6 sm:pt-20">
+        <section>
+          <p className="mb-3 text-sm text-muted-foreground">{home.name}</p>
+          <h1 className="max-w-[18ch] text-[clamp(2rem,6vw,3.25rem)] leading-[1.1] font-bold tracking-tight text-pretty">
+            {home.headline}
           </h1>
-        </Tip>
+          <p className="mt-5 max-w-[42ch] text-[0.95rem] leading-7 text-muted-foreground text-pretty">
+            {home.bio}
+          </p>
+        </section>
 
-        <p className="mb-8 max-w-2xl text-[15px] leading-7 text-pretty text-muted-foreground sm:text-base">
-          i build robots, ai systems, developer tools, and unusual software from khagaria, india.
-          hard problems, small complete tools, things people can actually run. currently deep in
-          robotics, rust, and systems work — with a quant bent for markets and models.
-        </p>
-
-        <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Tip tip="selected public builds" as="div">
-            <div className="stat">
-              <p className="text-[11px] tracking-wide text-muted-foreground uppercase">projects</p>
-              <p className="mt-1 text-xl font-bold text-accent">{projects.length}</p>
-            </div>
-          </Tip>
-          <Tip tip="notes on the workbench" as="div">
-            <div className="stat">
-              <p className="text-[11px] tracking-wide text-muted-foreground uppercase">writing</p>
-              <p className="mt-1 text-xl font-bold text-accent">{posts.length}+</p>
-            </div>
-          </Tip>
-          <Tip tip="primary stack" as="div">
-            <div className="stat">
-              <p className="text-[11px] tracking-wide text-muted-foreground uppercase">stack</p>
-              <p className="mt-1 text-xl font-bold text-signal">rust</p>
-            </div>
-          </Tip>
-          <Tip tip="based in khagaria, india" as="div">
-            <div className="stat">
-              <p className="text-[11px] tracking-wide text-muted-foreground uppercase">base</p>
-              <p className="mt-1 text-xl font-bold text-signal">blr/in</p>
-            </div>
-          </Tip>
-        </div>
-
-        <p className="mb-4 flex flex-wrap gap-x-2 gap-y-1 text-[15px] sm:text-base">
-          <BracketLink href="/blog" tip="notes on building and shipping">
-            blog
-          </BracketLink>
-          <BracketLink href="/about" tip="who i am and what this site is">
-            about
-          </BracketLink>
-          <BracketLink href="/contact" tip="email and official profiles">
-            contact
-          </BracketLink>
-          <BracketLink href="https://gallery.shubhxho.com" tip="3d studies and stills" external>
-            gallery
-          </BracketLink>
-        </p>
-
-        <p className="mb-3 text-sm text-muted-foreground">
-          elsewhere:{" "}
-          <Tip tip="@shubhgupta on x" as="span">
-            <a href={site.links.x} target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">
-              x
-            </a>
-          </Tip>
-          <span className="mx-1.5 text-border">|</span>
-          <Tip tip="repositories and experiments" as="span">
-            <a href={site.links.gh} target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">
-              github
-            </a>
-          </Tip>
-          <span className="mx-1.5 text-border">|</span>
-          <Tip tip="professional profile" as="span">
-            <a href={site.links.in} target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">
-              linkedin
-            </a>
-          </Tip>
-          <span className="mx-1.5 text-border">|</span>
-          <Tip tip="models and datasets" as="span">
-            <a href={site.links.hf} target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">
-              huggingface
-            </a>
-          </Tip>
-        </p>
-
-        <p className="mb-14 text-sm">
-          reach out:{" "}
-          <Tip tip="best way to get a reply" as="span">
-            <a href={`mailto:${site.email}`} className="link">
-              {site.email}
-            </a>
-          </Tip>
-        </p>
-
-        <section aria-labelledby="work-heading" className="mb-14">
-          <div className="mb-5 flex items-end justify-between gap-4 border-b border-border pb-3">
-            <div>
-              <p className="text-[11px] tracking-[0.18em] text-muted-foreground uppercase">01 · builds</p>
-              <h2 id="work-heading" className="mt-1 text-lg font-bold tracking-tight">
-                a few things i&apos;ve done
-              </h2>
-            </div>
-          </div>
-
-          <div className="space-y-3">
+        <section className="mt-14" aria-labelledby="projects-label">
+          <h2 id="projects-label" className="mb-5 text-sm font-bold tracking-tight">
+            {home.projectsLabel}
+          </h2>
+          <ul className="divide-y divide-border border-y border-border">
             {projects.map((project) => (
-              <article key={project.title} className="panel group p-4 transition-colors hover:border-accent/40">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-                  <p className="text-sm leading-6">
-                    <Tip tip={project.tip} as="span">
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-bold group-hover:text-accent"
-                      >
-                        {project.title}
-                      </a>
-                    </Tip>
-                    <span className="text-muted-foreground"> — {project.role}</span>
-                  </p>
-                  <p className="text-[11px] tracking-wide text-signal uppercase">{project.metric}</p>
-                </div>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.description}</p>
-                <p className="mt-3 text-sm">
-                  <BracketLink href={project.href} tip={project.tip} external>
-                    open
-                  </BracketLink>
-                </p>
-              </article>
+              <li key={project.slug}>
+                <Tip tip={project.tip || project.role} as="div">
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group grid gap-1 py-4 transition-colors hover:bg-foreground hover:text-inverse sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-6"
+                  >
+                    <span>
+                      <span className="block text-[0.95rem] font-bold">{project.title}</span>
+                      <span className="mt-1 block max-w-[46ch] text-sm text-muted-foreground group-hover:text-inverse/75">
+                        {project.description}
+                      </span>
+                    </span>
+                    <span className="text-sm tabular-nums text-muted-foreground group-hover:text-inverse/75">
+                      {project.year}
+                    </span>
+                  </a>
+                </Tip>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-14" aria-labelledby="writing-label">
+          <div className="mb-5 flex items-baseline justify-between gap-4">
+            <h2 id="writing-label" className="text-sm font-bold tracking-tight">
+              {home.writingLabel}
+            </h2>
+            <Link href="/blog" className="ink-link text-sm">
+              {home.writingLinkLabel}
+            </Link>
+          </div>
+          <ul className="divide-y divide-border border-y border-border">
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <Tip tip={post.tip} as="div">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group block py-4 transition-colors hover:bg-foreground hover:text-inverse"
+                  >
+                    <span className="block text-[0.95rem] font-bold">{post.title}</span>
+                    <span className="mt-1 block max-w-[46ch] text-sm text-muted-foreground group-hover:text-inverse/75">
+                      {post.description}
+                    </span>
+                  </Link>
+                </Tip>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-14" aria-labelledby="gallery-label">
+          <div className="mb-5 flex items-baseline justify-between gap-4">
+            <h2 id="gallery-label" className="text-sm font-bold tracking-tight">
+              {home.galleryLabel}
+            </h2>
+            <a href={home.galleryUrl} target="_blank" rel="noreferrer" className="ink-link text-sm">
+              {home.galleryLinkLabel}
+            </a>
+          </div>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+            {previewGallery.map((image) => (
+              <a
+                key={image.id}
+                href={image.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative block aspect-square overflow-hidden bg-surface"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 640px) 33vw, 12vw"
+                  className="object-cover grayscale transition duration-500 group-hover:scale-[1.04] group-hover:grayscale-0"
+                />
+              </a>
             ))}
           </div>
         </section>
 
-        <section aria-labelledby="writing-heading">
-          <div className="mb-5 flex items-end justify-between gap-4 border-b border-border pb-3">
-            <div>
-              <p className="text-[11px] tracking-[0.18em] text-muted-foreground uppercase">02 · notes</p>
-              <h2 id="writing-heading" className="mt-1 text-lg font-bold tracking-tight">
-                writing
-              </h2>
-            </div>
-            <BracketLink href="/blog" tip="open the full writing index">
-              all writing
-            </BracketLink>
-          </div>
-
-          <div className="space-y-3">
-            {posts.map((post) => (
-              <article key={post.slug} className="panel group p-4 transition-colors hover:border-accent/40">
-                <p className="text-sm leading-6">
-                  <Tip tip={post.tip} as="span">
-                    <Link href={`/blog/${post.slug}`} className="font-bold group-hover:text-accent">
-                      {post.title.toLowerCase()}
-                    </Link>
-                  </Tip>
-                </p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{post.description}</p>
-              </article>
-            ))}
-          </div>
+        <section className="mt-14 border-t border-border pt-8" aria-labelledby="contact-label">
+          <h2 id="contact-label" className="mb-4 text-sm font-bold tracking-tight">
+            {home.contactLabel}
+          </h2>
+          <p className="max-w-[46ch] text-sm leading-7 text-muted-foreground">
+            email{" "}
+            <a href={`mailto:${site.email}`} className="ink-link text-foreground">
+              {site.email}
+            </a>
+            {" · "}
+            <a href={site.links.gh} target="_blank" rel="noreferrer" className="ink-link text-foreground">
+              github
+            </a>
+            {" · "}
+            <a href={site.links.x} target="_blank" rel="noreferrer" className="ink-link text-foreground">
+              x
+            </a>
+            {" · "}
+            <a href={site.links.in} target="_blank" rel="noreferrer" className="ink-link text-foreground">
+              linkedin
+            </a>
+          </p>
+          <p className="mt-8 text-xs text-muted-foreground">{home.footerCredit}</p>
         </section>
       </FadeIn>
     </main>

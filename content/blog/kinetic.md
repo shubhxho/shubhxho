@@ -1,0 +1,38 @@
+---
+title: Kinetic — a macOS robotics simulator
+description: Why I built a native simulator before touching more hardware, and how it fits into how I learn robotics.
+date: 2026-08-16
+---
+
+Before I spend money on motors and machined parts, I want to know whether the idea survives contact with physics. [kinetic](https://github.com/shubhxho/kinetic) is a native macOS robotics simulator built for that loop: sketch a mechanism, drop it in a world, watch it fail fast.
+
+Hardware is slow feedback. Ordering parts, waiting on prints, debugging wiring — each cycle can take days. Simulation is not a replacement for real machines, but it is a filter. Bad kinematics should die on screen.
+
+## Design choices
+
+**Native macOS.** I use my laptop constantly. A simulator that lives beside my editor and opens instantly gets used. A web demo that stutters on large scenes does not.
+
+**Focused scope.** Kinetic is not trying to be every robotics tool. It is trying to make it easy to test ideas: joint limits, simple controllers, basic environments. The goal is a tight loop, not a feature checklist.
+
+**Readable internals.** Robotics code gets opaque quickly. I wanted something I could inspect when a joint oscillates or a foot slips — clear enough that the next experiment is a small change, not a rewrite.
+
+## How I use it
+
+Typical session:
+
+1. Model or import a rough mechanism
+2. Apply a controller that should work in theory
+3. Watch where theory ends
+4. Change one variable and rerun
+
+That rhythm matches how I build physical things too. Simulation just makes iteration cheaper.
+
+## Connection to real robots
+
+In 2026 I received an Emergent Ventures grant to make robots more awesome. Grants are permission to take hardware seriously. Kinetic is the software side of the same bet: shorten the path from idea to tested design.
+
+The simulator will never capture contact friction perfectly or replace the moment a real actuator overheats. It does reduce the number of expensive surprises.
+
+If you are building robots on a budget or from a place without a shared lab, simulation is not a luxury. It is how you compete with people who have more shop time than you.
+
+Open issues and experiments live on [GitHub](https://github.com/shubhxho/kinetic).

@@ -1,0 +1,35 @@
+---
+title: Wolfenstein inside a PDF
+description: How wolfpdf started, why the format constraint matters, and what I learned shipping a game where it should not run.
+date: 2026-08-19
+---
+
+[wolfpdf](https://github.com/shubhxho/wolfpdf) is Wolfenstein 3D running inside a PDF file. It is a systems toy that should not work, but does.
+
+The idea came from a narrow question: **what can a document format actually execute?** PDFs are not game engines. They have a scripting layer, strict sandboxing, and a rendering model built for pages, not frames. That mismatch is the whole project.
+
+## Why bother
+
+Most demos choose the easy container. I wanted the hard one because the constraint forces honest engineering:
+
+- You cannot assume a game loop. You have to map update logic onto what PDF JavaScript allows.
+- Memory and timing behave differently than in a browser or native runtime.
+- Every hack is visible. There is nowhere to hide behind a framework.
+
+A finished wolfpdf is not impressive because PDF is a good platform for games. It is impressive because the port exposes exactly where the platform breaks and where it surprisingly holds.
+
+## The build loop
+
+I started with the smallest playable slice: load a level, move the camera, render a wall. Each step had to survive inside the PDF viewer's ruleset. When something broke, the failure mode was usually informative — a timing cap, a missing API, a rendering quirk in a specific viewer.
+
+Rust handles the heavy lifting on the build side. The output is still a PDF you can email, archive, or open without installing anything except a reader that supports scripting.
+
+## What it taught me
+
+**Constraints are a spec.** When you cannot change the platform, you get clearer about what your program actually needs.
+
+**Complete beats ambitious.** A tiny game that runs in a PDF teaches more than a grand design doc for a game that does not.
+
+**Weird projects find their audience.** People share things that violate expectations. wolfpdf is useful as a reference for anyone curious about document formats, embedded scripting, or porting legacy code to hostile environments.
+
+If you are working on something similarly cursed — running code where it was never meant to run — [reach out](mailto:shubh@shubhxho.com). I collect these problems.

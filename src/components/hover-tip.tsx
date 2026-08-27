@@ -70,7 +70,7 @@ export function HoverTipProvider({ children }: { children: ReactNode }) {
       {enabled && text ? (
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed z-50 max-w-[16rem] border border-border bg-surface px-2.5 py-1.5 text-[11px] leading-4 text-muted-foreground shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+          className="pointer-events-none fixed z-50 max-w-[16rem] border border-foreground bg-foreground px-2.5 py-1.5 text-[11px] leading-4 text-inverse"
           style={{
             left: pos.x + 14,
             top: pos.y + 16,

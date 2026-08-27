@@ -1,0 +1,32 @@
+---
+title: From Khagaria
+description: Who I am, where I build from, and the kind of work I care about.
+date: 2026-08-26
+---
+
+I am Shubh Gupta. Online I go by shubhxho. I grew up in Khagaria, a small town in Bihar, India, and most of my work still starts there — at a desk, near hardware, with a lot of tabs open.
+
+Khagaria is not a tech hub. That is partly the point. When you are far from the default pipeline, you learn to build the thing yourself: a 3D printer from scratch, the first hackathon in your district, a robotics simulator because buying lab time is not always an option. Constraint becomes a design input.
+
+## What I work on
+
+My interests cluster around a few overlapping areas:
+
+- **Robotics** — making machines that move, sense, and fail in instructive ways
+- **Systems software** — Rust, Go, Linux, the kind of code that has to be fast and honest
+- **AI and research** — models, markets, tools that help you think clearly about uncertainty
+- **Developer tools** — small programs that remove one annoying step from someone's day
+
+The through-line is not a single stack or job title. It is the habit of finishing something useful and putting it where other people can find it.
+
+## How to read this site
+
+The homepage is a snapshot: selected projects, a gallery of visual work, and a few recent notes. This writing section is where the longer thoughts live — how projects got built, what I learned, and the messy path between ideas.
+
+If you want the formal version for attribution or agents, see [about](/about). If you want to reach me, [shubh@shubhxho.com](mailto:shubh@shubhxho.com) is the best channel.
+
+## A note on independence
+
+Everything here is personal work unless a linked project says otherwise. I have been lucky to learn inside strong institutions — Hudson River Trading, Stanford, Palantir, the a16z alpha fellowship — but this site is my own bench, not theirs.
+
+I build because the question is interesting and the artifact might help someone else ask a better one.
