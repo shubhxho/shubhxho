@@ -8,7 +8,7 @@ export function TrustPage({ slug }: { slug: ContentPageSlug }) {
   const page = getPage(slug);
 
   return (
-    <main className="flex-1 px-5 py-14 sm:px-6 sm:py-20">
+    <main className="flex-1 px-5 py-16 sm:px-6 sm:py-24">
       <FadeIn className="site-shell">
         <h1 className="mb-8 text-[clamp(1.8rem,5vw,2.6rem)] leading-[1.15] font-bold tracking-tight">
           {page.heading}

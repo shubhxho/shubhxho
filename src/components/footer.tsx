@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 export function Footer() {
   return (
     <footer className="mt-auto pb-10">
-      <div className="site-shell flex flex-wrap items-baseline justify-between gap-3 border-t border-border px-5 pt-5 text-xs text-muted-foreground sm:px-6">
+      <div className="site-shell flex flex-wrap items-baseline justify-between gap-3 border-t border-border px-5 pt-5 text-xs text-muted-foreground sm:px-0">
         <p>
           © {new Date().getFullYear()} {site.handle}
         </p>

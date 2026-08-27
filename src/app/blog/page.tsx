@@ -17,7 +17,7 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <main className="flex-1 px-5 py-14 sm:px-6 sm:py-20">
+    <main className="flex-1 px-5 py-16 sm:px-6 sm:py-24">
       <FadeIn className="site-shell">
         <h1 className="mb-2 text-[clamp(1.8rem,5vw,2.6rem)] font-bold tracking-tight">Writing</h1>
         <p className="mb-10 max-w-xl text-sm leading-7 text-muted-foreground">

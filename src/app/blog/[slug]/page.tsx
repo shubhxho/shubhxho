@@ -36,7 +36,7 @@ export default async function PostPage({ params }: PostPageProps) {
   if (!post) notFound();
 
   return (
-    <main className="flex-1 px-5 py-14 sm:px-6 sm:py-20">
+    <main className="flex-1 px-5 py-16 sm:px-6 sm:py-24">
       <FadeIn className="site-shell">
         <p className="mb-8 text-sm">
           <Link href="/blog" className="ink-link">

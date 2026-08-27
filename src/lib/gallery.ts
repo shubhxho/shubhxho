@@ -1,3 +1,3 @@
-import { getGalleryBackground, getGalleryImages } from "@/lib/content";
+import { getGalleryBackground, getGalleryContent, getGalleryImages } from "@/lib/content";
 
-export { getGalleryBackground, getGalleryImages };
+export { getGalleryBackground, getGalleryContent, getGalleryImages };

@@ -1,14 +1,15 @@
 ---
-name: shubhxho
+name: Shubh Gupta
 headline: Hi. I make things.
-bio: engineer and hacker from khagaria. i like solving hard problems and building robots, systems, and unusual software around them.
-projectsLabel: what i'm working on
-galleryLabel: gallery
-galleryUrl: https://gallery.shubhxho.com
-galleryLinkLabel: open full gallery →
-writingLabel: writing
+bio: I like solving hard problems and building robots, systems, and unusual software around them. Engineer and hacker from Khagaria.
+projectsLabel: What I'm working on
+galleryLabel: Gallery
+galleryUrl: /gallery
+galleryLinkLabel: see all →
+galleryExternalUrl: https://gallery.shubhxho.com
+writingLabel: Writing
 writingLinkLabel: all writing →
 writingPreviewCount: 4
-contactLabel: reach out
-footerCredit: design and development by me
+contactLabel: Reach out
+footerCredit: Design and development by me
 ---

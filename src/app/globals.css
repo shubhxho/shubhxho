@@ -2,13 +2,13 @@
 
 @theme inline {
   --font-mono: var(--font-jetbrains-face);
-  --color-background: #fafafa;
+  --color-background: #ffffff;
   --color-foreground: #111111;
-  --color-muted-foreground: #666666;
-  --color-surface: #f0f0f0;
-  --color-border: #e5e5e5;
+  --color-muted-foreground: #555555;
+  --color-surface: #f3f3f3;
+  --color-border: #e8e8e8;
   --color-accent: #111111;
-  --color-inverse: #fafafa;
+  --color-inverse: #ffffff;
 }
 
 html,
@@ -21,10 +21,6 @@ body {
   font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   font-feature-settings: "ss01" on, "calt" on;
   text-rendering: optimizeLegibility;
-  background-image:
-    radial-gradient(ellipse 90% 55% at 50% -20%, rgba(17, 17, 17, 0.035), transparent 60%),
-    linear-gradient(180deg, #ffffff 0%, var(--color-background) 28%);
-  background-attachment: fixed;
 }
 
 ::selection {
@@ -49,6 +45,8 @@ a {
 
 .ink-link {
   display: inline;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: background-color 120ms ease, color 120ms ease;
 }
@@ -56,11 +54,38 @@ a {
 .ink-link:hover {
   background-color: #111111;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .site-shell {
-  width: min(100%, 42rem);
+  width: min(100%, 40rem);
   margin-inline: auto;
+}
+
+.site-shell-wide {
+  width: min(100%, 56rem);
+}
+
+.gallery-mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-mosaic {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 7.5rem;
+    gap: 0.65rem;
+  }
+
+  .gallery-tile.sm\:row-span-2 {
+    min-height: 100%;
+  }
+}
+
+.gallery-tile img {
+  will-change: transform;
 }
 
 .prose {
@@ -140,7 +165,7 @@ a {
   border: 1px solid var(--color-border);
   background-color: #111111;
   padding: 1rem;
-  color: #fafafa;
+  color: #ffffff;
 }
 
 .prose pre code {

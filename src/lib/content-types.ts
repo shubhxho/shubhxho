@@ -6,6 +6,7 @@ export type HomeContent = {
   galleryLabel: string;
   galleryUrl: string;
   galleryLinkLabel: string;
+  galleryExternalUrl: string;
   writingLabel: string;
   writingLinkLabel: string;
   writingPreviewCount: number;
@@ -24,11 +25,21 @@ export type Project = {
   order: number;
 };
 
+export type GalleryLayout = "feature" | "tall" | "wide" | "square";
+
 export type GalleryImage = {
   id: string;
   src: string;
   alt: string;
+  title: string;
   href: string;
+  layout: GalleryLayout;
+};
+
+export type GalleryContent = {
+  url: string;
+  intro: string;
+  images: GalleryImage[];
 };
 
 export type ContentPage = {

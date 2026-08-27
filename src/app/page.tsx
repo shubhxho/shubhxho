@@ -1,5 +1,5 @@
 import { HomeView } from "@/components/home-view";
-import { getAllPosts, getGalleryImages, getHomeContent, getProjects } from "@/lib/content";
+import { getAllPosts, getGalleryContent, getHomeContent, getProjects } from "@/lib/content";
 import { site } from "@/lib/site";
 
 const structuredData = (projects: ReturnType<typeof getProjects>) => ({
@@ -45,7 +45,7 @@ const structuredData = (projects: ReturnType<typeof getProjects>) => ({
 export default function Home() {
   const home = getHomeContent();
   const projects = getProjects();
-  const gallery = getGalleryImages();
+  const gallery = getGalleryContent();
   const posts = getAllPosts()
     .slice(0, home.writingPreviewCount)
     .map((post) => ({

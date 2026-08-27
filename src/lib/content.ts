@@ -4,6 +4,7 @@ import type {
   BlogPost,
   ContentPage,
   ContentPageSlug,
+  GalleryContent,
   GalleryImage,
   HomeContent,
   Project,
@@ -22,6 +23,7 @@ export type {
   BlogPost,
   ContentPage,
   ContentPageSlug,
+  GalleryContent,
   GalleryImage,
   HomeContent,
   Project,
@@ -37,20 +39,21 @@ export function getHomeContent(): HomeContent {
   const { attributes } = readMarkdownFile("home.md");
 
   return {
-    name: attributes.name ?? "shubhxho",
+    name: attributes.name ?? "Shubh Gupta",
     headline: attributes.headline ?? "Hi. I make things.",
     bio:
       attributes.bio ??
-      "engineer and hacker from khagaria. building robots, systems, and unusual software.",
-    projectsLabel: attributes.projectsLabel ?? "what i'm working on",
-    galleryLabel: attributes.galleryLabel ?? "gallery",
-    galleryUrl: attributes.galleryUrl ?? "https://gallery.shubhxho.com",
-    galleryLinkLabel: attributes.galleryLinkLabel ?? "open full gallery →",
-    writingLabel: attributes.writingLabel ?? "writing",
+      "I like solving hard problems and building robots, systems, and unusual software around them.",
+    projectsLabel: attributes.projectsLabel ?? "What I'm working on",
+    galleryLabel: attributes.galleryLabel ?? "Gallery",
+    galleryUrl: attributes.galleryUrl ?? "/gallery",
+    galleryLinkLabel: attributes.galleryLinkLabel ?? "see all →",
+    galleryExternalUrl: attributes.galleryExternalUrl ?? "https://gallery.shubhxho.com",
+    writingLabel: attributes.writingLabel ?? "Writing",
     writingLinkLabel: attributes.writingLinkLabel ?? "all writing →",
     writingPreviewCount: numberAttribute(attributes.writingPreviewCount, 4),
-    contactLabel: attributes.contactLabel ?? "reach out",
-    footerCredit: attributes.footerCredit ?? "design and development by me",
+    contactLabel: attributes.contactLabel ?? "Reach out",
+    footerCredit: attributes.footerCredit ?? "Design and development by me",
   };
 }
 
@@ -80,32 +83,51 @@ export function getProjects(): Project[] {
 }
 
 export function getGalleryImages(): GalleryImage[] {
+  return getGalleryContent().images;
+}
+
+export function getGalleryContent(): GalleryContent {
   const { attributes, content } = readMarkdownFile("gallery.md");
   const cloudinaryBase =
     attributes.cloudinaryBase ??
-    "https://res.cloudinary.com/dtq4hbiya/image/upload/c_scale,w_1200";
+    "https://res.cloudinary.com/dtq4hbiya/image/upload/c_scale,w_1400";
   const galleryUrl = attributes.url ?? "https://gallery.shubhxho.com";
 
-  return content
+  const images = content
     .split("\n")
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => {
-      const [id, file, alt, hrefSuffix] = line.split("|").map((part) => part.trim());
-      if (!id || !file || !alt) return null;
+      const [id, file, title, hrefSuffix, layoutRaw] = line
+        .split("|")
+        .map((part) => part.trim());
+      if (!id || !file || !title) return null;
 
       const href = hrefSuffix?.startsWith("http")
         ? hrefSuffix
         : `${galleryUrl}${hrefSuffix?.startsWith("/") ? hrefSuffix : `/${hrefSuffix ?? ""}`}`;
 
+      const layout =
+        layoutRaw === "feature" || layoutRaw === "tall" || layoutRaw === "wide"
+          ? layoutRaw
+          : "square";
+
       return {
         id,
         src: `${cloudinaryBase}/${file}`,
-        alt,
+        alt: title,
+        title,
         href,
+        layout,
       };
     })
     .filter((image): image is GalleryImage => image !== null);
+
+  return {
+    url: galleryUrl,
+    intro: attributes.intro ?? "Blender studies, stills, and experiments.",
+    images,
+  };
 }
 
 export function getGalleryBackground() {
