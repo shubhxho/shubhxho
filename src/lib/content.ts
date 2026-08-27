@@ -52,6 +52,10 @@ export function getHomeContent(): HomeContent {
     writingLabel: attributes.writingLabel ?? "Writing",
     writingLinkLabel: attributes.writingLinkLabel ?? "all writing →",
     writingPreviewCount: numberAttribute(attributes.writingPreviewCount, 4),
+    historyLabel: attributes.historyLabel ?? "History",
+    historyUrl: attributes.historyUrl ?? "/history",
+    historyLinkLabel: attributes.historyLinkLabel ?? "full timeline →",
+    historyPreviewCount: numberAttribute(attributes.historyPreviewCount, 10),
     contactLabel: attributes.contactLabel ?? "Reach out",
     footerCredit: attributes.footerCredit ?? "Design and development by me",
   };
@@ -165,6 +169,16 @@ export function getTimeline(): TimelineEntry[] {
       };
     })
     .filter((entry): entry is TimelineEntry => entry !== null);
+}
+
+export function getTimelineMeta() {
+  const { attributes } = readMarkdownFile("timeline.md");
+  return {
+    title: attributes.title ?? "History",
+    description:
+      attributes.description ??
+      "Chronological timeline of projects, fellowships, and milestones.",
+  };
 }
 
 function toBlogPost(filename: string): BlogPost | null {

@@ -1,5 +1,11 @@
 import { HomeView } from "@/components/home-view";
-import { getAllPosts, getGalleryContent, getHomeContent, getProjects } from "@/lib/content";
+import {
+  getAllPosts,
+  getGalleryContent,
+  getHomeContent,
+  getProjects,
+  getTimeline,
+} from "@/lib/content";
 import { site } from "@/lib/site";
 
 const structuredData = (projects: ReturnType<typeof getProjects>) => ({
@@ -46,6 +52,7 @@ export default function Home() {
   const home = getHomeContent();
   const projects = getProjects();
   const gallery = getGalleryContent();
+  const timeline = getTimeline().slice(0, home.historyPreviewCount);
   const posts = getAllPosts()
     .slice(0, home.writingPreviewCount)
     .map((post) => ({
@@ -57,7 +64,13 @@ export default function Home() {
 
   return (
     <>
-      <HomeView home={home} projects={projects} gallery={gallery} posts={posts} />
+      <HomeView
+        home={home}
+        projects={projects}
+        gallery={gallery}
+        posts={posts}
+        timeline={timeline}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

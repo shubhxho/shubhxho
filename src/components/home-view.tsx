@@ -2,7 +2,8 @@ import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { GalleryMosaic } from "@/components/gallery-mosaic";
 import { Tip } from "@/components/hover-tip";
-import type { GalleryContent, HomeContent, Project } from "@/lib/content-types";
+import { TimelineList } from "@/components/timeline-list";
+import type { GalleryContent, HomeContent, Project, TimelineEntry } from "@/lib/content-types";
 import { site } from "@/lib/site";
 
 export type HomePost = {
@@ -17,9 +18,10 @@ type HomeViewProps = {
   projects: Project[];
   gallery: GalleryContent;
   posts: HomePost[];
+  timeline: TimelineEntry[];
 };
 
-export function HomeView({ home, projects, gallery, posts }: HomeViewProps) {
+export function HomeView({ home, projects, gallery, posts, timeline }: HomeViewProps) {
   return (
     <main className="flex flex-1 flex-col">
       <FadeIn className="site-shell px-5 pt-16 pb-20 sm:px-0 sm:pt-24">
@@ -57,6 +59,18 @@ export function HomeView({ home, projects, gallery, posts }: HomeViewProps) {
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="mt-16" aria-labelledby="history-label">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <h2 id="history-label" className="text-xl font-bold tracking-tight">
+              {home.historyLabel}
+            </h2>
+            <Link href={home.historyUrl} className="ink-link text-sm">
+              {home.historyLinkLabel}
+            </Link>
+          </div>
+          <TimelineList entries={timeline} />
         </section>
 
         <section className="mt-16" aria-labelledby="writing-label">

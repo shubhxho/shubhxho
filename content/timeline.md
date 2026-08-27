@@ -1,5 +1,6 @@
 ---
-title: Timeline
+title: History
+description: Chronological timeline of projects, fellowships, and milestones from Khagaria to now.
 ---
 
 - **2026-08-18** — Ships [wolfpdf](https://github.com/shubhxho/wolfpdf), wolfenstein 3d in a pdf

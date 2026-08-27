@@ -24,11 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    ...["about", "contact", "privacy", "gallery"].map((path) => ({
+    ...["about", "contact", "privacy", "gallery", "history"].map((path) => ({
       url: `${site.url}/${path}`,
       lastModified: new Date(site.lastUpdated),
       changeFrequency: "monthly" as const,
-      priority: path === "gallery" ? 0.7 : 0.6,
+      priority: path === "gallery" || path === "history" ? 0.7 : 0.6,
     })),
   ];
 }

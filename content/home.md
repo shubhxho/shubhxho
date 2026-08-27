@@ -10,6 +10,10 @@ galleryExternalUrl: https://gallery.shubhxho.com
 writingLabel: Writing
 writingLinkLabel: all writing →
 writingPreviewCount: 4
+historyLabel: History
+historyUrl: /history
+historyLinkLabel: full timeline →
+historyPreviewCount: 10
 contactLabel: Reach out
 footerCredit: Design and development by me
 ---

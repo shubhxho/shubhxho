@@ -10,6 +10,10 @@ export type HomeContent = {
   writingLabel: string;
   writingLinkLabel: string;
   writingPreviewCount: number;
+  historyLabel: string;
+  historyUrl: string;
+  historyLinkLabel: string;
+  historyPreviewCount: number;
   contactLabel: string;
   footerCredit: string;
 };

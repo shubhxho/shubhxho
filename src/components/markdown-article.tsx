@@ -1,21 +1,36 @@
 import { Fragment, type ReactNode } from "react";
 
-function inlineMarkdown(value: string): ReactNode[] {
+export function InlineMarkdown({ value }: { value: string }) {
   const parts = value.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^\s)]+\))/g);
 
-  return parts.map((part, index) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={index}>{part.slice(2, -2)}</strong>;
-    }
-    if (part.startsWith("`") && part.endsWith("`")) {
-      return <code key={index}>{part.slice(1, -1)}</code>;
-    }
-    const link = part.match(/^\[([^\]]+)\]\(([^\s)]+)\)$/);
-    if (link) {
-      return <a key={index} href={link[2]}>{link[1]}</a>;
-    }
-    return <Fragment key={index}>{part}</Fragment>;
-  });
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong key={index}>{part.slice(2, -2)}</strong>;
+        }
+        if (part.startsWith("`") && part.endsWith("`")) {
+          return <code key={index}>{part.slice(1, -1)}</code>;
+        }
+        const link = part.match(/^\[([^\]]+)\]\(([^\s)]+)\)$/);
+        if (link) {
+          const href = link[2];
+          const external = href.startsWith("http");
+          return (
+            <a
+              key={index}
+              href={href}
+              className="ink-link"
+              {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+            >
+              {link[1]}
+            </a>
+          );
+        }
+        return <Fragment key={index}>{part}</Fragment>;
+      })}
+    </>
+  );
 }
 
 export function MarkdownArticle({ content }: { content: string }) {
@@ -26,19 +41,27 @@ export function MarkdownArticle({ content }: { content: string }) {
 
   const flushParagraph = () => {
     if (paragraph.length) {
-      blocks.push(<p key={`p-${blocks.length}`}>{inlineMarkdown(paragraph.join(" "))}</p>);
-      paragraph = [];
+      blocks.push(
+        <p key={`p-${blocks.length}`}>
+          <InlineMarkdown value={paragraph.join(" ")} />
+        </p>,
+      );
     }
+    paragraph = [];
   };
   const flushList = () => {
     if (list.length) {
       blocks.push(
         <ul key={`list-${blocks.length}`} role="list">
-          {list.map((item) => <li key={item}>{inlineMarkdown(item)}</li>)}
+          {list.map((item) => (
+            <li key={item}>
+              <InlineMarkdown value={item} />
+            </li>
+          ))}
         </ul>,
       );
-      list = [];
     }
+    list = [];
   };
 
   for (const line of lines) {
@@ -59,7 +82,11 @@ export function MarkdownArticle({ content }: { content: string }) {
     } else if (line.startsWith("> ")) {
       flushParagraph();
       flushList();
-      blocks.push(<blockquote key={`quote-${blocks.length}`}>{inlineMarkdown(line.slice(2))}</blockquote>);
+      blocks.push(
+        <blockquote key={`quote-${blocks.length}`}>
+          <InlineMarkdown value={line.slice(2)} />
+        </blockquote>,
+      );
     } else {
       paragraph.push(line.trim());
     }
