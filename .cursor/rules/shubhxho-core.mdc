@@ -1,0 +1,47 @@
+---
+description: shubhxho.com — architecture, content map, and agent workflow (read first)
+alwaysApply: true
+---
+
+# shubhxho.com
+
+Personal site for **Shubh Gupta** (`shubhxho`). Next.js 16 App Router. Style: sparse kdrag0n-like, JetBrains Mono, white canvas, `site-shell` (~40rem).
+
+## Architecture
+
+```
+content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
+                     src/lib/markdown.ts
+```
+
+| Task | Edit | Loader |
+|------|------|--------|
+| Homepage copy + labels | `content/home.md` | `getHomeContent()` |
+| Projects | `content/projects/*.md` | `getProjects()` |
+| Blog | `content/blog/*.md` | `getAllPosts()` / `getPost()` |
+| Gallery mosaic | `content/gallery.md` | `getGalleryContent()` |
+| History / timeline | `content/timeline.md` | `getTimeline()` |
+| About / contact / privacy | `content/pages/*.md` | `getPage()` |
+| URL, email, socials only | `src/lib/site.ts` | — |
+
+## Default workflow
+
+1. **Copy or new posts** → markdown in `content/` only
+2. **Layout / behavior** → `src/components/` + `src/app/`
+3. **Never** import `@/lib/content` in `"use client"` files — types from `@/lib/content-types` only
+4. **Verify** → `npm test` (build + agentic smoke tests)
+5. **Commit** only when the user asks
+
+## Routes
+
+`/`, `/blog`, `/blog/[slug]`, `/gallery`, `/history`, `/about`, `/contact`, `/privacy`
+
+Agent endpoints (do not break): `/llms.txt`, `/llms-full.txt`, `/profile.md`, `/feed.xml`, `/sitemap.xml`, markdown negotiation via `src/proxy.ts`
+
+## Commands
+
+```bash
+npm run dev    # http://localhost:3000
+npm run build
+npm test
+```

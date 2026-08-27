@@ -1,0 +1,60 @@
+---
+description: Markdown frontmatter formats and content/ editing rules
+globs: content/**/*
+alwaysApply: false
+---
+
+# Content markdown
+
+All site copy lives under `content/`. Frontmatter is `key: value` (one line per key). Body is markdown where applicable.
+
+## `content/home.md`
+
+Controls homepage sections and preview counts:
+
+```yaml
+---
+name: Shubh Gupta
+headline: Hi. I make things.
+bio: ...
+projectsLabel: What I'm working on
+writingPreviewCount: 4
+historyPreviewCount: 10
+galleryUrl: /gallery
+historyUrl: /history
+---
+```
+
+## `content/projects/*.md`
+
+Required: `title`, `description`, `href`. Optional: `role`, `year`, `tip`, `order` (lower = first).
+
+## `content/blog/*.md`
+
+Required: `title`, `description`, `date` (ISO `YYYY-MM-DD`). Body supports `##`, lists, links, blockquotes via `MarkdownArticle`.
+
+## `content/gallery.md`
+
+Frontmatter: `url`, `cloudinaryBase`, `intro`. Body lines:
+
+```
+id | cloudinary-filename.jpg | tile title | /p/0 | feature
+```
+
+Layout suffix: `feature` | `tall` | `wide` | omit for square.
+
+## `content/timeline.md`
+
+Frontmatter: `title`, `description`. Body:
+
+```
+- **2026-08-18** — Ships [wolfpdf](https://github.com/...), description
+```
+
+## `content/pages/*.md`
+
+Frontmatter: `title`, `description`, `heading`. Body = trust page prose.
+
+## After adding content
+
+New blog slugs auto-SSG via `generateStaticParams`. New routes need `src/app/` page + `src/app/sitemap.ts` entry.

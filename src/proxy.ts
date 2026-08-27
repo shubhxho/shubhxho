@@ -5,7 +5,10 @@ const markdownNativePaths = new Set(["/llms.txt", "/llms-full.txt", "/profile.md
 const knownPaths = new Set([
   "/",
   "/about",
+  "/blog",
   "/contact",
+  "/gallery",
+  "/history",
   "/privacy",
   "/feed.xml",
   "/humans.txt",
@@ -22,6 +25,12 @@ const knownPaths = new Set([
   "/twitter-image",
 ]);
 
+function isKnownPath(pathname: string) {
+  if (knownPaths.has(pathname)) return true;
+  if (pathname.startsWith("/blog/")) return true;
+  return false;
+}
+
 function withNegotiationVary(response: NextResponse) {
   response.headers.set("Vary", "Accept, Accept-Encoding");
   return response;
@@ -37,7 +46,7 @@ export function proxy(request: NextRequest) {
     );
   }
 
-  if (wantsMarkdown && !markdownNativePaths.has(pathname) && !knownPaths.has(pathname)) {
+  if (wantsMarkdown && !markdownNativePaths.has(pathname) && !isKnownPath(pathname)) {
     return new NextResponse(getNotFoundMarkdown(pathname), {
       status: 404,
       headers: {

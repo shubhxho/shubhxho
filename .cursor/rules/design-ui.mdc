@@ -1,0 +1,46 @@
+---
+description: Visual system — kdrag0n-style layout, typography, and components
+globs: src/app/globals.css,src/components/**/*.tsx,src/app/**/page.tsx
+alwaysApply: false
+---
+
+# Design system
+
+Sparse personal-site aesthetic (kdrag0n / kognise). Do not add heavy gradients, dark themes, or decorative chrome unless asked.
+
+## Layout
+
+- **Shell**: `.site-shell` (40rem) for text pages; `.site-shell-wide` (56rem) for gallery
+- **Sections**: `text-xl font-bold` h2, generous `mt-16` spacing
+- **Hero**: name as h1, headline + bio below, muted bio color
+
+## Typography & links
+
+- Font: JetBrains Mono via layout (`font-mono`)
+- Links: `.ink-link` — underline, invert to black bg on hover
+- Muted text: `text-muted-foreground`
+
+## Components (reuse, don't duplicate)
+
+| Component | Use |
+|-----------|-----|
+| `HomeView` | Homepage sections |
+| `GalleryMosaic` | Gallery grid (`compact` on home) |
+| `TimelineList` | History rows |
+| `MarkdownArticle` | Blog + trust pages |
+| `FadeIn` | Page enter animation (GSAP) |
+| `Tip` | Hover tips on links |
+
+## Homepage section order
+
+Intro → What I'm working on → History → Writing → Gallery → Reach out
+
+## Gallery
+
+Mosaic with `feature` / `tall` / `wide` tiles. Hover shows title gradient. Keep images from `content/gallery.md`.
+
+## Don't
+
+- Hardcode copy in JSX when it belongs in `content/`
+- Add new font families without explicit request
+- Break mobile: test narrow column + gallery 2-col grid

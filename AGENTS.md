@@ -8,41 +8,68 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Cursor / coding agent guide — shubhxho.com
+# Agent guide — shubhxho.com
 
-Personal site for **Shubh Gupta** (`shubhxho`). Next.js App Router. Visual style: sparse kdrag0n-like, JetBrains Mono, light canvas.
+Cursor rules live in `.cursor/rules/` (always read `shubhxho-core.mdc` first).
 
-## Source of truth: `content/`
+## What this is
 
-Do not invent copy in React. Load through `src/lib/content.ts`:
+Personal site for **Shubh Gupta** (`shubhxho`). Next.js 16, App Router, markdown-driven content, kdrag0n-style layout (JetBrains Mono, white, narrow column).
 
-- `content/home.md` — name, headline, bio, section labels
-- `content/projects/*.md` — selected work
-- `content/blog/*.md` — writing
-- `content/gallery.md` — gallery mosaic
-- `content/timeline.md` — history
-- `content/pages/{about,contact,privacy}.md` — trust pages
+## Content-first rule
 
-Site identity constants (URL, email, socials): `src/lib/site.ts`.
+**Public copy → `content/` markdown.** React only loads and renders it.
 
-## Agent-facing public URLs
+```
+content/
+├── home.md           # homepage labels + intro
+├── gallery.md        # mosaic images
+├── timeline.md       # history
+├── blog/*.md         # writing
+├── projects/*.md     # selected work
+└── pages/*.md        # about, contact, privacy
+```
 
-- `/llms.txt` — discovery index for agents
-- `/llms-full.txt` / `/profile.md` — full markdown profile + timeline
-- `/feed.xml` — RSS of blog posts
-- `/sitemap.xml` — all public routes
-- `Accept: text/markdown` on `/` returns the markdown profile (see `src/proxy.ts`)
+Loaders: `src/lib/content.ts` · parser: `src/lib/markdown.ts` · types: `src/lib/content-types.ts`
 
-## Workflow for agents
+## Common tasks
 
-1. Prefer editing `content/**/*.md` for copy/structure changes
-2. Touch `src/components/*` only for layout/behavior
-3. Never put `node:fs` in client components
-4. Verify with `npm test` before finishing
+| User wants | Do this |
+|------------|---------|
+| New blog post | Add `content/blog/slug.md` with frontmatter + body |
+| New project | Add `content/projects/slug.md` with `order` |
+| Edit homepage | Edit `content/home.md` |
+| Edit timeline | Edit `content/timeline.md` |
+| Change gallery | Edit `content/gallery.md` lines |
+| New page route | Add `src/app/route/page.tsx` + sitemap + proxy known path |
 
-## Local run
+## Server / client boundary
+
+- `@/lib/content` → **server only**
+- Client components → import types from `@/lib/content-types` only
+- Pass loaded data as props (`HomeView`, etc.)
+
+## Public agent endpoints
+
+| URL | Purpose |
+|-----|---------|
+| `/llms.txt` | Discovery index |
+| `/llms-full.txt` | Full profile + timeline |
+| `/profile.md` | Markdown profile |
+| `/feed.xml` | Blog RSS |
+| `/sitemap.xml` | All indexable URLs |
+| `Accept: text/markdown` on `/` | Rewrites to profile |
+
+Implementation: `src/lib/discovery.ts`, `src/lib/agentic.ts`, `src/proxy.ts`
+
+## Verify
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
+npm test         # build + agentic smoke tests
 ```
+
+## Site constants
+
+Email, social links, SEO keywords: `src/lib/site.ts` (not in markdown).
