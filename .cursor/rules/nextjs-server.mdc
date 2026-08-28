@@ -10,28 +10,30 @@ Read `node_modules/next/dist/docs/` before changing App Router APIs — this Nex
 
 ## Server vs client
 
-- **Server** (default): pages, layouts, `getHomeContent()`, `getAllPosts()`, etc.
+- **Server** (default): pages, layouts, loaders (`getHomeContent()`, `getAllPosts()`, `getAllPeople()`, `getPage()`)
 - **Client** (`"use client"`): `Header`, `HomeView`, `FadeIn`, `Tip`, `GalleryMosaic` (uses Next Image)
 - Load markdown on server → pass props to client components
-- `node:fs` only in `src/lib/markdown.ts` and `src/lib/content.ts`
+- `node:fs` only in `markdown.ts`, `content.ts`, `posts.ts`, `people.ts`, `pages.ts`
 
 ## Adding a page
 
 1. `src/app/<route>/page.tsx` — call content loaders, render with `FadeIn` + `site-shell`
 2. Export `metadata` from page or layout
-3. Add URL to `src/app/sitemap.ts`
+3. Add URL in `src/app/sitemap.ts` (use `pageSlugs`, `getAllPosts()`, or `getAllPeople()`)
 4. If markdown agents should not 404 it, update path checks in `src/proxy.ts`
 
-## Blog posts
+## Blog / people
 
-- Slugs from filename: `content/blog/my-post.md` → `/blog/my-post`
-- `generateStaticParams` in `src/app/blog/[slug]/page.tsx`
+- Blog slugs: `content/blog/my-post.mdx` → `/blog/my-post` via `posts.ts`
+- Gratitude slugs: `content/people/hackclub.mdx` → `/people/hackclub` via `people.ts`
+- Trust pages: `content/pages/{about,contact,privacy}.md` → `pages.ts` → `src/app/{slug}/page.tsx`
 
 ## Preserve agent infrastructure
 
 - `src/lib/discovery.ts` — llms.txt, profile, RSS
 - `src/lib/agentic.ts` — Accept negotiation helpers
 - `src/proxy.ts` — markdown rewrite for `/` and 404 markdown
+- `src/app/sitemap.ts` — all indexable HTML URLs
 - `scripts/test-agentic.mjs` — smoke tests; update when routes/sections change
 
 ## Config

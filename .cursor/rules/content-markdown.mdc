@@ -22,6 +22,8 @@ writingPreviewCount: 4
 historyPreviewCount: 10
 galleryUrl: /gallery
 historyUrl: /history
+peopleLabel: Gratitude
+peopleUrl: /people
 ---
 ```
 
@@ -53,11 +55,11 @@ Frontmatter: `title`, `description`. Body:
 
 ## `content/people/*.mdx`
 
-Required: `name`. Optional: `slug`, `href`, `order`. Body is MDX, loaded by `people.ts`.
+Required: `name`. Optional: `slug`, `href`, `order`. Body is MDX via `people.ts` → `GratitudeView` / `MdxArticle`. Public section name is Gratitude; URLs are `/people/{slug}`.
 
 ## `content/pages/*.md`
 
-Frontmatter: `title`, `description`, `heading`. Body = trust page prose.
+Frontmatter: `title`, `description`, `heading`. Body = trust page prose. Loaded by `src/lib/pages.ts`.
 
 ## After adding content
 

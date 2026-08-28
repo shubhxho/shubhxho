@@ -27,13 +27,16 @@ Sparse personal-site aesthetic (kdrag0n / kognise). Do not add heavy gradients, 
 | `HomeView` | Homepage sections |
 | `GalleryMosaic` | Gallery grid (`compact` on home) |
 | `TimelineList` | History rows |
-| `MarkdownArticle` | Blog + trust pages |
+| `BlogPostList` | Writing index rows |
+| `PeopleView` / `GratitudeView` | Gratitude list + person MDX |
+| `MdxArticle` | Blog + people MDX bodies |
+| `MarkdownArticle` | Trust pages (about / contact / privacy) |
 | `FadeIn` | Page enter animation (GSAP) |
 | `Tip` | Hover tips on links |
 
 ## Homepage section order
 
-Intro → What I'm working on → History → Writing → Gallery → Reach out
+Intro → What I'm working on → History → Writing → Gallery → Gratitude → Reach out
 
 ## Gallery
 

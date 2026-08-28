@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { TrustPage } from "@/components/trust-page";
-import { getPage } from "@/lib/content";
+import { getPage } from "@/lib/pages";
 import { site } from "@/lib/site";
 
 const page = getPage("contact");

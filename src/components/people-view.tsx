@@ -83,7 +83,7 @@ export function PeopleView(props: PeopleViewProps) {
     <>
       <p className="mb-8 text-sm">
         <Link href="/people" className="ink-link">
-          ← all people
+          ← all gratitude
         </Link>
       </p>
       <h1 className="mb-6 text-[clamp(1.8rem,5vw,2.6rem)] leading-[1.15] font-bold tracking-tight text-pretty">

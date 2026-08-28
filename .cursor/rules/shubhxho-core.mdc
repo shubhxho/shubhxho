@@ -10,8 +10,11 @@ Personal site for **Shubh Gupta** (`shubhxho`). Next.js 16 App Router. Style: sp
 ## Architecture
 
 ```
-content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
-                     src/lib/markdown.ts
+content/pages/*.md      → pages.ts      → /about /contact /privacy
+content/blog/*.mdx      → posts.ts      → blog.ts → /blog
+content/people/*.mdx    → people.ts     → /people (gratitude)
+content/**/*.md         → content.ts    → homepage, gallery, history
+                          markdown.ts
 ```
 
 | Task | Edit | Loader |
@@ -21,15 +24,16 @@ content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
 | Blog | `content/blog/*.mdx` | `getAllPosts()` / `getPost()` |
 | Gallery mosaic | `content/gallery.md` | `getGalleryContent()` |
 | History / timeline | `content/timeline.md` | `getTimeline()` |
-| People / gratitude | `content/people/*.mdx` | `getAllPeople()` / `getPerson()` |
-| About / contact / privacy | `content/pages/*.md` | `getPage()` |
+| Gratitude / people | `content/people/*.mdx` | `getAllPeople()` / `getPerson()` |
+| About / contact / privacy | `content/pages/*.md` | `getPage()` in `pages.ts` |
+| Indexable URLs | — | `src/app/sitemap.ts` |
 | URL, email, socials only | `src/lib/site.ts` | — |
 
 ## Default workflow
 
 1. **Copy or new posts** → markdown in `content/` only
 2. **Layout / behavior** → `src/components/` + `src/app/`
-3. **Never** import `@/lib/content` in `"use client"` files — types from `@/lib/content-types` only
+3. **Never** import `@/lib/content`, `@/lib/people`, `@/lib/posts`, or `@/lib/pages` in `"use client"` files — types from `@/lib/content-types` only
 4. **Verify** → `npm test` (build + agentic smoke tests)
 5. **Commit** only when the user asks
 
@@ -37,7 +41,9 @@ content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
 
 `/`, `/blog`, `/blog/[slug]`, `/gallery`, `/history`, `/people`, `/people/[slug]`, `/about`, `/contact`, `/privacy`
 
-Agent endpoints (do not break): `/llms.txt`, `/llms-full.txt`, `/profile.md`, `/feed.xml`, `/sitemap.xml`, markdown negotiation via `src/proxy.ts`
+Gratitude is the public name; URLs are `/people`. Old `/gratitude` paths redirect.
+
+Agent endpoints (do not break): `/llms.txt`, `/llms-full.txt`, `/profile.md`, `/feed.xml`, `/sitemap.xml`, `/people.md`, markdown negotiation via `src/proxy.ts`
 
 ## Commands
 

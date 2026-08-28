@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BlogPostList, type BlogPostListItem } from "@/components/blog-post-list";
 import { FadeIn } from "@/components/fade-in";
 import { GalleryMosaic } from "@/components/gallery-mosaic";
-import { PeopleView } from "@/components/people-view";
+import { GratitudeView } from "@/components/gratitude-view";
 import { Tip } from "@/components/hover-tip";
 import { TimelineList } from "@/components/timeline-list";
 import type { GalleryContent, HomeContent, Person, Project, TimelineEntry } from "@/lib/content-types";
@@ -110,7 +110,7 @@ export function HomeView({ home, projects, gallery, posts, timeline, people }: H
               {home.peopleLinkLabel}
             </Link>
           </div>
-          <PeopleView variant="list" people={people} />
+          <GratitudeView variant="list" people={people} />
         </section>
 
         <section className="mt-16" aria-labelledby="contact-label">

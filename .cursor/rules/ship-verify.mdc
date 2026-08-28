@@ -16,7 +16,9 @@ This runs production build (webpack) + `scripts/test-agentic.mjs` (starts server
 ## When tests fail
 
 - Homepage section renamed → update assertions in `scripts/test-agentic.mjs`
-- New public route → add to sitemap + agentic test loop + `src/proxy.ts` known paths if needed
+- New public route → add to `src/app/sitemap.ts` + agentic test loop + `src/proxy.ts` known paths if needed
+- New gratitude person → `content/people/slug.mdx` (sitemap picks it up via `getAllPeople()`)
+- New trust page → `content/pages/slug.md` + `pageSlugs` in `pages.ts` + `src/app/<slug>/page.tsx`
 - Client bundle fs error → move loader to server page, pass props
 
 ## Git

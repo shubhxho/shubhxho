@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { MarkdownArticle } from "@/components/markdown-article";
-import type { ContentPageSlug } from "@/lib/content";
-import { getPage } from "@/lib/content";
+import type { ContentPageSlug } from "@/lib/pages";
+import { getPage } from "@/lib/pages";
 
 export function TrustPage({ slug }: { slug: ContentPageSlug }) {
   const page = getPage(slug);

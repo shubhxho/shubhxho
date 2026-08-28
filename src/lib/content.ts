@@ -1,6 +1,4 @@
 import type {
-  ContentPage,
-  ContentPageSlug,
   GalleryContent,
   GalleryImage,
   HomeContent,
@@ -14,14 +12,14 @@ import {
 } from "@/lib/markdown";
 
 export type {
-  ContentPage,
-  ContentPageSlug,
   GalleryContent,
   GalleryImage,
   HomeContent,
   Project,
   TimelineEntry,
 } from "@/lib/content-types";
+export { getPage, getPages, pageSlugs } from "@/lib/pages";
+export type { ContentPage, ContentPageSlug } from "@/lib/pages";
 
 function numberAttribute(value: string | undefined, fallback: number) {
   const parsed = Number(value);
@@ -133,18 +131,6 @@ export function getGalleryContent(): GalleryContent {
 
 export function getGalleryBackground() {
   return getGalleryImages()[0]?.src ?? "";
-}
-
-export function getPage(slug: ContentPageSlug): ContentPage {
-  const { attributes, content } = readMarkdownFile("pages", `${slug}.md`);
-
-  return {
-    slug,
-    title: attributes.title ?? slug,
-    description: attributes.description ?? "",
-    heading: attributes.heading ?? attributes.title ?? slug,
-    content,
-  };
 }
 
 export function getTimeline(): TimelineEntry[] {
