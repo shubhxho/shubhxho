@@ -1,17 +1,8 @@
-import { site } from "@/lib/site";
+import { getProfileLinks, site } from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
 import { getTimeline } from "@/lib/content";
 import { getPages } from "@/lib/pages";
 import { getPeopleDiscoveryMarkdown, getAllPeople } from "@/lib/people";
-
-const linkLabels: Record<string, string> = {
-  x: "X",
-  in: "LinkedIn",
-  ig: "Instagram",
-  gh: "GitHub",
-  hf: "Hugging Face",
-  kg: "Kaggle",
-};
 
 const timelineMarkdown = getTimeline()
   .map((entry) => `- ${entry.date}: ${entry.plainText}`)
@@ -27,8 +18,8 @@ const writingMarkdown = getAllPosts()
   .map((post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.description}`)
   .join("\n");
 
-const profileLinks = Object.entries(site.links)
-  .map(([name, url]) => `- [${linkLabels[name] ?? name.toUpperCase()}](${url})`)
+const profileLinks = getProfileLinks()
+  .map((link) => `- [${link.label}](${link.url})`)
   .join("\n");
 
 const markdownEndpoints = [

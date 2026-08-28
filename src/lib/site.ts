@@ -49,3 +49,24 @@ export const site = {
     kg: "https://www.kaggle.com/shubhxho",
   },
 } as const;
+
+export type ProfileLinkKey = keyof typeof site.links;
+
+export const profileLinkLabels: Record<ProfileLinkKey, string> = {
+  gh: "GitHub",
+  kg: "Kaggle",
+  hf: "Hugging Face",
+  x: "X",
+  in: "LinkedIn",
+  ig: "Instagram",
+};
+
+export const profileLinkOrder: ProfileLinkKey[] = ["gh", "kg", "hf", "x", "in", "ig"];
+
+export function getProfileLinks() {
+  return profileLinkOrder.map((key) => ({
+    key,
+    label: profileLinkLabels[key],
+    url: site.links[key],
+  }));
+}

@@ -51,6 +51,9 @@ try {
   assert.match(homepageHtml, /<h2[^>]*>Gallery<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gratitude<\/h2>/);
   assert.ok(textFromHtml(homepageHtml).length > 500, "homepage must have 500+ characters without JavaScript");
+  assert.match(homepageHtml, /kaggle\.com\/shubhxho/);
+  assert.match(homepageHtml, /huggingface\.co\/shubhxho/);
+  assert.match(homepageHtml, /github\.com\/shubhxho/);
 
   const markdownHomepage = await get("/", { headers: { Accept: "text/markdown" } });
   assert.equal(markdownHomepage.status, 200);

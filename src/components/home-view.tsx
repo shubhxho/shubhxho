@@ -6,7 +6,7 @@ import { GratitudeView } from "@/components/gratitude-view";
 import { Tip } from "@/components/hover-tip";
 import { TimelineList } from "@/components/timeline-list";
 import type { GalleryContent, HomeContent, Person, Project, TimelineEntry } from "@/lib/content-types";
-import { site } from "@/lib/site";
+import { getProfileLinks, site } from "@/lib/site";
 
 type HomeViewProps = {
   home: HomeContent;
@@ -123,17 +123,19 @@ export function HomeView({ home, projects, gallery, posts, timeline, people }: H
               {site.email}
             </a>
             , or find me on{" "}
-            <a href={site.links.gh} target="_blank" rel="noreferrer" className="ink-link text-foreground">
-              GitHub
-            </a>
-            ,{" "}
-            <a href={site.links.x} target="_blank" rel="noreferrer" className="ink-link text-foreground">
-              X
-            </a>
-            , and{" "}
-            <a href={site.links.in} target="_blank" rel="noreferrer" className="ink-link text-foreground">
-              LinkedIn
-            </a>
+            {getProfileLinks().map((link, index, links) => {
+              const separator =
+                index === 0 ? "" : index === links.length - 1 ? ", and " : ", ";
+
+              return (
+                <span key={link.key}>
+                  {separator}
+                  <a href={link.url} target="_blank" rel="noreferrer" className="ink-link text-foreground">
+                    {link.label}
+                  </a>
+                </span>
+              );
+            })}
             .
           </p>
           <p className="mt-10 text-xs text-muted-foreground">{home.footerCredit}</p>
