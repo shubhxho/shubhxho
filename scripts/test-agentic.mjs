@@ -105,6 +105,9 @@ try {
   assert.match(llms, /llms-full\.txt/);
   assert.match(llms, /people\.md/);
   assert.match(llms, /Kaggle/);
+  assert.match(llms, /## shubhxho/);
+  assert.match(llms, /kaggle\.com\/shubhxho/);
+  assert.match(llms, /huggingface\.co\/shubhxho/);
   assert.match(llms, /## Markdown endpoints/);
 
   const llmsFull = await (await get("/llms-full.txt")).text();
@@ -115,6 +118,7 @@ try {
   assert.match(llmsFull, /## Writing/);
   assert.match(llmsFull, /## Pages/);
   assert.match(llmsFull, /## Machine-learning profiles/);
+  assert.match(llmsFull, /huggingface\.co\/shubhxho/);
   assert.match(llmsFull, /kaggle\.com\/shubhxho/);
   assert.match(llmsFull, /Hack Club/);
 

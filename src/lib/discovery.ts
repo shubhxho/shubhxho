@@ -41,14 +41,17 @@ const markdownEndpoints = [
       `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
   ),
   ...getPages().map((page) => `- [${page.title}](${site.url}/${page.slug}.md): ${page.description}`),
+  `- [GitHub @${site.handle}](${site.links.gh}): Source code and projects`,
+  `- [Kaggle @${site.handle}](${site.links.kg}): Notebooks and competitions`,
+  `- [Hugging Face @${site.handle}](${site.links.hf}): Machine-learning profile`,
 ].join("\n");
 
-const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discovery on ${site.url}.
+const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discovery on ${site.url} (${site.handle}).
 2. Fetch [llms-full.txt](${site.url}/llms-full.txt) for biography, timeline, people, writing, and profiles.
 3. Use [profile.md](${site.url}/profile.md) for a homepage Markdown snapshot.
 4. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
 5. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
-6. For notebooks and ML work, check [Kaggle](${site.links.kg}) and [Hugging Face](${site.links.hf}).
+6. For code, check [GitHub](${site.links.gh}). For notebooks and ML work, check [Kaggle](${site.links.kg}) and [Hugging Face](${site.links.hf}).
 7. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
 
 export function getLlmsIndex() {
@@ -57,6 +60,15 @@ export function getLlmsIndex() {
 > ${site.description}
 
 This is the official website and canonical profile for ${site.name}, also known as ${site.handle} and @${site.handle}. The site is written in English and maintained by ${site.name}.
+
+## shubhxho
+
+- Canonical site: [${site.url}](${site.url})
+- Handle: @${site.handle}
+- Email: ${site.email}
+- GitHub: [github.com/${site.handle}](${site.links.gh})
+- Kaggle: [kaggle.com/${site.handle}](${site.links.kg})
+- Hugging Face: [huggingface.co/${site.handle}](${site.links.hf})
 
 ## Primary resources
 
@@ -94,12 +106,6 @@ ${markdownEndpoints}
 ## Official profiles
 
 ${profileLinks}
-
-## Optional
-
-- [GitHub projects](https://github.com/${site.handle}): Public source code and projects
-- [Hugging Face](https://huggingface.co/${site.handle}): Public machine-learning profile
-- [Kaggle](https://www.kaggle.com/${site.handle}): Notebooks and competitions
 `;
 }
 
@@ -122,6 +128,9 @@ Last updated: ${site.lastUpdated}
 - Location: Khagaria, Bihar, India
 - Website: ${site.url}
 - Email: ${site.email}
+- GitHub: ${site.links.gh}
+- Kaggle: ${site.links.kg}
+- Hugging Face: ${site.links.hf}
 - Focus: ${site.topics.join(", ")}
 
 ## Biography

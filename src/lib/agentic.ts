@@ -26,5 +26,7 @@ export function getNotFoundMarkdown(pathname: string) {
 - [Full AI-readable profile](https://shubhxho.com/llms-full.txt): biography, timeline, people, and writing
 - [Markdown profile](https://shubhxho.com/profile.md): homepage snapshot
 - [Kaggle](https://www.kaggle.com/shubhxho): notebooks and competitions
+- [Hugging Face](https://huggingface.co/shubhxho): machine-learning profile
+- [GitHub](https://github.com/shubhxho): source code and projects
 `;
 }
