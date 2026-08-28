@@ -166,6 +166,7 @@ try {
   await expectMarkdown("/privacy.md", /^# Privacy/m);
   await expectMarkdown("/people.md", /^# Gratitude/m);
   await expectMarkdown("/people/hackclub.md", /^# Hack Club/m);
+  await expectMarkdown("/people/hermes-mail.md", /^# Hermes Mail/m);
 
   const humans = await (await get("/humans.txt")).text();
   assert.match(humans, /shubhxho/);
@@ -180,10 +181,15 @@ try {
     assert.match(sitemap, new RegExp(`https://shubhxho\\.com${path}`));
   }
   assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hackclub/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hermes-mail/);
 
   const personEntry = await get("/people/hackclub");
   assert.equal(personEntry.status, 200, "/people/hackclub must be public");
   assert.match(await personEntry.text(), /Hack Club/);
+
+  const hermesEntry = await get("/people/hermes-mail");
+  assert.equal(hermesEntry.status, 200, "/people/hermes-mail must be public");
+  assert.match(await hermesEntry.text(), /Hermes Mail/);
 
   const gratitudeRedirect = await get("/gratitude", { redirect: "manual" });
   assert.equal(gratitudeRedirect.status, 308, "/gratitude must redirect to /people");

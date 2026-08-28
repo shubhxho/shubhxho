@@ -1,4 +1,5 @@
 import { getAllPosts } from "@/lib/blog";
+import { getAllDaily } from "@/lib/daily";
 import { getPages } from "@/lib/pages";
 import { getAllPeople } from "@/lib/people";
 import { site } from "@/lib/site";
@@ -22,6 +23,7 @@ function entry(
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
+  const daily = getAllDaily();
   const people = getAllPeople();
   const pages = getPages();
 
@@ -42,6 +44,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entry(`/blog/${post.slug}`, {
         lastModified: new Date(post.date),
         priority: 0.7,
+      }),
+    ),
+    entry("/daily", {
+      lastModified: new Date(daily[0]?.date ?? site.lastUpdated),
+      changeFrequency: "daily",
+      priority: 0.7,
+    }),
+    ...daily.map((note) =>
+      entry(`/daily/${note.slug}`, {
+        lastModified: new Date(note.date),
+        changeFrequency: "yearly",
+        priority: 0.6,
       }),
     ),
     entry("/people", { priority: 0.7 }),

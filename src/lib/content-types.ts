@@ -85,3 +85,11 @@ export type BlogPost = {
   readingTime: string;
   content: string;
 };
+
+export type DailyEntry = {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  content: string;
+};

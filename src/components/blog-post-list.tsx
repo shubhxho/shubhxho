@@ -9,14 +9,15 @@ export type BlogPostListItem = {
 
 type BlogPostListProps = {
   posts: BlogPostListItem[];
+  basePath?: string;
 };
 
-export function BlogPostList({ posts }: BlogPostListProps) {
+export function BlogPostList({ posts, basePath = "/blog" }: BlogPostListProps) {
   return (
     <ul className="space-y-3">
       {posts.map((post) => (
         <li key={post.slug}>
-          <Link href={`/blog/${post.slug}`} className="group block text-sm leading-6">
+          <Link href={`${basePath}/${post.slug}`} className="group block text-sm leading-6">
             <time dateTime={post.date} className="tabular-nums text-muted-foreground">
               {formatPostDate(post.date)}
             </time>

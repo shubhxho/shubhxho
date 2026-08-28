@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         source: "/people/:slug.md",
         destination: "/people-markdown/:slug",
       },
+      {
+        source: "/daily/:slug.md",
+        destination: "/daily-markdown/:slug",
+      },
       ...pageSlugs.map((slug) => ({
         source: `/${slug}.md`,
         destination: `/page-markdown/${slug}`,
