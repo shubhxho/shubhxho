@@ -3,6 +3,15 @@ import { spawn } from "node:child_process";
 
 const port = 3137;
 const origin = `http://127.0.0.1:${port}`;
+const profileUrls = [
+  "github.com/shubhxho",
+  "kaggle.com/shubhxho",
+  "huggingface.co/shubhxho",
+  "x.com/shubhgupta",
+  "linkedin.com/in/shubhxho",
+  "instagram.com/shubhxho",
+];
+
 const server = spawn("./node_modules/.bin/next", ["start", "-p", String(port)], {
   stdio: ["ignore", "pipe", "pipe"],
 });
@@ -32,8 +41,23 @@ function textFromHtml(html) {
   return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+function assertProfileLinks(text, label) {
+  for (const url of profileUrls) {
+    assert.match(text, new RegExp(url.replaceAll(".", "\\.")), `${label} must include ${url}`);
+  }
+}
+
 async function get(path, options) {
   return fetch(`${origin}${path}`, options);
+}
+
+async function expectMarkdown(path, pattern) {
+  const response = await get(path);
+  assert.equal(response.status, 200, `${path} must be public`);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/markdown/, `${path} must be markdown`);
+  const body = await response.text();
+  assert.match(body, pattern, `${path} must match expected markdown`);
+  return body;
 }
 
 try {
@@ -51,15 +75,11 @@ try {
   assert.match(homepageHtml, /<h2[^>]*>Gallery<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gratitude<\/h2>/);
   assert.ok(textFromHtml(homepageHtml).length > 500, "homepage must have 500+ characters without JavaScript");
-  assert.match(homepageHtml, /kaggle\.com\/shubhxho/);
-  assert.match(homepageHtml, /huggingface\.co\/shubhxho/);
-  assert.match(homepageHtml, /github\.com\/shubhxho/);
-  assert.match(homepageHtml, /x\.com\/shubhgupta/);
-  assert.match(homepageHtml, /linkedin\.com\/in\/shubhxho/);
-  assert.match(homepageHtml, /instagram\.com\/shubhxho/);
+  assertProfileLinks(homepageHtml, "homepage");
   assert.match(homepageHtml, /application\/ld\+json/);
   assert.match(homepageHtml, /llms\.txt/);
   assert.match(homepageHtml, /llms-full\.txt/);
+  assert.match(homepageHtml, /"subjectOf"/);
 
   const markdownHomepage = await get("/", { headers: { Accept: "text/markdown" } });
   assert.equal(markdownHomepage.status, 200);
@@ -86,9 +106,9 @@ try {
   assert.match(notFoundMarkdown, /## Agent discovery/);
   assert.match(notFoundMarkdown, /llms\.txt/);
   assert.match(notFoundMarkdown, /llms-full\.txt/);
+  assert.match(notFoundMarkdown, /profile\.md/);
   assert.match(notFoundMarkdown, /## Official profiles/);
-  assert.match(notFoundMarkdown, /kaggle\.com\/shubhxho/);
-  assert.match(notFoundMarkdown, /huggingface\.co\/shubhxho/);
+  assertProfileLinks(notFoundMarkdown, "404 markdown");
 
   for (const path of ["/about", "/contact", "/privacy", "/blog", "/gallery", "/history", "/people"]) {
     const response = await get(path);
@@ -116,21 +136,15 @@ try {
     assert.equal(response.status, 200, `${path} must be public`);
   }
 
-  const llms = await (await get("/llms.txt")).text();
+  const llms = await expectMarkdown("/llms.txt", /^# Shubh Gupta/m);
   assert.match(llms, /## Agent workflow/);
   assert.match(llms, /llms-full\.txt/);
   assert.match(llms, /people\.md/);
-  assert.match(llms, /Kaggle/);
   assert.match(llms, /## shubhxho/);
-  assert.match(llms, /kaggle\.com\/shubhxho/);
-  assert.match(llms, /huggingface\.co\/shubhxho/);
-  assert.match(llms, /github\.com\/shubhxho/);
-  assert.match(llms, /x\.com\/shubhgupta/);
-  assert.match(llms, /linkedin\.com\/in\/shubhxho/);
-  assert.match(llms, /instagram\.com\/shubhxho/);
   assert.match(llms, /## Markdown endpoints/);
+  assertProfileLinks(llms, "llms.txt");
 
-  const llmsFull = await (await get("/llms-full.txt")).text();
+  const llmsFull = await expectMarkdown("/llms-full.txt", /^# Shubh Gupta/m);
   assert.match(llmsFull, /llms\.txt/);
   assert.match(llmsFull, /## Agent workflow/);
   assert.match(llmsFull, /## Markdown endpoints/);
@@ -138,14 +152,28 @@ try {
   assert.match(llmsFull, /## Writing/);
   assert.match(llmsFull, /## Pages/);
   assert.match(llmsFull, /## Machine-learning profiles/);
-  assert.match(llmsFull, /huggingface\.co\/shubhxho/);
-  assert.match(llmsFull, /kaggle\.com\/shubhxho/);
   assert.match(llmsFull, /Hack Club/);
+  assertProfileLinks(llmsFull, "llms-full.txt");
 
   const llmsHeaders = await get("/llms.txt");
   assert.match(llmsHeaders.headers.get("link") ?? "", /llms-full\.txt/);
   const llmsFullHeaders = await get("/llms-full.txt");
   assert.match(llmsFullHeaders.headers.get("link") ?? "", /llms\.txt/);
+
+  await expectMarkdown("/profile.md", /^# Shubh Gupta/m);
+  await expectMarkdown("/about.md", /^# About Shubh Gupta/m);
+  await expectMarkdown("/contact.md", /^# Contact Shubh Gupta/m);
+  await expectMarkdown("/privacy.md", /^# Privacy/m);
+  await expectMarkdown("/people.md", /^# Gratitude/m);
+  await expectMarkdown("/people/hackclub.md", /^# Hack Club/m);
+
+  const humans = await (await get("/humans.txt")).text();
+  assert.match(humans, /shubhxho/);
+  assert.match(humans, /llms\.txt/);
+
+  const feed = await (await get("/feed.xml")).text();
+  assert.match(feed, /^<\?xml version="1.0"/);
+  assert.match(feed, /<rss version="2.0"/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
   for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/people"]) {
@@ -157,19 +185,13 @@ try {
   assert.equal(personEntry.status, 200, "/people/hackclub must be public");
   assert.match(await personEntry.text(), /Hack Club/);
 
-  const personMarkdown = await get("/people/hackclub.md");
-  assert.equal(personMarkdown.status, 200, "/people/hackclub.md must be public");
-  assert.match(personMarkdown.headers.get("content-type") ?? "", /^text\/markdown/);
-  assert.match(await personMarkdown.text(), /^# Hack Club/m);
+  const gratitudeRedirect = await get("/gratitude", { redirect: "manual" });
+  assert.equal(gratitudeRedirect.status, 308, "/gratitude must redirect to /people");
+  assert.match(gratitudeRedirect.headers.get("location") ?? "", /\/people$/);
 
-  const peopleIndexMarkdown = await get("/people.md");
-  assert.equal(peopleIndexMarkdown.status, 200, "/people.md must be public");
-  assert.match(await peopleIndexMarkdown.text(), /^# Gratitude/m);
-
-  const privacyMarkdown = await get("/privacy.md");
-  assert.equal(privacyMarkdown.status, 200, "/privacy.md must be public");
-  assert.match(privacyMarkdown.headers.get("content-type") ?? "", /^text\/markdown/);
-  assert.match(await privacyMarkdown.text(), /^# Privacy/m);
+  const gratitudeMarkdownRedirect = await get("/gratitude.md", { redirect: "manual" });
+  assert.equal(gratitudeMarkdownRedirect.status, 308, "/gratitude.md must redirect to /people.md");
+  assert.match(gratitudeMarkdownRedirect.headers.get("location") ?? "", /\/people\.md$/);
 
   const indexNow = await get("/indexnow.txt");
   assert.equal(indexNow.status, 404, "IndexNow must remain unavailable without a configured key");
