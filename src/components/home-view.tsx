@@ -5,8 +5,7 @@ import { GalleryMosaic } from "@/components/gallery-mosaic";
 import { PeopleView } from "@/components/people-view";
 import { Tip } from "@/components/hover-tip";
 import { TimelineList } from "@/components/timeline-list";
-import type { GalleryContent, HomeContent, Project, TimelineEntry } from "@/lib/content-types";
-import type { Person } from "@/lib/people";
+import type { GalleryContent, HomeContent, Person, Project, TimelineEntry } from "@/lib/content-types";
 import { site } from "@/lib/site";
 
 type HomeViewProps = {

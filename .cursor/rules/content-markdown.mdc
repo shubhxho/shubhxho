@@ -29,9 +29,9 @@ historyUrl: /history
 
 Required: `title`, `description`, `href`. Optional: `role`, `year`, `tip`, `order` (lower = first).
 
-## `content/blog/*.md`
+## `content/blog/*.mdx`
 
-Required: `title`, `description`, `date` (ISO `YYYY-MM-DD`). Body supports `##`, lists, links, blockquotes via `MarkdownArticle`.
+Required: `title`, `description`, `date` (ISO `YYYY-MM-DD`). Body is MDX via `MdxArticle`.
 
 ## `content/gallery.md`
 

@@ -18,7 +18,7 @@ content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
 |------|------|--------|
 | Homepage copy + labels | `content/home.md` | `getHomeContent()` |
 | Projects | `content/projects/*.md` | `getProjects()` |
-| Blog | `content/blog/*.md` | `getAllPosts()` / `getPost()` |
+| Blog | `content/blog/*.mdx` | `getAllPosts()` / `getPost()` |
 | Gallery mosaic | `content/gallery.md` | `getGalleryContent()` |
 | History / timeline | `content/timeline.md` | `getTimeline()` |
 | People / gratitude | `content/people/*.mdx` | `getAllPeople()` / `getPerson()` |

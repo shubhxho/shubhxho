@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MdxArticle } from "@/components/mdx-article";
-import type { Person } from "@/lib/people";
+import type { Person } from "@/lib/content-types";
 
 function PersonMdx({
   person,

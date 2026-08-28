@@ -32,13 +32,14 @@ content/
 └── pages/*.md        # about, contact, privacy
 ```
 
-Loaders: `src/lib/content.ts` · parser: `src/lib/markdown.ts` · types: `src/lib/content-types.ts`
+Loaders: `src/lib/content.ts` · `src/lib/people.ts` · `src/lib/posts.ts` · parser: `src/lib/markdown.ts` · types: `src/lib/content-types.ts`
 
 ## Common tasks
 
 | User wants | Do this |
 |------------|---------|
-| New blog post | Add `content/blog/slug.md` with frontmatter + body |
+| New blog post | Add `content/blog/slug.mdx` with frontmatter + body |
+| New person | Add `content/people/slug.mdx` with `name` / `order` |
 | New project | Add `content/projects/slug.md` with `order` |
 | Edit homepage | Edit `content/home.md` |
 | Edit timeline | Edit `content/timeline.md` |
