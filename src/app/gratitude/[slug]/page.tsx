@@ -1,47 +1,47 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FadeIn } from "@/components/fade-in";
-import { GratitudeView } from "@/components/gratitude-view";
-import { getAllGratitude, getGratitude } from "@/lib/gratitude";
+import { PeopleView } from "@/components/people-view";
+import { getAllPeople, getPerson } from "@/lib/people";
 import { site } from "@/lib/site";
 
-type GratitudePageProps = { params: Promise<{ slug: string }> };
+type PersonPageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return getAllGratitude().map(({ slug }) => ({ slug }));
+  return getAllPeople().map(({ slug }) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: GratitudePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PersonPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const entry = getGratitude(slug);
-  if (!entry) return {};
+  const person = getPerson(slug);
+  if (!person) return {};
   return {
-    title: entry.name,
-    description: entry.plainNote,
+    title: person.name,
+    description: person.plainNote,
     alternates: {
-      canonical: `/gratitude/${entry.slug}`,
+      canonical: `/gratitude/${person.slug}`,
       types: {
-        "text/markdown": `${site.url}/gratitude/${entry.slug}.md`,
+        "text/markdown": `${site.url}/gratitude/${person.slug}.md`,
       },
     },
     openGraph: {
       type: "article",
-      url: `${site.url}/gratitude/${entry.slug}`,
-      title: entry.name,
-      description: entry.plainNote,
+      url: `${site.url}/gratitude/${person.slug}`,
+      title: person.name,
+      description: person.plainNote,
     },
   };
 }
 
-export default async function GratitudeEntryPage({ params }: GratitudePageProps) {
+export default async function PersonPage({ params }: PersonPageProps) {
   const { slug } = await params;
-  const entry = getGratitude(slug);
-  if (!entry) notFound();
+  const person = getPerson(slug);
+  if (!person) notFound();
 
   return (
     <main className="flex-1 px-5 py-16 sm:px-6 sm:py-24">
       <FadeIn className="site-shell">
-        <GratitudeView variant="entry" entry={entry} />
+        <PeopleView variant="entry" person={person} />
       </FadeIn>
     </main>
   );

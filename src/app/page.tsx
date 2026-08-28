@@ -6,7 +6,7 @@ import {
   getProjects,
   getTimeline,
 } from "@/lib/content";
-import { getAllGratitude } from "@/lib/gratitude";
+import { getAllPeople } from "@/lib/people";
 import { site } from "@/lib/site";
 
 const structuredData = (projects: ReturnType<typeof getProjects>) => ({
@@ -61,7 +61,7 @@ export default function Home() {
       title: post.title,
       date: post.date,
     }));
-  const gratitude = getAllGratitude().slice(0, home.gratitudePreviewCount);
+  const people = getAllPeople().slice(0, home.gratitudePreviewCount);
 
   return (
     <>
@@ -71,7 +71,7 @@ export default function Home() {
         gallery={gallery}
         posts={posts}
         timeline={timeline}
-        gratitude={gratitude}
+        people={people}
       />
       <script
         type="application/ld+json"

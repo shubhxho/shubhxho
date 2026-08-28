@@ -22,7 +22,7 @@ export type HomeContent = {
   footerCredit: string;
 };
 
-export type GratitudeEntry = {
+export type Person = {
   slug: string;
   name: string;
   href: string;
@@ -30,6 +30,9 @@ export type GratitudeEntry = {
   content: string;
   plainNote: string;
 };
+
+/** @deprecated Use Person */
+export type GratitudeEntry = Person;
 
 export type Project = {
   slug: string;

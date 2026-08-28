@@ -2,11 +2,11 @@ import Link from "next/link";
 import { BlogPostList, type BlogPostListItem } from "@/components/blog-post-list";
 import { FadeIn } from "@/components/fade-in";
 import { GalleryMosaic } from "@/components/gallery-mosaic";
-import { GratitudeView } from "@/components/gratitude-view";
+import { PeopleView } from "@/components/people-view";
 import { Tip } from "@/components/hover-tip";
 import { TimelineList } from "@/components/timeline-list";
 import type { GalleryContent, HomeContent, Project, TimelineEntry } from "@/lib/content-types";
-import type { GratitudeEntry } from "@/lib/gratitude";
+import type { Person } from "@/lib/people";
 import { site } from "@/lib/site";
 
 type HomeViewProps = {
@@ -15,10 +15,10 @@ type HomeViewProps = {
   gallery: GalleryContent;
   posts: BlogPostListItem[];
   timeline: TimelineEntry[];
-  gratitude: GratitudeEntry[];
+  people: Person[];
 };
 
-export function HomeView({ home, projects, gallery, posts, timeline, gratitude }: HomeViewProps) {
+export function HomeView({ home, projects, gallery, posts, timeline, people }: HomeViewProps) {
   return (
     <main className="flex flex-1 flex-col">
       <FadeIn className="site-shell px-5 pt-16 pb-20 sm:px-0 sm:pt-24">
@@ -111,7 +111,7 @@ export function HomeView({ home, projects, gallery, posts, timeline, gratitude }
               {home.gratitudeLinkLabel}
             </Link>
           </div>
-          <GratitudeView variant="list" entries={gratitude} />
+          <PeopleView variant="list" people={people} />
         </section>
 
         <section className="mt-16" aria-labelledby="contact-label">

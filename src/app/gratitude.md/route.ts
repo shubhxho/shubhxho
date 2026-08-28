@@ -1,10 +1,10 @@
-import { getGratitudeIndexMarkdown } from "@/lib/gratitude";
+import { getPeopleIndexMarkdown } from "@/lib/people";
 import { site } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 export function GET() {
-  return new Response(getGratitudeIndexMarkdown(), {
+  return new Response(getPeopleIndexMarkdown(), {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
       "Cache-Control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",

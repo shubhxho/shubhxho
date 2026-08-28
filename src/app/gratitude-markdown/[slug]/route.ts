@@ -1,19 +1,19 @@
-import { getAllGratitude, getGratitudeMarkdown } from "@/lib/gratitude";
+import { getAllPeople, getPersonMarkdown } from "@/lib/people";
 import { site } from "@/lib/site";
 
-type GratitudeMarkdownRouteProps = {
+type PersonMarkdownRouteProps = {
   params: Promise<{ slug: string }>;
 };
 
 export const dynamic = "force-static";
 
 export function generateStaticParams() {
-  return getAllGratitude().map(({ slug }) => ({ slug }));
+  return getAllPeople().map(({ slug }) => ({ slug }));
 }
 
-export async function GET(_request: Request, { params }: GratitudeMarkdownRouteProps) {
+export async function GET(_request: Request, { params }: PersonMarkdownRouteProps) {
   const { slug } = await params;
-  const markdown = getGratitudeMarkdown(slug);
+  const markdown = getPersonMarkdown(slug);
 
   if (!markdown) {
     return new Response("Not found", { status: 404 });

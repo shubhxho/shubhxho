@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
-import { getAllGratitude } from "@/lib/gratitude";
+import { getAllPeople } from "@/lib/people";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
-  const gratitude = getAllGratitude();
+  const people = getAllPeople();
   return [
     {
       url: site.url,
@@ -32,8 +32,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
-    ...gratitude.map((entry) => ({
-      url: `${site.url}/gratitude/${entry.slug}`,
+    ...people.map((person) => ({
+      url: `${site.url}/gratitude/${person.slug}`,
       lastModified: new Date(site.lastUpdated),
       changeFrequency: "yearly" as const,
       priority: 0.6,
