@@ -103,6 +103,7 @@ try {
   const llms = await (await get("/llms.txt")).text();
   assert.match(llms, /## When to use this profile/);
   assert.match(llms, /agent workflow/);
+  assert.match(llms, /people\.md/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
   for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/people"]) {
