@@ -1,4 +1,4 @@
-import { getPage, getPageMarkdown, pageSlugs } from "@/lib/pages";
+import { getPage, getPageMarkdown, isPageSlug, pageSlugs } from "@/lib/pages";
 import { site } from "@/lib/site";
 
 type PageMarkdownRouteProps = {
@@ -13,13 +13,16 @@ export function generateStaticParams() {
 
 export async function GET(_request: Request, { params }: PageMarkdownRouteProps) {
   const { slug } = await params;
-  if (!pageSlugs.includes(slug as (typeof pageSlugs)[number])) {
+  if (!isPageSlug(slug)) {
     return new Response("Not found", { status: 404 });
   }
 
-  const pageSlug = slug as (typeof pageSlugs)[number];
-  const page = getPage(pageSlug);
-  const markdown = getPageMarkdown(pageSlug);
+  const page = getPage(slug);
+  const markdown = getPageMarkdown(slug);
+
+  if (!page || !markdown) {
+    return new Response("Not found", { status: 404 });
+  }
 
   return new Response(markdown, {
     headers: {

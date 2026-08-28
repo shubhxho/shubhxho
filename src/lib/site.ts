@@ -123,3 +123,80 @@ export function getDescribedProfileLinksMarkdown(keys: ProfileLinkKey[]) {
 export function getSameAsUrls() {
   return getProfileLinks().map((link) => link.url);
 }
+
+export const agentDiscoveryEndpoints = [
+  {
+    url: `${site.url}/llms.txt`,
+    label: "Agent instructions",
+    description: "machine-readable site guide (start here)",
+  },
+  {
+    url: `${site.url}/llms-full.txt`,
+    label: "Full AI-readable profile",
+    description: "biography, timeline, people, and writing",
+  },
+  {
+    url: `${site.url}/profile.md`,
+    label: "Markdown profile",
+    description: "homepage snapshot",
+  },
+] as const;
+
+export function getAgentDiscoveryLinksMarkdown() {
+  return agentDiscoveryEndpoints
+    .map((endpoint) => `- [${endpoint.label}](${endpoint.url}): ${endpoint.description}`)
+    .join("\n");
+}
+
+type StructuredDataProject = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+export function getStructuredData(projects: StructuredDataProject[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${site.url}/#website`,
+        url: site.url,
+        name: site.name,
+        alternateName: [site.handle, site.shortTitle],
+        description: site.description,
+        inLanguage: site.language,
+        publisher: { "@id": `${site.url}/#person` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${site.url}/#person`,
+        name: site.name,
+        url: site.url,
+        description: site.description,
+        email: site.email,
+        homeLocation: { "@type": "Place", name: "Khagaria, Bihar, India" },
+        knowsAbout: site.topics,
+        sameAs: getSameAsUrls(),
+        subjectOf: agentDiscoveryEndpoints.map((endpoint) => ({
+          "@type": "CreativeWork",
+          url: endpoint.url,
+          name: endpoint.label,
+        })),
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${site.url}/#work`,
+        name: "Selected work",
+        numberOfItems: projects.length,
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: project.title,
+          description: project.description,
+          url: project.href,
+        })),
+      },
+    ],
+  };
+}

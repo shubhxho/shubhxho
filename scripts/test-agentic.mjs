@@ -57,6 +57,9 @@ try {
   assert.match(homepageHtml, /x\.com\/shubhgupta/);
   assert.match(homepageHtml, /linkedin\.com\/in\/shubhxho/);
   assert.match(homepageHtml, /instagram\.com\/shubhxho/);
+  assert.match(homepageHtml, /application\/ld\+json/);
+  assert.match(homepageHtml, /llms\.txt/);
+  assert.match(homepageHtml, /llms-full\.txt/);
 
   const markdownHomepage = await get("/", { headers: { Accept: "text/markdown" } });
   assert.equal(markdownHomepage.status, 200);
@@ -78,7 +81,14 @@ try {
   });
   assert.equal(markdownNotFound.status, 404);
   assert.match(markdownNotFound.headers.get("content-type") ?? "", /^text\/markdown/);
-  assert.match(await markdownNotFound.text(), /^# 404: Page not found/m);
+  const notFoundMarkdown = await markdownNotFound.text();
+  assert.match(notFoundMarkdown, /^# 404: Page not found/m);
+  assert.match(notFoundMarkdown, /## Agent discovery/);
+  assert.match(notFoundMarkdown, /llms\.txt/);
+  assert.match(notFoundMarkdown, /llms-full\.txt/);
+  assert.match(notFoundMarkdown, /## Official profiles/);
+  assert.match(notFoundMarkdown, /kaggle\.com\/shubhxho/);
+  assert.match(notFoundMarkdown, /huggingface\.co\/shubhxho/);
 
   for (const path of ["/about", "/contact", "/privacy", "/blog", "/gallery", "/history", "/people"]) {
     const response = await get(path);
@@ -131,6 +141,11 @@ try {
   assert.match(llmsFull, /huggingface\.co\/shubhxho/);
   assert.match(llmsFull, /kaggle\.com\/shubhxho/);
   assert.match(llmsFull, /Hack Club/);
+
+  const llmsHeaders = await get("/llms.txt");
+  assert.match(llmsHeaders.headers.get("link") ?? "", /llms-full\.txt/);
+  const llmsFullHeaders = await get("/llms-full.txt");
+  assert.match(llmsFullHeaders.headers.get("link") ?? "", /llms\.txt/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
   for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/people"]) {

@@ -1,16 +1,7 @@
-import type { Metadata } from "next";
 import { TrustPage } from "@/components/trust-page";
-import { getPage } from "@/lib/pages";
-import { site } from "@/lib/site";
+import { getPageMetadata } from "@/lib/pages";
 
-const page = getPage("contact");
-
-export const metadata: Metadata = {
-  title: page.title,
-  description: page.description,
-  alternates: { canonical: "/contact" },
-  openGraph: { url: `${site.url}/contact` },
-};
+export const metadata = getPageMetadata("contact");
 
 export default function ContactPage() {
   return <TrustPage slug="contact" />;

@@ -1,4 +1,4 @@
-import { getProfileLinksMarkdown, site } from "@/lib/site";
+import { getAgentDiscoveryLinksMarkdown, getProfileLinksMarkdown, site } from "@/lib/site";
 
 const markdownMediaType = /(?:^|,)\s*text\/markdown(?:\s*;[^,]*)?(?:,|$)/i;
 
@@ -13,6 +13,7 @@ export function acceptsMarkdown(accept: string | null) {
 
 export function getNotFoundMarkdown(pathname: string) {
   const profileLinks = getProfileLinksMarkdown();
+  const agentLinks = getAgentDiscoveryLinksMarkdown();
 
   return `# 404: Page not found
 
@@ -26,9 +27,10 @@ export function getNotFoundMarkdown(pathname: string) {
 - [Gallery](${site.url}/gallery): visual work
 - [Writing](${site.url}/blog): essays and notes
 - [Sitemap](${site.url}/sitemap.xml): canonical indexable pages
-- [Agent instructions](${site.url}/llms.txt): machine-readable site guide
-- [Full AI-readable profile](${site.url}/llms-full.txt): biography, timeline, people, and writing
-- [Markdown profile](${site.url}/profile.md): homepage snapshot
+
+## Agent discovery
+
+${agentLinks}
 
 ## Official profiles
 
