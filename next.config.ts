@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/gratitude/:slug.md",
+        destination: "/gratitude-markdown/:slug",
+      },
+    ];
+  },
   async headers() {
     return [
       {

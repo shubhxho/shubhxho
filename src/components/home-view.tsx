@@ -1,27 +1,24 @@
 import Link from "next/link";
+import { BlogPostList, type BlogPostListItem } from "@/components/blog-post-list";
 import { FadeIn } from "@/components/fade-in";
 import { GalleryMosaic } from "@/components/gallery-mosaic";
+import { GratitudeView } from "@/components/gratitude-view";
 import { Tip } from "@/components/hover-tip";
 import { TimelineList } from "@/components/timeline-list";
 import type { GalleryContent, HomeContent, Project, TimelineEntry } from "@/lib/content-types";
+import type { GratitudeEntry } from "@/lib/gratitude";
 import { site } from "@/lib/site";
-
-export type HomePost = {
-  slug: string;
-  title: string;
-  description: string;
-  tip: string;
-};
 
 type HomeViewProps = {
   home: HomeContent;
   projects: Project[];
   gallery: GalleryContent;
-  posts: HomePost[];
+  posts: BlogPostListItem[];
   timeline: TimelineEntry[];
+  gratitude: GratitudeEntry[];
 };
 
-export function HomeView({ home, projects, gallery, posts, timeline }: HomeViewProps) {
+export function HomeView({ home, projects, gallery, posts, timeline, gratitude }: HomeViewProps) {
   return (
     <main className="flex flex-1 flex-col">
       <FadeIn className="site-shell px-5 pt-16 pb-20 sm:px-0 sm:pt-24">
@@ -82,22 +79,7 @@ export function HomeView({ home, projects, gallery, posts, timeline }: HomeViewP
               {home.writingLinkLabel}
             </Link>
           </div>
-          <div className="space-y-6">
-            {posts.map((post) => (
-              <article key={post.slug}>
-                <Tip tip={post.tip}>
-                  <Link href={`/blog/${post.slug}`} className="group block">
-                    <h3 className="text-[1.05rem] font-bold tracking-tight">
-                      <span className="ink-link">{post.title}</span>
-                    </h3>
-                    <p className="mt-2 max-w-[38rem] text-sm leading-7 text-muted-foreground">
-                      {post.description}
-                    </p>
-                  </Link>
-                </Tip>
-              </article>
-            ))}
-          </div>
+          <BlogPostList posts={posts} />
         </section>
 
         <section className="mt-16" aria-labelledby="gallery-label">
@@ -118,6 +100,18 @@ export function HomeView({ home, projects, gallery, posts, timeline }: HomeViewP
             </a>
             .
           </p>
+        </section>
+
+        <section className="mt-16" aria-labelledby="gratitude-label">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <h2 id="gratitude-label" className="text-xl font-bold tracking-tight">
+              {home.gratitudeLabel}
+            </h2>
+            <Link href={home.gratitudeUrl} className="ink-link text-sm">
+              {home.gratitudeLinkLabel}
+            </Link>
+          </div>
+          <GratitudeView variant="list" entries={gratitude} />
         </section>
 
         <section className="mt-16" aria-labelledby="contact-label">

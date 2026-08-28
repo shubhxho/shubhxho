@@ -1,13 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { acceptsMarkdown, getNotFoundMarkdown } from "@/lib/agentic";
 
-const markdownNativePaths = new Set(["/llms.txt", "/llms-full.txt", "/profile.md"]);
+const markdownNativePaths = new Set([
+  "/llms.txt",
+  "/llms-full.txt",
+  "/profile.md",
+  "/gratitude.md",
+]);
 const knownPaths = new Set([
   "/",
   "/about",
   "/blog",
   "/contact",
   "/gallery",
+  "/gratitude",
+  "/gratitude.md",
   "/history",
   "/privacy",
   "/feed.xml",
@@ -28,6 +35,8 @@ const knownPaths = new Set([
 function isKnownPath(pathname: string) {
   if (knownPaths.has(pathname)) return true;
   if (pathname.startsWith("/blog/")) return true;
+  if (pathname.startsWith("/gratitude/")) return true;
+  if (pathname.startsWith("/gratitude-markdown/")) return true;
   return false;
 }
 

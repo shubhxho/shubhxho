@@ -1,11 +1,12 @@
 import { HomeView } from "@/components/home-view";
+import { getAllPosts } from "@/lib/blog";
 import {
-  getAllPosts,
   getGalleryContent,
   getHomeContent,
   getProjects,
   getTimeline,
 } from "@/lib/content";
+import { getAllGratitude } from "@/lib/gratitude";
 import { site } from "@/lib/site";
 
 const structuredData = (projects: ReturnType<typeof getProjects>) => ({
@@ -58,9 +59,9 @@ export default function Home() {
     .map((post) => ({
       slug: post.slug,
       title: post.title,
-      description: post.description,
-      tip: `${post.readingTime} · open note`,
+      date: post.date,
     }));
+  const gratitude = getAllGratitude().slice(0, home.gratitudePreviewCount);
 
   return (
     <>
@@ -70,6 +71,7 @@ export default function Home() {
         gallery={gallery}
         posts={posts}
         timeline={timeline}
+        gratitude={gratitude}
       />
       <script
         type="application/ld+json"

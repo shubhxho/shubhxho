@@ -14,8 +14,21 @@ export type HomeContent = {
   historyUrl: string;
   historyLinkLabel: string;
   historyPreviewCount: number;
+  gratitudeLabel: string;
+  gratitudeUrl: string;
+  gratitudeLinkLabel: string;
+  gratitudePreviewCount: number;
   contactLabel: string;
   footerCredit: string;
+};
+
+export type GratitudeEntry = {
+  slug: string;
+  name: string;
+  href: string;
+  order: number;
+  content: string;
+  plainNote: string;
 };
 
 export type Project = {

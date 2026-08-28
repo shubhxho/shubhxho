@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BlogPostList } from "@/components/blog-post-list";
 import { FadeIn } from "@/components/fade-in";
-import { Tip } from "@/components/hover-tip";
-import { formatPostDate, getAllPosts } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
+import { getHomeContent } from "@/lib/content";
 import { site } from "@/lib/site";
+
+const home = getHomeContent();
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -14,33 +17,25 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const posts = getAllPosts().map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    date: post.date,
+  }));
 
   return (
     <main className="flex-1 px-5 py-16 sm:px-6 sm:py-24">
       <FadeIn className="site-shell">
-        <h1 className="mb-2 text-[clamp(1.8rem,5vw,2.6rem)] font-bold tracking-tight">Writing</h1>
-        <p className="mb-10 max-w-xl text-sm leading-7 text-muted-foreground">
-          Notes on projects, robotics, and building from Khagaria — {posts.length} posts.
+        <p className="mb-3 text-sm text-muted-foreground">{home.name}</p>
+        <h1 className="text-[clamp(2rem,6vw,3rem)] font-bold tracking-tight">{home.writingLabel}</h1>
+        <div className="mt-10">
+          <BlogPostList posts={posts} />
+        </div>
+        <p className="mt-10 text-sm">
+          <Link href="/" className="ink-link">
+            ← home
+          </Link>
         </p>
-        <ul className="divide-y divide-border border-y border-border">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Tip tip={`${post.readingTime} · open note`} as="div">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="block py-5 transition-colors hover:bg-foreground hover:text-inverse"
-                >
-                  <p className="text-xs text-muted-foreground">
-                    {formatPostDate(post.date)} · {post.readingTime}
-                  </p>
-                  <h2 className="mt-2 text-[0.95rem] font-bold">{post.title}</h2>
-                  <p className="mt-2 max-w-xl text-sm text-muted-foreground">{post.description}</p>
-                </Link>
-              </Tip>
-            </li>
-          ))}
-        </ul>
       </FadeIn>
     </main>
   );

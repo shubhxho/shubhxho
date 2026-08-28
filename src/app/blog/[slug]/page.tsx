@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FadeIn } from "@/components/fade-in";
-import { MarkdownArticle } from "@/components/markdown-article";
+import { MdxArticle } from "@/components/mdx-article";
 import { formatPostDate, getAllPosts, getPost } from "@/lib/blog";
 import { site } from "@/lib/site";
 
@@ -50,7 +50,7 @@ export default async function PostPage({ params }: PostPageProps) {
           {post.title}
         </h1>
         <p className="mb-10 max-w-xl text-sm leading-7 text-muted-foreground">{post.description}</p>
-        <MarkdownArticle content={post.content} />
+        <MdxArticle content={post.content} />
       </FadeIn>
     </main>
   );

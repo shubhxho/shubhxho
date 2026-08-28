@@ -49,6 +49,7 @@ try {
   assert.match(homepageHtml, /working on<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Writing<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gallery<\/h2>/);
+  assert.match(homepageHtml, /<h2[^>]*>Gratitude<\/h2>/);
   assert.ok(textFromHtml(homepageHtml).length > 500, "homepage must have 500+ characters without JavaScript");
 
   const markdownHomepage = await get("/", { headers: { Accept: "text/markdown" } });
@@ -73,7 +74,7 @@ try {
   assert.match(markdownNotFound.headers.get("content-type") ?? "", /^text\/markdown/);
   assert.match(await markdownNotFound.text(), /^# 404: Page not found/m);
 
-  for (const path of ["/about", "/contact", "/privacy", "/blog", "/gallery", "/history"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/blog", "/gallery", "/history", "/gratitude"]) {
     const response = await get(path);
     const html = await response.text();
     assert.equal(response.status, 200, `${path} must be public`);
@@ -104,9 +105,23 @@ try {
   assert.match(llms, /agent workflow/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
-  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/gratitude"]) {
     assert.match(sitemap, new RegExp(`https://shubhxho\\.com${path}`));
   }
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/gratitude\/hackclub/);
+
+  const gratitudeEntry = await get("/gratitude/hackclub");
+  assert.equal(gratitudeEntry.status, 200, "/gratitude/hackclub must be public");
+  assert.match(await gratitudeEntry.text(), /Hack Club/);
+
+  const gratitudeMarkdown = await get("/gratitude/hackclub.md");
+  assert.equal(gratitudeMarkdown.status, 200, "/gratitude/hackclub.md must be public");
+  assert.match(gratitudeMarkdown.headers.get("content-type") ?? "", /^text\/markdown/);
+  assert.match(await gratitudeMarkdown.text(), /^# Hack Club/m);
+
+  const gratitudeIndexMarkdown = await get("/gratitude.md");
+  assert.equal(gratitudeIndexMarkdown.status, 200, "/gratitude.md must be public");
+  assert.match(await gratitudeIndexMarkdown.text(), /^# Gratitude/m);
 
   const indexNow = await get("/indexnow.txt");
   assert.equal(indexNow.status, 404, "IndexNow must remain unavailable without a configured key");

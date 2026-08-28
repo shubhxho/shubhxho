@@ -1,7 +1,4 @@
-import fs from "node:fs";
-import path from "node:path";
 import type {
-  BlogPost,
   ContentPage,
   ContentPageSlug,
   GalleryContent,
@@ -11,16 +8,12 @@ import type {
   TimelineEntry,
 } from "@/lib/content-types";
 import {
-  contentRoot,
   listMarkdownFiles,
   markdownToPlainText,
-  parseFrontMatter,
   readMarkdownFile,
-  readingTime,
 } from "@/lib/markdown";
 
 export type {
-  BlogPost,
   ContentPage,
   ContentPageSlug,
   GalleryContent,
@@ -56,6 +49,10 @@ export function getHomeContent(): HomeContent {
     historyUrl: attributes.historyUrl ?? "/history",
     historyLinkLabel: attributes.historyLinkLabel ?? "full timeline →",
     historyPreviewCount: numberAttribute(attributes.historyPreviewCount, 10),
+    gratitudeLabel: attributes.gratitudeLabel ?? "Gratitude",
+    gratitudeUrl: attributes.gratitudeUrl ?? "/gratitude",
+    gratitudeLinkLabel: attributes.gratitudeLinkLabel ?? "full list →",
+    gratitudePreviewCount: numberAttribute(attributes.gratitudePreviewCount, 4),
     contactLabel: attributes.contactLabel ?? "Reach out",
     footerCredit: attributes.footerCredit ?? "Design and development by me",
   };
@@ -181,46 +178,3 @@ export function getTimelineMeta() {
   };
 }
 
-function toBlogPost(filename: string): BlogPost | null {
-  const source = fs.readFileSync(path.join(contentRoot, "blog", filename), "utf8");
-  const { attributes, content } = parseFrontMatter(source);
-  const title = attributes.title;
-  const description = attributes.description;
-  const date = attributes.date;
-
-  if (!title || !description || !date) return null;
-
-  return {
-    slug: filename.replace(/\.md$/, ""),
-    title,
-    description,
-    date,
-    readingTime: readingTime(content),
-    content,
-  };
-}
-
-export function getAllPosts() {
-  const blogDirectory = path.join(contentRoot, "blog");
-  if (!fs.existsSync(blogDirectory)) return [];
-
-  return fs
-    .readdirSync(blogDirectory)
-    .filter((file) => file.endsWith(".md"))
-    .map(toBlogPost)
-    .filter((post): post is BlogPost => post !== null)
-    .sort((a, b) => b.date.localeCompare(a.date));
-}
-
-export function getPost(slug: string) {
-  return getAllPosts().find((post) => post.slug === slug);
-}
-
-export function formatPostDate(date: string) {
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(`${date}T00:00:00Z`));
-}
