@@ -7,7 +7,7 @@ import {
   getTimeline,
 } from "@/lib/content";
 import { getAllPeople } from "@/lib/people";
-import { getStructuredData, site } from "@/lib/site";
+import { getStructuredData } from "@/lib/site";
 
 export default function Home() {
   const home = getHomeContent();
