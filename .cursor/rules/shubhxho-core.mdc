@@ -10,7 +10,7 @@ Personal site for **Shubh Gupta** (`shubhxho`). Next.js 16 App Router. Style: sp
 ## Architecture
 
 ```
-content/pages/*.md      → pages.ts      → /about /contact /privacy
+content/pages/*.mdx     → pages.ts      → /about /contact /privacy
 content/blog/*.mdx      → posts.ts      → blog.ts → /blog
 content/people/*.mdx    → people.ts     → /people (gratitude)
 content/**/*.md         → content.ts    → homepage, gallery, history

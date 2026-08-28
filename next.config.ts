@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { pageSlugs } from "./src/lib/content-types";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -18,18 +19,10 @@ const nextConfig: NextConfig = {
         source: "/people/:slug.md",
         destination: "/people-markdown/:slug",
       },
-      {
-        source: "/about.md",
-        destination: "/page-markdown/about",
-      },
-      {
-        source: "/contact.md",
-        destination: "/page-markdown/contact",
-      },
-      {
-        source: "/privacy.md",
-        destination: "/page-markdown/privacy",
-      },
+      ...pageSlugs.map((slug) => ({
+        source: `/${slug}.md`,
+        destination: `/page-markdown/${slug}`,
+      })),
     ];
   },
   async redirects() {

@@ -9,7 +9,7 @@ import {
 } from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
 import { getTimeline } from "@/lib/content";
-import { getPages } from "@/lib/pages";
+import { getPagesDiscoveryMarkdown, getPagesMarkdownEndpoints } from "@/lib/pages";
 import { getPeopleDiscoveryMarkdown, getAllPeople } from "@/lib/people";
 
 const timelineMarkdown = getTimeline()
@@ -18,9 +18,7 @@ const timelineMarkdown = getTimeline()
 
 const peopleMarkdown = getPeopleDiscoveryMarkdown();
 
-const pagesMarkdown = getPages()
-  .map((page) => `- [${page.title}](${site.url}/${page.slug}): ${page.description}`)
-  .join("\n");
+const pagesMarkdown = getPagesDiscoveryMarkdown();
 
 const writingMarkdown = getAllPosts()
   .map((post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.description}`)
@@ -41,7 +39,7 @@ const markdownEndpoints = [
     (person) =>
       `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
   ),
-  ...getPages().map((page) => `- [${page.title}](${site.url}/${page.slug}.md): ${page.description}`),
+  ...getPagesMarkdownEndpoints().split("\n"),
   externalProfileEndpoints,
 ].join("\n");
 

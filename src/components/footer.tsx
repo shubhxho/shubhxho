@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { pageSlugs } from "@/lib/content-types";
 import { site } from "@/lib/site";
 
 export function Footer() {
@@ -9,12 +10,11 @@ export function Footer() {
           © {new Date().getFullYear()} {site.handle}
         </p>
         <nav aria-label="Site information" className="flex gap-3">
-          <Link href="/contact" className="ink-link text-foreground">
-            contact
-          </Link>
-          <Link href="/privacy" className="ink-link text-foreground">
-            privacy
-          </Link>
+          {pageSlugs.map((slug) => (
+            <Link key={slug} href={`/${slug}`} className="ink-link text-foreground">
+              {slug}
+            </Link>
+          ))}
           <a href="/feed.xml" className="ink-link text-foreground">
             rss
           </a>

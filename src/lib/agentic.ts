@@ -1,4 +1,5 @@
 import { getAgentDiscoveryLinksMarkdown, getProfileLinksMarkdown, site } from "@/lib/site";
+import { pageSlugs } from "@/lib/content-types";
 
 const markdownMediaType = /(?:^|,)\s*text\/markdown(?:\s*;[^,]*)?(?:,|$)/i;
 
@@ -23,6 +24,7 @@ export function getNotFoundMarkdown(pathname: string) {
 
 - [Homepage](${site.url}/): biography, projects, history, gallery, and writing
 - [People](${site.url}/people): people I look up to ([Markdown](${site.url}/people.md))
+${pageSlugs.map((slug) => `- [${slug}](${site.url}/${slug}) ([Markdown](${site.url}/${slug}.md))`).join("\n")}
 - [History](${site.url}/history): chronological timeline
 - [Gallery](${site.url}/gallery): visual work
 - [Writing](${site.url}/blog): essays and notes

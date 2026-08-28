@@ -1,30 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { acceptsMarkdown, getNotFoundMarkdown } from "@/lib/agentic";
+import { pageSlugs } from "@/lib/content-types";
+
+const pagePaths = pageSlugs.flatMap((slug) => [`/${slug}`, `/${slug}.md`]);
 
 const markdownNativePaths = new Set([
   "/llms.txt",
   "/llms-full.txt",
   "/profile.md",
   "/people.md",
-  "/about.md",
-  "/contact.md",
-  "/privacy.md",
+  ...pageSlugs.map((slug) => `/${slug}.md`),
 ]);
 const knownPaths = new Set([
   "/",
-  "/about",
-  "/about.md",
+  ...pagePaths,
   "/blog",
-  "/contact",
-  "/contact.md",
   "/gallery",
   "/gratitude",
   "/gratitude.md",
   "/people",
   "/people.md",
   "/history",
-  "/privacy",
-  "/privacy.md",
   "/feed.xml",
   "/humans.txt",
   "/indexnow.txt",

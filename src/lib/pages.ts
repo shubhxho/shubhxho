@@ -1,15 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
-import type { ContentPage, ContentPageSlug } from "@/lib/content-types";
+import { pageSlugs, type ContentPage, type ContentPageSlug } from "@/lib/content-types";
 import { contentRoot, parseFrontMatter } from "@/lib/markdown";
 import { site } from "@/lib/site";
 
 export type { ContentPage, ContentPageSlug } from "@/lib/content-types";
+export { pageSlugs } from "@/lib/content-types";
 
 const pagesDirectory = path.join(contentRoot, "pages");
-
-export const pageSlugs = ["about", "contact", "privacy"] as const satisfies readonly ContentPageSlug[];
 
 export function isPageSlug(slug: string): slug is ContentPageSlug {
   return (pageSlugs as readonly string[]).includes(slug);
@@ -40,7 +39,9 @@ export function getPages(): ContentPage[] {
     .map(toPage)
     .filter((page): page is ContentPage => page !== null);
 
-  return pageSlugs.map((slug) => pages.find((page) => page.slug === slug)).filter((page): page is ContentPage => page !== undefined);
+  return pageSlugs
+    .map((slug) => pages.find((page) => page.slug === slug))
+    .filter((page): page is ContentPage => page !== undefined);
 }
 
 export function getPage(slug: ContentPageSlug) {
@@ -60,6 +61,18 @@ export function getPageMarkdown(slug: ContentPageSlug) {
 
 export function getPrivacyMarkdown() {
   return getPageMarkdown("privacy");
+}
+
+export function getPagesDiscoveryMarkdown() {
+  return getPages()
+    .map((page) => `- [${page.title}](${site.url}/${page.slug}): ${page.description}`)
+    .join("\n");
+}
+
+export function getPagesMarkdownEndpoints() {
+  return getPages()
+    .map((page) => `- [${page.title}](${site.url}/${page.slug}.md): ${page.description}`)
+    .join("\n");
 }
 
 export function getPageMetadata(slug: ContentPageSlug): Metadata {

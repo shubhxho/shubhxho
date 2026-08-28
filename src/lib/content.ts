@@ -18,7 +18,7 @@ export type {
   Project,
   TimelineEntry,
 } from "@/lib/content-types";
-export { getPage, getPageMarkdown, getPageMetadata, getPages, getPrivacy, getPrivacyMarkdown, pageSlugs } from "@/lib/pages";
+export { getPage, getPageMarkdown, getPageMetadata, getPages, getPagesDiscoveryMarkdown, getPagesMarkdownEndpoints, getPrivacy, getPrivacyMarkdown, pageSlugs } from "@/lib/pages";
 export type { ContentPage, ContentPageSlug } from "@/lib/pages";
 
 function numberAttribute(value: string | undefined, fallback: number) {

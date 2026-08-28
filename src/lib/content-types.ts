@@ -67,7 +67,9 @@ export type ContentPage = {
   content: string;
 };
 
-export type ContentPageSlug = "about" | "contact" | "privacy";
+export const pageSlugs = ["about", "contact", "privacy"] as const;
+
+export type ContentPageSlug = (typeof pageSlugs)[number];
 
 export type TimelineEntry = {
   date: string;
