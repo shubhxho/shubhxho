@@ -105,8 +105,12 @@ try {
   assert.match(llms, /llms-full\.txt/);
   assert.match(llms, /people\.md/);
   assert.match(llms, /Kaggle/);
+  assert.match(llms, /## Markdown endpoints/);
 
   const llmsFull = await (await get("/llms-full.txt")).text();
+  assert.match(llmsFull, /llms\.txt/);
+  assert.match(llmsFull, /## Agent workflow/);
+  assert.match(llmsFull, /## Markdown endpoints/);
   assert.match(llmsFull, /## People/);
   assert.match(llmsFull, /## Writing/);
   assert.match(llmsFull, /## Pages/);
