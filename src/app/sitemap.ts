@@ -27,13 +27,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     })),
     {
-      url: `${site.url}/gratitude`,
+      url: `${site.url}/people`,
       lastModified: new Date(site.lastUpdated),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
     ...people.map((person) => ({
-      url: `${site.url}/gratitude/${person.slug}`,
+      url: `${site.url}/people/${person.slug}`,
       lastModified: new Date(site.lastUpdated),
       changeFrequency: "yearly" as const,
       priority: 0.6,

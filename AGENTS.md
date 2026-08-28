@@ -25,7 +25,9 @@ content/
 ├── home.md           # homepage labels + intro
 ├── gallery.md        # mosaic images
 ├── timeline.md       # history
-├── blog/*.md         # writing
+├── people.md         # gratitude section copy
+├── people/*.mdx      # people I look up to
+├── blog/*.mdx        # writing
 ├── projects/*.md     # selected work
 └── pages/*.md        # about, contact, privacy
 ```

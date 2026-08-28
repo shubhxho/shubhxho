@@ -51,6 +51,10 @@ Frontmatter: `title`, `description`. Body:
 - **2026-08-18** — Ships [wolfpdf](https://github.com/...), description
 ```
 
+## `content/people/*.mdx`
+
+Required: `name`. Optional: `slug`, `href`, `order`. Body is MDX, loaded by `people.ts`.
+
 ## `content/pages/*.md`
 
 Frontmatter: `title`, `description`, `heading`. Body = trust page prose.

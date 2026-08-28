@@ -15,9 +15,17 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/gratitude/:slug.md",
-        destination: "/gratitude-markdown/:slug",
+        source: "/people/:slug.md",
+        destination: "/people-markdown/:slug",
       },
+    ];
+  },
+  async redirects() {
+    return [
+      { source: "/gratitude", destination: "/people", permanent: true },
+      { source: "/gratitude.md", destination: "/people.md", permanent: true },
+      { source: "/gratitude/:slug", destination: "/people/:slug", permanent: true },
+      { source: "/gratitude/:slug.md", destination: "/people/:slug.md", permanent: true },
     ];
   },
   async headers() {

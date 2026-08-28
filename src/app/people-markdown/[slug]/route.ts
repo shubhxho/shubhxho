@@ -23,7 +23,7 @@ export async function GET(_request: Request, { params }: PersonMarkdownRouteProp
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
       "Cache-Control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
-      Link: `<${site.url}/gratitude/${slug}>; rel="canonical"`,
+      Link: `<${site.url}/people/${slug}>; rel="canonical"`,
       Vary: "Accept, Accept-Encoding",
       "X-Robots-Tag": "noindex, follow",
     },

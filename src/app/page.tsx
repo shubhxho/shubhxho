@@ -61,7 +61,7 @@ export default function Home() {
       title: post.title,
       date: post.date,
     }));
-  const people = getAllPeople().slice(0, home.gratitudePreviewCount);
+  const people = getAllPeople().slice(0, home.peoplePreviewCount);
 
   return (
     <>

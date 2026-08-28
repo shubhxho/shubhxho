@@ -14,10 +14,10 @@ historyLabel: History
 historyUrl: /history
 historyLinkLabel: full timeline →
 historyPreviewCount: 10
-gratitudeLabel: Gratitude
-gratitudeUrl: /gratitude
-gratitudeLinkLabel: full list →
-gratitudePreviewCount: 4
+peopleLabel: Gratitude
+peopleUrl: /people
+peopleLinkLabel: full list →
+peoplePreviewCount: 4
 contactLabel: Reach out
 footerCredit: Design and development by me
 ---

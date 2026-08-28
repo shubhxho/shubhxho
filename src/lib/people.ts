@@ -5,7 +5,7 @@ import { contentRoot, markdownToPlainText, parseFrontMatter, readMarkdownFile } 
 
 export type { Person } from "@/lib/content-types";
 
-const peopleDirectory = path.join(contentRoot, "gratitude");
+const peopleDirectory = path.join(contentRoot, "people");
 
 function numberAttribute(value: string | undefined, fallback: number) {
   const parsed = Number(value);
@@ -42,7 +42,7 @@ function toPerson(filename: string): Person | null {
 }
 
 export function getPeopleMeta() {
-  const { attributes } = readMarkdownFile("gratitude.md");
+  const { attributes } = readMarkdownFile("people.md");
 
   return {
     title: attributes.title ?? "Gratitude",
@@ -82,7 +82,7 @@ export function getPeopleIndexMarkdown() {
   const people = getAllPeople();
 
   const body = people
-    .map((person) => `- [${person.name}](/gratitude/${person.slug}.md): ${person.plainNote}`)
+    .map((person) => `- [${person.name}](/people/${person.slug}.md): ${person.plainNote}`)
     .join("\n");
 
   return `# ${meta.title}

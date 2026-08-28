@@ -21,6 +21,7 @@ content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
 | Blog | `content/blog/*.md` | `getAllPosts()` / `getPost()` |
 | Gallery mosaic | `content/gallery.md` | `getGalleryContent()` |
 | History / timeline | `content/timeline.md` | `getTimeline()` |
+| People / gratitude | `content/people/*.mdx` | `getAllPeople()` / `getPerson()` |
 | About / contact / privacy | `content/pages/*.md` | `getPage()` |
 | URL, email, socials only | `src/lib/site.ts` | — |
 
@@ -34,7 +35,7 @@ content/**/*.md  →  src/lib/content.ts  →  src/app/* + src/components/*
 
 ## Routes
 
-`/`, `/blog`, `/blog/[slug]`, `/gallery`, `/history`, `/about`, `/contact`, `/privacy`
+`/`, `/blog`, `/blog/[slug]`, `/gallery`, `/history`, `/people`, `/people/[slug]`, `/about`, `/contact`, `/privacy`
 
 Agent endpoints (do not break): `/llms.txt`, `/llms-full.txt`, `/profile.md`, `/feed.xml`, `/sitemap.xml`, markdown negotiation via `src/proxy.ts`
 

@@ -14,10 +14,10 @@ export type HomeContent = {
   historyUrl: string;
   historyLinkLabel: string;
   historyPreviewCount: number;
-  gratitudeLabel: string;
-  gratitudeUrl: string;
-  gratitudeLinkLabel: string;
-  gratitudePreviewCount: number;
+  peopleLabel: string;
+  peopleUrl: string;
+  peopleLinkLabel: string;
+  peoplePreviewCount: number;
   contactLabel: string;
   footerCredit: string;
 };
@@ -30,9 +30,6 @@ export type Person = {
   content: string;
   plainNote: string;
 };
-
-/** @deprecated Use Person */
-export type GratitudeEntry = Person;
 
 export type Project = {
   slug: string;

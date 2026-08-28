@@ -17,7 +17,7 @@ export function getNotFoundMarkdown(pathname: string) {
 ## Where to look next
 
 - [Homepage](https://shubhxho.com/): biography, projects, history, gallery, and writing
-- [Gratitude](https://shubhxho.com/gratitude): people I look up to ([Markdown](https://shubhxho.com/gratitude.md))
+- [People](https://shubhxho.com/people): people I look up to ([Markdown](https://shubhxho.com/people.md))
 - [History](https://shubhxho.com/history): chronological timeline
 - [Gallery](https://shubhxho.com/gallery): visual work
 - [Writing](https://shubhxho.com/blog): essays and notes

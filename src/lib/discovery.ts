@@ -23,7 +23,7 @@ This is the official website and canonical profile for ${site.name}, also known 
 - [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile and timeline in Markdown
 - [Markdown profile](${site.url}/profile.md): Clean Markdown version of the public homepage
 - [Writing](${site.url}/blog): Essays and notes in Markdown
-- [Gratitude](${site.url}/gratitude): People I look up to ([Markdown index](${site.url}/gratitude.md))
+- [People](${site.url}/people): People I look up to ([Markdown index](${site.url}/people.md))
 - [History](${site.url}/history): Chronological timeline
 - [Gallery](${site.url}/gallery): Blender studies and stills
 - [Cursor / coding agents](${site.url}/llms.txt): Start here for machine-readable discovery

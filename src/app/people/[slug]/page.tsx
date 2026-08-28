@@ -19,14 +19,14 @@ export async function generateMetadata({ params }: PersonPageProps): Promise<Met
     title: person.name,
     description: person.plainNote,
     alternates: {
-      canonical: `/gratitude/${person.slug}`,
+      canonical: `/people/${person.slug}`,
       types: {
-        "text/markdown": `${site.url}/gratitude/${person.slug}.md`,
+        "text/markdown": `${site.url}/people/${person.slug}.md`,
       },
     },
     openGraph: {
       type: "article",
-      url: `${site.url}/gratitude/${person.slug}`,
+      url: `${site.url}/people/${person.slug}`,
       title: person.name,
       description: person.plainNote,
     },

@@ -13,15 +13,15 @@ export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
   alternates: {
-    canonical: "/gratitude",
+    canonical: "/people",
     types: {
-      "text/markdown": `${site.url}/gratitude.md`,
+      "text/markdown": `${site.url}/people.md`,
     },
   },
-  openGraph: { url: `${site.url}/gratitude` },
+  openGraph: { url: `${site.url}/people` },
 };
 
-export default function GratitudePage() {
+export default function PeoplePage() {
   const people = getAllPeople();
 
   return (

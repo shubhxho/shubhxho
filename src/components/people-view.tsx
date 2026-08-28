@@ -16,7 +16,7 @@ function PersonMdx({
       {showTitle ? (
         <h2 className="text-[1.05rem] font-bold tracking-tight">
           {linked ? (
-            <Link href={`/gratitude/${person.slug}`} className="ink-link">
+            <Link href={`/people/${person.slug}`} className="ink-link">
               {person.name}
             </Link>
           ) : (
@@ -82,8 +82,8 @@ export function PeopleView(props: PeopleViewProps) {
   return (
     <>
       <p className="mb-8 text-sm">
-        <Link href="/gratitude" className="ink-link">
-          ← all gratitude
+        <Link href="/people" className="ink-link">
+          ← all people
         </Link>
       </p>
       <h1 className="mb-6 text-[clamp(1.8rem,5vw,2.6rem)] leading-[1.15] font-bold tracking-tight text-pretty">
@@ -93,6 +93,3 @@ export function PeopleView(props: PeopleViewProps) {
     </>
   );
 }
-
-/** @deprecated Use PeopleView */
-export const GratitudeView = PeopleView;

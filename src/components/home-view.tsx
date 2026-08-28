@@ -102,13 +102,13 @@ export function HomeView({ home, projects, gallery, posts, timeline, people }: H
           </p>
         </section>
 
-        <section className="mt-16" aria-labelledby="gratitude-label">
+        <section className="mt-16" aria-labelledby="people-label">
           <div className="mb-6 flex items-baseline justify-between gap-4">
-            <h2 id="gratitude-label" className="text-xl font-bold tracking-tight">
-              {home.gratitudeLabel}
+            <h2 id="people-label" className="text-xl font-bold tracking-tight">
+              {home.peopleLabel}
             </h2>
-            <Link href={home.gratitudeUrl} className="ink-link text-sm">
-              {home.gratitudeLinkLabel}
+            <Link href={home.peopleUrl} className="ink-link text-sm">
+              {home.peopleLinkLabel}
             </Link>
           </div>
           <PeopleView variant="list" people={people} />

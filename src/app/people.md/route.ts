@@ -8,7 +8,7 @@ export function GET() {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
       "Cache-Control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
-      Link: `<${site.url}/gratitude>; rel="canonical"`,
+      Link: `<${site.url}/people>; rel="canonical"`,
       Vary: "Accept, Accept-Encoding",
       "X-Robots-Tag": "noindex, follow",
     },

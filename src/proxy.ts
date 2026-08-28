@@ -5,7 +5,7 @@ const markdownNativePaths = new Set([
   "/llms.txt",
   "/llms-full.txt",
   "/profile.md",
-  "/gratitude.md",
+  "/people.md",
 ]);
 const knownPaths = new Set([
   "/",
@@ -15,6 +15,8 @@ const knownPaths = new Set([
   "/gallery",
   "/gratitude",
   "/gratitude.md",
+  "/people",
+  "/people.md",
   "/history",
   "/privacy",
   "/feed.xml",
@@ -35,8 +37,9 @@ const knownPaths = new Set([
 function isKnownPath(pathname: string) {
   if (knownPaths.has(pathname)) return true;
   if (pathname.startsWith("/blog/")) return true;
+  if (pathname.startsWith("/people/")) return true;
+  if (pathname.startsWith("/people-markdown/")) return true;
   if (pathname.startsWith("/gratitude/")) return true;
-  if (pathname.startsWith("/gratitude-markdown/")) return true;
   return false;
 }
 
