@@ -8,6 +8,7 @@ import {
   site,
 } from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
+import { getAllDaily, getDailyDiscoveryMarkdown } from "@/lib/daily";
 import { getTimeline } from "@/lib/content";
 import { getPagesDiscoveryMarkdown, getPagesMarkdownEndpoints } from "@/lib/pages";
 import { getPeopleDiscoveryMarkdown, getAllPeople } from "@/lib/people";
@@ -24,6 +25,8 @@ const writingMarkdown = getAllPosts()
   .map((post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.description}`)
   .join("\n");
 
+const dailyMarkdown = getDailyDiscoveryMarkdown();
+
 const profileLinks = getProfileLinksMarkdown();
 const shubhxhoIdentity = getShubhxhoIdentityMarkdown();
 const externalProfileEndpoints = getExternalProfileEndpointsMarkdown();
@@ -35,9 +38,14 @@ const markdownEndpoints = [
   `- [llms-full.txt](${site.url}/llms-full.txt): Full biography, timeline, people, and writing`,
   `- [profile.md](${site.url}/profile.md): Homepage in Markdown`,
   `- [people.md](${site.url}/people.md): Gratitude / people index`,
+  `- [daily.md](${site.url}/daily.md): Daily notes index`,
   ...getAllPeople().map(
     (person) =>
       `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
+  ),
+  ...getAllDaily().map(
+    (entry) =>
+      `- [${entry.title}](${site.url}/daily/${entry.slug}.md): ${entry.description}`,
   ),
   ...getPagesMarkdownEndpoints().split("\n"),
   externalProfileEndpoints,
@@ -47,9 +55,10 @@ const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discover
 2. Fetch [llms-full.txt](${site.url}/llms-full.txt) for biography, timeline, people, writing, and profiles.
 3. Use [profile.md](${site.url}/profile.md) for a homepage Markdown snapshot.
 4. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
-5. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
-6. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
-7. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
+5. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{slug}.md\`.
+6. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
+7. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
+8. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
 
 export function getLlmsIndex() {
   return `# ${site.name} (${site.handle})
@@ -68,6 +77,7 @@ ${shubhxhoIdentity}
 - [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile, timeline, people, and writing in Markdown
 - [Markdown profile](${site.url}/profile.md): Clean Markdown version of the public homepage
 - [Writing](${site.url}/blog): Essays and notes in Markdown
+- [Daily](${site.url}/daily): Short dated notes ([Markdown index](${site.url}/daily.md))
 - [People](${site.url}/people): People I look up to ([Markdown index](${site.url}/people.md))
 - [History](${site.url}/history): Chronological timeline
 - [Gallery](${site.url}/gallery): Blender studies and stills
@@ -144,6 +154,10 @@ ${peopleMarkdown}
 ## Writing
 
 ${writingMarkdown}
+
+## Daily
+
+${dailyMarkdown}
 
 ## Pages
 

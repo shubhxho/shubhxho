@@ -110,7 +110,7 @@ try {
   assert.match(notFoundMarkdown, /## Official profiles/);
   assertProfileLinks(notFoundMarkdown, "404 markdown");
 
-  for (const path of ["/about", "/contact", "/privacy", "/blog", "/gallery", "/history", "/people"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/blog", "/daily", "/gallery", "/history", "/people"]) {
     const response = await get(path);
     const html = await response.text();
     assert.equal(response.status, 200, `${path} must be public`);
@@ -141,6 +141,7 @@ try {
   assert.match(llms, /llms-full\.txt/);
   assert.match(llms, /people\.md/);
   assert.match(llms, /## shubhxho/);
+  assert.match(llms, /daily\.md/);
   assert.match(llms, /## Markdown endpoints/);
   assertProfileLinks(llms, "llms.txt");
 
@@ -151,7 +152,7 @@ try {
   assert.match(llmsFull, /## People/);
   assert.match(llmsFull, /## Writing/);
   assert.match(llmsFull, /## Pages/);
-  assert.match(llmsFull, /## Machine-learning profiles/);
+  assert.match(llmsFull, /## Daily/);
   assert.match(llmsFull, /Hack Club/);
   assertProfileLinks(llmsFull, "llms-full.txt");
 
@@ -167,6 +168,12 @@ try {
   await expectMarkdown("/people.md", /^# Gratitude/m);
   await expectMarkdown("/people/hackclub.md", /^# Hack Club/m);
   await expectMarkdown("/people/hermes-mail.md", /^# Hermes Mail/m);
+  await expectMarkdown("/daily.md", /^# Daily/m);
+  await expectMarkdown("/daily/2026-08-29.md", /^# Agent discovery and site links/m);
+
+  const dailyEntry = await get("/daily/2026-08-29");
+  assert.equal(dailyEntry.status, 200, "/daily/2026-08-29 must be public");
+  assert.match(await dailyEntry.text(), /Agent discovery and site links/);
 
   const humans = await (await get("/humans.txt")).text();
   assert.match(humans, /shubhxho/);
@@ -177,10 +184,12 @@ try {
   assert.match(feed, /<rss version="2.0"/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
-  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/people"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/daily", "/people"]) {
     assert.match(sitemap, new RegExp(`https://shubhxho\\.com${path}`));
   }
   assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hackclub/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/daily/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/daily\/2026-08-29/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hermes-mail/);
 
   const personEntry = await get("/people/hackclub");

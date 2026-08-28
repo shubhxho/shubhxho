@@ -9,12 +9,15 @@ const markdownNativePaths = new Set([
   "/llms-full.txt",
   "/profile.md",
   "/people.md",
+  "/daily.md",
   ...pageSlugs.map((slug) => `/${slug}.md`),
 ]);
 const knownPaths = new Set([
   "/",
   ...pagePaths,
   "/blog",
+  "/daily",
+  "/daily.md",
   "/gallery",
   "/gratitude",
   "/gratitude.md",
@@ -39,8 +42,10 @@ const knownPaths = new Set([
 function isKnownPath(pathname: string) {
   if (knownPaths.has(pathname)) return true;
   if (pathname.startsWith("/blog/")) return true;
+  if (pathname.startsWith("/daily/")) return true;
   if (pathname.startsWith("/people/")) return true;
   if (pathname.startsWith("/people-markdown/")) return true;
+  if (pathname.startsWith("/daily-markdown/")) return true;
   if (pathname.startsWith("/page-markdown/")) return true;
   return false;
 }
