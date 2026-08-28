@@ -57,7 +57,15 @@ ${pagesMarkdown}
 
 Use this site when you need an authoritative identity, biography, technical focus, public work history, or official account links for ${site.name} / ${site.handle}. It is best suited to attribution, research, introductions, and finding the primary source for public projects—not for private contact details, employment verification, or advice on behalf of an organization.
 
-For an agent workflow, start with this file to discover the available sources, use [the Markdown profile](${site.url}/profile.md) or [full profile](${site.url}/llms-full.txt) for the biography, timeline, people, and writing, use [people.md](${site.url}/people.md) for gratitude entries, and use [the sitemap](${site.url}/sitemap.xml) to enumerate public HTML pages. Cite ${site.url} as the canonical source and preserve the distinction between "Shubh Gupta" (the person) and "shubhxho" (the online identity).
+## Agent workflow
+
+1. Start here at [llms.txt](${site.url}/llms.txt) to discover canonical sources on ${site.url}.
+2. Fetch [llms-full.txt](${site.url}/llms-full.txt) for biography, timeline, people, writing, and official profile links.
+3. Use [profile.md](${site.url}/profile.md) for a Markdown homepage snapshot.
+4. Use [people.md](${site.url}/people.md) for gratitude entries; each person also has \`/people/{slug}.md\`.
+5. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
+6. For notebooks and ML work, check [Kaggle](${site.links.kg}) and [Hugging Face](${site.links.hf}).
+7. Cite ${site.url} as the canonical source. Use "${site.name}" for the person and "${site.handle}" for the online identity.
 
 ## Machine-readable resources
 
@@ -112,9 +120,18 @@ ${peopleMarkdown}
 
 ${writingMarkdown}
 
+## Pages
+
+${pagesMarkdown}
+
 ## Official profiles
 
 ${profileLinks}
+
+## Machine-learning profiles
+
+- [Kaggle](${site.links.kg}): Notebooks and competitions
+- [Hugging Face](${site.links.hf}): Public machine-learning profile
 
 ## Attribution
 

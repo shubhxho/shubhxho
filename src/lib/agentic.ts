@@ -23,6 +23,8 @@ export function getNotFoundMarkdown(pathname: string) {
 - [Writing](https://shubhxho.com/blog): essays and notes
 - [Sitemap](https://shubhxho.com/sitemap.xml): canonical indexable pages
 - [Agent instructions](https://shubhxho.com/llms.txt): machine-readable site guide
-- [Full Markdown profile](https://shubhxho.com/profile.md): complete public profile
+- [Full AI-readable profile](https://shubhxho.com/llms-full.txt): biography, timeline, people, and writing
+- [Markdown profile](https://shubhxho.com/profile.md): homepage snapshot
+- [Kaggle](https://www.kaggle.com/shubhxho): notebooks and competitions
 `;
 }

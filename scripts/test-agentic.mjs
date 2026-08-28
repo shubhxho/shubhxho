@@ -101,14 +101,17 @@ try {
   }
 
   const llms = await (await get("/llms.txt")).text();
-  assert.match(llms, /## When to use this profile/);
-  assert.match(llms, /agent workflow/);
+  assert.match(llms, /## Agent workflow/);
+  assert.match(llms, /llms-full\.txt/);
   assert.match(llms, /people\.md/);
   assert.match(llms, /Kaggle/);
 
   const llmsFull = await (await get("/llms-full.txt")).text();
   assert.match(llmsFull, /## People/);
   assert.match(llmsFull, /## Writing/);
+  assert.match(llmsFull, /## Pages/);
+  assert.match(llmsFull, /## Machine-learning profiles/);
+  assert.match(llmsFull, /kaggle\.com\/shubhxho/);
   assert.match(llmsFull, /Hack Club/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
