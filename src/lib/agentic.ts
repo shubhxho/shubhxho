@@ -1,4 +1,4 @@
-import { getProfileLinks, site } from "@/lib/site";
+import { getProfileLinksMarkdown, site } from "@/lib/site";
 
 const markdownMediaType = /(?:^|,)\s*text\/markdown(?:\s*;[^,]*)?(?:,|$)/i;
 
@@ -12,9 +12,7 @@ export function acceptsMarkdown(accept: string | null) {
 }
 
 export function getNotFoundMarkdown(pathname: string) {
-  const profileLinks = getProfileLinks()
-    .map((link) => `- [${link.label}](${link.url})`)
-    .join("\n");
+  const profileLinks = getProfileLinksMarkdown();
 
   return `# 404: Page not found
 

@@ -54,6 +54,9 @@ try {
   assert.match(homepageHtml, /kaggle\.com\/shubhxho/);
   assert.match(homepageHtml, /huggingface\.co\/shubhxho/);
   assert.match(homepageHtml, /github\.com\/shubhxho/);
+  assert.match(homepageHtml, /x\.com\/shubhgupta/);
+  assert.match(homepageHtml, /linkedin\.com\/in\/shubhxho/);
+  assert.match(homepageHtml, /instagram\.com\/shubhxho/);
 
   const markdownHomepage = await get("/", { headers: { Accept: "text/markdown" } });
   assert.equal(markdownHomepage.status, 200);
@@ -111,6 +114,10 @@ try {
   assert.match(llms, /## shubhxho/);
   assert.match(llms, /kaggle\.com\/shubhxho/);
   assert.match(llms, /huggingface\.co\/shubhxho/);
+  assert.match(llms, /github\.com\/shubhxho/);
+  assert.match(llms, /x\.com\/shubhgupta/);
+  assert.match(llms, /linkedin\.com\/in\/shubhxho/);
+  assert.match(llms, /instagram\.com\/shubhxho/);
   assert.match(llms, /## Markdown endpoints/);
 
   const llmsFull = await (await get("/llms-full.txt")).text();

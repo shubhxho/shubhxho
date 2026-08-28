@@ -7,7 +7,7 @@ import {
   getTimeline,
 } from "@/lib/content";
 import { getAllPeople } from "@/lib/people";
-import { site } from "@/lib/site";
+import { getSameAsUrls, site } from "@/lib/site";
 
 const structuredData = (projects: ReturnType<typeof getProjects>) => ({
   "@context": "https://schema.org",
@@ -31,7 +31,7 @@ const structuredData = (projects: ReturnType<typeof getProjects>) => ({
       email: site.email,
       homeLocation: { "@type": "Place", name: "Khagaria, Bihar, India" },
       knowsAbout: site.topics,
-      sameAs: Object.values(site.links),
+      sameAs: getSameAsUrls(),
     },
     {
       "@type": "ItemList",

@@ -61,12 +61,65 @@ export const profileLinkLabels: Record<ProfileLinkKey, string> = {
   ig: "Instagram",
 };
 
+export const profileLinkPaths: Record<ProfileLinkKey, string> = {
+  gh: "github.com/shubhxho",
+  kg: "kaggle.com/shubhxho",
+  hf: "huggingface.co/shubhxho",
+  x: "x.com/shubhgupta",
+  in: "linkedin.com/in/shubhxho",
+  ig: "instagram.com/shubhxho",
+};
+
+export const profileLinkDescriptions: Partial<Record<ProfileLinkKey, string>> = {
+  gh: "Source code and projects",
+  kg: "Notebooks and competitions",
+  hf: "Public machine-learning profile",
+};
+
 export const profileLinkOrder: ProfileLinkKey[] = ["gh", "kg", "hf", "x", "in", "ig"];
 
-export function getProfileLinks() {
-  return profileLinkOrder.map((key) => ({
+export function getProfileLink(key: ProfileLinkKey) {
+  return {
     key,
     label: profileLinkLabels[key],
     url: site.links[key],
-  }));
+    path: profileLinkPaths[key],
+    description: profileLinkDescriptions[key],
+  };
+}
+
+export function getProfileLinks(keys: ProfileLinkKey[] = profileLinkOrder) {
+  return keys.map(getProfileLink);
+}
+
+export function getProfileLinksMarkdown(keys: ProfileLinkKey[] = profileLinkOrder) {
+  return getProfileLinks(keys)
+    .map((link) => `- [${link.label}](${link.url})`)
+    .join("\n");
+}
+
+export function getShubhxhoIdentityMarkdown() {
+  return [
+    `- Canonical site: [${site.url}](${site.url})`,
+    `- Handle: @${site.handle}`,
+    `- Email: ${site.email}`,
+    ...getProfileLinks().map((link) => `- ${link.label}: [${link.path}](${link.url})`),
+  ].join("\n");
+}
+
+export function getExternalProfileEndpointsMarkdown() {
+  return getProfileLinks()
+    .filter((link) => link.description)
+    .map((link) => `- [${link.label} @${site.handle}](${link.url}): ${link.description}`)
+    .join("\n");
+}
+
+export function getDescribedProfileLinksMarkdown(keys: ProfileLinkKey[]) {
+  return getProfileLinks(keys)
+    .map((link) => `- [${link.label}](${link.url}): ${link.description}`)
+    .join("\n");
+}
+
+export function getSameAsUrls() {
+  return getProfileLinks().map((link) => link.url);
 }

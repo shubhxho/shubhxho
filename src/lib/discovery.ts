@@ -1,4 +1,12 @@
-import { getProfileLinks, site } from "@/lib/site";
+import {
+  getDescribedProfileLinksMarkdown,
+  getExternalProfileEndpointsMarkdown,
+  getProfileLink,
+  getProfileLinks,
+  getProfileLinksMarkdown,
+  getShubhxhoIdentityMarkdown,
+  site,
+} from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
 import { getTimeline } from "@/lib/content";
 import { getPages } from "@/lib/pages";
@@ -18,9 +26,11 @@ const writingMarkdown = getAllPosts()
   .map((post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.description}`)
   .join("\n");
 
-const profileLinks = getProfileLinks()
-  .map((link) => `- [${link.label}](${link.url})`)
-  .join("\n");
+const profileLinks = getProfileLinksMarkdown();
+const shubhxhoIdentity = getShubhxhoIdentityMarkdown();
+const externalProfileEndpoints = getExternalProfileEndpointsMarkdown();
+const mlProfileLinks = getProfileLinks(["kg", "hf"]);
+const codeProfileLink = getProfileLink("gh");
 
 const markdownEndpoints = [
   `- [llms.txt](${site.url}/llms.txt): Agent discovery index (start here)`,
@@ -32,9 +42,7 @@ const markdownEndpoints = [
       `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
   ),
   ...getPages().map((page) => `- [${page.title}](${site.url}/${page.slug}.md): ${page.description}`),
-  `- [GitHub @${site.handle}](${site.links.gh}): Source code and projects`,
-  `- [Kaggle @${site.handle}](${site.links.kg}): Notebooks and competitions`,
-  `- [Hugging Face @${site.handle}](${site.links.hf}): Machine-learning profile`,
+  externalProfileEndpoints,
 ].join("\n");
 
 const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discovery on ${site.url} (${site.handle}).
@@ -42,7 +50,7 @@ const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discover
 3. Use [profile.md](${site.url}/profile.md) for a homepage Markdown snapshot.
 4. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
 5. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
-6. For code, check [GitHub](${site.links.gh}). For notebooks and ML work, check [Kaggle](${site.links.kg}) and [Hugging Face](${site.links.hf}).
+6. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
 7. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
 
 export function getLlmsIndex() {
@@ -54,12 +62,7 @@ This is the official website and canonical profile for ${site.name}, also known 
 
 ## shubhxho
 
-- Canonical site: [${site.url}](${site.url})
-- Handle: @${site.handle}
-- Email: ${site.email}
-- GitHub: [github.com/${site.handle}](${site.links.gh})
-- Kaggle: [kaggle.com/${site.handle}](${site.links.kg})
-- Hugging Face: [huggingface.co/${site.handle}](${site.links.hf})
+${shubhxhoIdentity}
 
 ## Primary resources
 
@@ -101,6 +104,12 @@ ${profileLinks}
 }
 
 export function getFullProfileMarkdown() {
+  const identityProfiles = getProfileLinks()
+    .map((link) => `- ${link.label}: ${link.url}`)
+    .join("\n");
+
+  const mlProfiles = getDescribedProfileLinksMarkdown(["kg", "hf"]);
+
   return `# ${site.name} (${site.handle})
 
 > ${site.description}
@@ -119,9 +128,7 @@ Last updated: ${site.lastUpdated}
 - Location: Khagaria, Bihar, India
 - Website: ${site.url}
 - Email: ${site.email}
-- GitHub: ${site.links.gh}
-- Kaggle: ${site.links.kg}
-- Hugging Face: ${site.links.hf}
+${identityProfiles}
 - Focus: ${site.topics.join(", ")}
 
 ## Biography
@@ -150,8 +157,7 @@ ${profileLinks}
 
 ## Machine-learning profiles
 
-- [Kaggle](${site.links.kg}): Notebooks and competitions
-- [Hugging Face](${site.links.hf}): Public machine-learning profile
+${mlProfiles}
 
 ## Agent workflow
 

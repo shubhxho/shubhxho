@@ -1,11 +1,8 @@
 ## Links
 
-- Instagram: [shubhxho](https://instagram.com/shubhxho)
-- Hugging Face: [shubhxho](https://huggingface.co/shubhxho)
-- GitHub: [shubhxho](https://github.com/shubhxho)
-- X: [Shubh Gupta](https://x.com/shubhgupta)
-- LinkedIn: [shubhxho](https://linkedin.com/in/shubhxho)
-- Calendar: [cal.com/shubhxho](https://cal.com/shubhxho)
-- Email: [shubh@shubhxho.com](mailto:shubh@shubhxho.com)
-- Website: [shubhxho.com](https://shubhxho.com)
+Official profile URLs live in `src/lib/site.ts` (`site.links` + `getProfileLinks()`).
 
+- Website: [shubhxho.com](https://shubhxho.com)
+- Email: [shubh@shubhxho.com](mailto:shubh@shubhxho.com)
+- Calendar: [cal.com/shubhxho](https://cal.com/shubhxho)
+- Agent discovery: [llms.txt](https://shubhxho.com/llms.txt)
