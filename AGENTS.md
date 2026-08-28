@@ -29,7 +29,7 @@ content/
 ├── people/*.mdx      # people I look up to
 ├── blog/*.mdx        # writing
 ├── projects/*.md     # selected work
-└── pages/*.md        # about, contact, privacy
+└── pages/*.mdx       # about, contact, privacy
 ```
 
 Loaders: `src/lib/content.ts` · `src/lib/people.ts` · `src/lib/posts.ts` · `src/lib/pages.ts` · parser: `src/lib/markdown.ts` · types: `src/lib/content-types.ts`

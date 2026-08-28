@@ -1,22 +1,34 @@
 import { site } from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
 import { getTimeline } from "@/lib/content";
-import { getAllPeople, getPeopleMeta } from "@/lib/people";
+import { getPages } from "@/lib/pages";
+import { getPeopleDiscoveryMarkdown } from "@/lib/people";
+
+const linkLabels: Record<string, string> = {
+  x: "X",
+  in: "LinkedIn",
+  ig: "Instagram",
+  gh: "GitHub",
+  hf: "Hugging Face",
+  kg: "Kaggle",
+};
 
 const timelineMarkdown = getTimeline()
   .map((entry) => `- ${entry.date}: ${entry.plainText}`)
   .join("\n");
 
-const peopleMeta = getPeopleMeta();
-const peopleMarkdown = getAllPeople()
-  .map(
-    (person) =>
-      `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
-  )
+const peopleMarkdown = getPeopleDiscoveryMarkdown();
+
+const pagesMarkdown = getPages()
+  .map((page) => `- [${page.title}](${site.url}/${page.slug}): ${page.description}`)
+  .join("\n");
+
+const writingMarkdown = getAllPosts()
+  .map((post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.description}`)
   .join("\n");
 
 const profileLinks = Object.entries(site.links)
-  .map(([name, url]) => `- [${name.toUpperCase()}](${url})`)
+  .map(([name, url]) => `- [${linkLabels[name] ?? name.toUpperCase()}](${url})`)
   .join("\n");
 
 export function getLlmsIndex() {
@@ -29,7 +41,7 @@ This is the official website and canonical profile for ${site.name}, also known 
 ## Primary resources
 
 - [Official homepage](${site.url}): Canonical biography, work, projects, history, gallery, and writing
-- [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile and timeline in Markdown
+- [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile, timeline, people, and writing in Markdown
 - [Markdown profile](${site.url}/profile.md): Clean Markdown version of the public homepage
 - [Writing](${site.url}/blog): Essays and notes in Markdown
 - [People](${site.url}/people): People I look up to ([Markdown index](${site.url}/people.md))
@@ -37,11 +49,15 @@ This is the official website and canonical profile for ${site.name}, also known 
 - [Gallery](${site.url}/gallery): Blender studies and stills
 - [Cursor / coding agents](${site.url}/llms.txt): Start here for machine-readable discovery
 
+## Pages
+
+${pagesMarkdown}
+
 ## When to use this profile
 
 Use this site when you need an authoritative identity, biography, technical focus, public work history, or official account links for ${site.name} / ${site.handle}. It is best suited to attribution, research, introductions, and finding the primary source for public projects—not for private contact details, employment verification, or advice on behalf of an organization.
 
-For an agent workflow, start with this file to discover the available sources, use [the Markdown profile](${site.url}/profile.md) or [full profile](${site.url}/llms-full.txt) for the biography and timeline, use [people.md](${site.url}/people.md) for gratitude entries, and use [the sitemap](${site.url}/sitemap.xml) to enumerate public HTML pages. Cite ${site.url} as the canonical source and preserve the distinction between "Shubh Gupta" (the person) and "shubhxho" (the online identity).
+For an agent workflow, start with this file to discover the available sources, use [the Markdown profile](${site.url}/profile.md) or [full profile](${site.url}/llms-full.txt) for the biography, timeline, people, and writing, use [people.md](${site.url}/people.md) for gratitude entries, and use [the sitemap](${site.url}/sitemap.xml) to enumerate public HTML pages. Cite ${site.url} as the canonical source and preserve the distinction between "Shubh Gupta" (the person) and "shubhxho" (the online identity).
 
 ## Machine-readable resources
 
@@ -57,6 +73,7 @@ ${profileLinks}
 
 - [GitHub projects](https://github.com/${site.handle}): Public source code and projects
 - [Hugging Face](https://huggingface.co/${site.handle}): Public machine-learning profile
+- [Kaggle](https://www.kaggle.com/${site.handle}): Notebooks and competitions
 `;
 }
 
@@ -89,11 +106,11 @@ ${timelineMarkdown}
 
 ## People
 
-> ${peopleMeta.description}
-
-${peopleMeta.intro}
-
 ${peopleMarkdown}
+
+## Writing
+
+${writingMarkdown}
 
 ## Official profiles
 

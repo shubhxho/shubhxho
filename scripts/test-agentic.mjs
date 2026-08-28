@@ -104,6 +104,12 @@ try {
   assert.match(llms, /## When to use this profile/);
   assert.match(llms, /agent workflow/);
   assert.match(llms, /people\.md/);
+  assert.match(llms, /Kaggle/);
+
+  const llmsFull = await (await get("/llms-full.txt")).text();
+  assert.match(llmsFull, /## People/);
+  assert.match(llmsFull, /## Writing/);
+  assert.match(llmsFull, /Hack Club/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
   for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/people"]) {
@@ -123,6 +129,11 @@ try {
   const peopleIndexMarkdown = await get("/people.md");
   assert.equal(peopleIndexMarkdown.status, 200, "/people.md must be public");
   assert.match(await peopleIndexMarkdown.text(), /^# Gratitude/m);
+
+  const privacyMarkdown = await get("/privacy.md");
+  assert.equal(privacyMarkdown.status, 200, "/privacy.md must be public");
+  assert.match(privacyMarkdown.headers.get("content-type") ?? "", /^text\/markdown/);
+  assert.match(await privacyMarkdown.text(), /^# Privacy/m);
 
   const indexNow = await get("/indexnow.txt");
   assert.equal(indexNow.status, 404, "IndexNow must remain unavailable without a configured key");

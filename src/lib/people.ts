@@ -77,6 +77,21 @@ export function getPersonMarkdown(slug: string) {
   return buildPersonMarkdown(person);
 }
 
+export function getPeopleDiscoveryMarkdown() {
+  const meta = getPeopleMeta();
+  const people = getAllPeople();
+
+  const body = people
+    .map((person) => `- [${person.name}](/people/${person.slug}.md): ${person.plainNote}`)
+    .join("\n");
+
+  return `> ${meta.description}
+
+${meta.intro}
+
+${body}`;
+}
+
 export function getPeopleIndexMarkdown() {
   const meta = getPeopleMeta();
   const people = getAllPeople();

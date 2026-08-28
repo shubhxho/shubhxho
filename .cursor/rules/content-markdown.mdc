@@ -57,9 +57,9 @@ Frontmatter: `title`, `description`. Body:
 
 Required: `name`. Optional: `slug`, `href`, `order`. Body is MDX via `people.ts` → `GratitudeView` / `MdxArticle`. Public section name is Gratitude; URLs are `/people/{slug}`.
 
-## `content/pages/*.md`
+## `content/pages/*.mdx`
 
-Frontmatter: `title`, `description`, `heading`. Body = trust page prose. Loaded by `src/lib/pages.ts`.
+Frontmatter: `title`, `description`, `heading`. Body is MDX via `pages.ts` → `MdxArticle`. Privacy, about, and contact are included in `src/app/sitemap.ts` through `getPages()`.
 
 ## After adding content
 

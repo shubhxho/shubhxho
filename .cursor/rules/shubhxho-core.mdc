@@ -25,7 +25,7 @@ content/**/*.md         → content.ts    → homepage, gallery, history
 | Gallery mosaic | `content/gallery.md` | `getGalleryContent()` |
 | History / timeline | `content/timeline.md` | `getTimeline()` |
 | Gratitude / people | `content/people/*.mdx` | `getAllPeople()` / `getPerson()` |
-| About / contact / privacy | `content/pages/*.md` | `getPage()` in `pages.ts` |
+| About / contact / privacy | `content/pages/*.mdx` | `getPage()` in `pages.ts` |
 | Indexable URLs | — | `src/app/sitemap.ts` |
 | URL, email, socials only | `src/lib/site.ts` | — |
 

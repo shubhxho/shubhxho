@@ -18,6 +18,18 @@ const nextConfig: NextConfig = {
         source: "/people/:slug.md",
         destination: "/people-markdown/:slug",
       },
+      {
+        source: "/about.md",
+        destination: "/page-markdown/about",
+      },
+      {
+        source: "/contact.md",
+        destination: "/page-markdown/contact",
+      },
+      {
+        source: "/privacy.md",
+        destination: "/page-markdown/privacy",
+      },
     ];
   },
   async redirects() {

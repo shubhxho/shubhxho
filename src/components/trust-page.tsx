@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
-import { MarkdownArticle } from "@/components/markdown-article";
+import { MdxArticle } from "@/components/mdx-article";
 import type { ContentPageSlug } from "@/lib/pages";
 import { getPage } from "@/lib/pages";
 
@@ -13,7 +13,7 @@ export function TrustPage({ slug }: { slug: ContentPageSlug }) {
         <h1 className="mb-8 text-[clamp(1.8rem,5vw,2.6rem)] leading-[1.15] font-bold tracking-tight">
           {page.heading}
         </h1>
-        <MarkdownArticle content={page.content} />
+        <MdxArticle content={page.content} />
         <p className="mt-10 flex flex-wrap gap-x-3 gap-y-2 text-sm">
           <Link href="/about" className="ink-link">
             about

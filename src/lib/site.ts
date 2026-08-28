@@ -46,5 +46,6 @@ export const site = {
     ig: "https://www.instagram.com/shubhxho",
     gh: "https://github.com/shubhxho",
     hf: "https://huggingface.co/shubhxho",
+    kg: "https://www.kaggle.com/shubhxho",
   },
 } as const;

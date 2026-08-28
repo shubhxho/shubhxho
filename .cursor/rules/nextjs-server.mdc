@@ -26,7 +26,7 @@ Read `node_modules/next/dist/docs/` before changing App Router APIs — this Nex
 
 - Blog slugs: `content/blog/my-post.mdx` → `/blog/my-post` via `posts.ts`
 - Gratitude slugs: `content/people/hackclub.mdx` → `/people/hackclub` via `people.ts`
-- Trust pages: `content/pages/{about,contact,privacy}.md` → `pages.ts` → `src/app/{slug}/page.tsx`
+- Trust pages: `content/pages/{about,contact,privacy}.mdx` → `pages.ts` → `src/app/{slug}/page.tsx` + `/{slug}.md`
 
 ## Preserve agent infrastructure
 
