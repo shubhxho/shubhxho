@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { FadeIn } from "@/components/fade-in";
 import { MdxArticle } from "@/components/mdx-article";
-import { formatPostDate, getAllPosts, getPost } from "@/lib/blog";
+import { formatPostDate, getAllPosts, getPost, getPostPath } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 type PostPageProps = { params: Promise<{ slug: string }> };
@@ -16,13 +16,14 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const path = getPostPath(post);
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
+    alternates: { canonical: path },
     openGraph: {
       type: "article",
-      url: `${site.url}/blog/${post.slug}`,
+      url: `${site.url}${path}`,
       publishedTime: post.date,
       title: post.title,
       description: post.description,
@@ -34,6 +35,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
+  if (post.kind === "essay") permanentRedirect(getPostPath(post));
 
   return (
     <main className="flex-1 px-5 py-16 sm:px-6 sm:py-24">

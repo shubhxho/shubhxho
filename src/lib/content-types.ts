@@ -7,6 +7,10 @@ export type HomeContent = {
   galleryUrl: string;
   galleryLinkLabel: string;
   galleryExternalUrl: string;
+  essaysLabel: string;
+  essaysUrl: string;
+  essaysLinkLabel: string;
+  essaysPreviewCount: number;
   writingLabel: string;
   writingLinkLabel: string;
   writingPreviewCount: number;
@@ -81,11 +85,14 @@ export type TimelineEntry = {
   plainText: string;
 };
 
+export type PostKind = "essay" | "note";
+
 export type BlogPost = {
   slug: string;
   title: string;
   description: string;
   date: string;
+  kind: PostKind;
   readingTime: string;
   content: string;
 };

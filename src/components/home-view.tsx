@@ -58,6 +58,18 @@ export function HomeView({ home, projects, gallery, posts, daily, timeline, peop
           </div>
         </section>
 
+        <section className="mt-16" aria-labelledby="essays-label">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <h2 id="essays-label" className="text-xl font-bold tracking-tight">
+              {home.essaysLabel}
+            </h2>
+            <Link href={home.essaysUrl} className="ink-link text-sm">
+              {home.essaysLinkLabel}
+            </Link>
+          </div>
+          <BlogPostList posts={posts} />
+        </section>
+
         <section className="mt-16" aria-labelledby="history-label">
           <div className="mb-6 flex items-baseline justify-between gap-4">
             <h2 id="history-label" className="text-xl font-bold tracking-tight">
@@ -70,18 +82,6 @@ export function HomeView({ home, projects, gallery, posts, daily, timeline, peop
           <TimelineList entries={timeline} />
         </section>
 
-        <section className="mt-16" aria-labelledby="writing-label">
-          <div className="mb-6 flex items-baseline justify-between gap-4">
-            <h2 id="writing-label" className="text-xl font-bold tracking-tight">
-              {home.writingLabel}
-            </h2>
-            <Link href="/blog" className="ink-link text-sm">
-              {home.writingLinkLabel}
-            </Link>
-          </div>
-          <BlogPostList posts={posts} />
-        </section>
-
         <section className="mt-16" aria-labelledby="daily-label">
           <div className="mb-6 flex items-baseline justify-between gap-4">
             <h2 id="daily-label" className="text-xl font-bold tracking-tight">
@@ -91,7 +91,7 @@ export function HomeView({ home, projects, gallery, posts, daily, timeline, peop
               {home.dailyLinkLabel}
             </Link>
           </div>
-          <BlogPostList posts={daily} basePath="/daily" />
+          <BlogPostList posts={daily} basePath="/daily" compact />
         </section>
 
         <section className="mt-16" aria-labelledby="gallery-label">

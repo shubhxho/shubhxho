@@ -13,7 +13,7 @@ Read `node_modules/next/dist/docs/` before changing App Router APIs — this Nex
 - **Server** (default): pages, layouts, loaders (`getHomeContent()`, `getAllPosts()`, `getAllPeople()`, `getPage()`)
 - **Client** (`"use client"`): `Header`, `HomeView`, `FadeIn`, `Tip`, `GalleryMosaic` (uses Next Image)
 - Load markdown on server → pass props to client components
-- `node:fs` only in `markdown.ts`, `content.ts`, `posts.ts`, `daily.ts`, `people.ts`, `pages.ts`
+- `node:fs` only in `markdown.ts`, `content.ts`, `posts.ts`, `daily.ts`, `people.ts`, `pages.ts`, `essays.ts`
 
 ## Adding a page
 
@@ -24,7 +24,8 @@ Read `node_modules/next/dist/docs/` before changing App Router APIs — this Nex
 
 ## Blog / people
 
-- Blog slugs: `content/blog/my-post.mdx` → `/blog/my-post` via `posts.ts`
+- Blog slugs: `content/blog/my-post.mdx` with `kind: note` → `/blog/my-post`
+- Essay slugs: `content/blog/my-essay.mdx` with `kind: essay` → `/essays/my-essay` via `essays.ts`
 - Gratitude slugs: `content/people/hackclub.mdx` → `/people/hackclub` via `people.ts`
 - Trust pages: `content/pages/{about,contact,privacy}.mdx` → `pages.ts` → `src/app/[slug]/page.tsx` + `/{slug}.md`
 

@@ -1,2 +1,9 @@
-export { formatPostDate, getAllPosts, getPost } from "@/lib/posts";
+export {
+  formatPostDate,
+  getAllNotes,
+  getAllPosts,
+  getNote,
+  getPost,
+  getPostPath,
+} from "@/lib/posts";
 export type { BlogPost } from "@/lib/content-types";

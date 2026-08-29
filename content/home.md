@@ -7,6 +7,10 @@ galleryLabel: Gallery
 galleryUrl: /gallery
 galleryLinkLabel: see all →
 galleryExternalUrl: https://gallery.shubhxho.com
+essaysLabel: Essays
+essaysUrl: /essays
+essaysLinkLabel: all essays →
+essaysPreviewCount: 4
 writingLabel: Writing
 writingLinkLabel: all writing →
 writingPreviewCount: 4

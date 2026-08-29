@@ -28,6 +28,7 @@ ${pageSlugs.map((slug) => `- [${slug}](${site.url}/${slug}) ([Markdown](${site.u
 - [History](${site.url}/history): chronological timeline
 - [Gallery](${site.url}/gallery): visual work
 - [Writing](${site.url}/blog): essays and notes
+- [Essays](${site.url}/essays): longer writing ([Markdown](${site.url}/essays.md))
 - [Sitemap](${site.url}/sitemap.xml): canonical indexable pages
 
 ## Agent discovery

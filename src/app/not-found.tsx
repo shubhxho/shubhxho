@@ -21,6 +21,9 @@ export default function NotFound() {
           <Link href="/" className="ink-link">
             home
           </Link>
+          <Link href="/essays" className="ink-link">
+            essays
+          </Link>
           <Link href="/blog" className="ink-link">
             writing
           </Link>

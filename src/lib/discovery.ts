@@ -7,8 +7,9 @@ import {
   getShubhxhoIdentityMarkdown,
   site,
 } from "@/lib/site";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getPostPath } from "@/lib/blog";
 import { getAllDaily, getDailyDiscoveryMarkdown } from "@/lib/daily";
+import { getAllEssays, getEssaysDiscoveryMarkdown } from "@/lib/essays";
 import { getTimeline } from "@/lib/content";
 import { getPagesDiscoveryMarkdown, getPagesMarkdownEndpoints } from "@/lib/pages";
 import { getPeopleDiscoveryMarkdown, getAllPeople } from "@/lib/people";
@@ -22,8 +23,10 @@ const peopleMarkdown = getPeopleDiscoveryMarkdown();
 const pagesMarkdown = getPagesDiscoveryMarkdown();
 
 const writingMarkdown = getAllPosts()
-  .map((post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.description}`)
+  .map((post) => `- [${post.title}](${site.url}${getPostPath(post)}): ${post.description}`)
   .join("\n");
+
+const essaysMarkdown = getEssaysDiscoveryMarkdown();
 
 const dailyMarkdown = getDailyDiscoveryMarkdown();
 
@@ -37,8 +40,13 @@ const markdownEndpoints = [
   `- [llms.txt](${site.url}/llms.txt): Agent discovery index (start here)`,
   `- [llms-full.txt](${site.url}/llms-full.txt): Full biography, timeline, people, and writing`,
   `- [profile.md](${site.url}/profile.md): Homepage in Markdown`,
+  `- [essays.md](${site.url}/essays.md): Essays index`,
   `- [people.md](${site.url}/people.md): Gratitude / people index`,
   `- [daily.md](${site.url}/daily.md): Daily notes index`,
+  ...getAllEssays().map(
+    (essay) =>
+      `- [${essay.title}](${site.url}/essays/${essay.slug}.md): ${essay.description}`,
+  ),
   ...getAllPeople().map(
     (person) =>
       `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
@@ -54,11 +62,12 @@ const markdownEndpoints = [
 const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discovery on ${site.url} (${site.handle}).
 2. Fetch [llms-full.txt](${site.url}/llms-full.txt) for biography, timeline, people, writing, and profiles.
 3. Use [profile.md](${site.url}/profile.md) for a homepage Markdown snapshot.
-4. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
-5. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{slug}.md\`.
-6. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
-7. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
-8. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
+4. Use [essays.md](${site.url}/essays.md) for essays; each essay has \`/essays/{slug}.md\`.
+5. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
+6. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{slug}.md\`.
+7. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
+8. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
+9. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
 
 export function getLlmsIndex() {
   return `# ${site.name} (${site.handle})
@@ -76,7 +85,8 @@ ${shubhxhoIdentity}
 - [Official homepage](${site.url}): Canonical biography, work, projects, history, gallery, and writing
 - [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile, timeline, people, and writing in Markdown
 - [Markdown profile](${site.url}/profile.md): Clean Markdown version of the public homepage
-- [Writing](${site.url}/blog): Essays and notes in Markdown
+- [Essays](${site.url}/essays): Longer writing ([Markdown index](${site.url}/essays.md))
+- [Writing](${site.url}/blog): Essays and project notes
 - [Daily](${site.url}/daily): Short dated notes ([Markdown index](${site.url}/daily.md))
 - [People](${site.url}/people): People I look up to ([Markdown index](${site.url}/people.md))
 - [History](${site.url}/history): Chronological timeline
@@ -151,6 +161,10 @@ ${timelineMarkdown}
 
 ${peopleMarkdown}
 
+## Essays
+
+${essaysMarkdown}
+
 ## Writing
 
 ${writingMarkdown}
@@ -212,7 +226,7 @@ export function getRssFeed() {
   const posts = getAllPosts();
   const items = posts
     .map((post) => {
-      const url = `${site.url}/blog/${post.slug}`;
+      const url = `${site.url}${getPostPath(post)}`;
       const publicationDate = new Date(`${post.date}T00:00:00Z`).toUTCString();
 
       return `    <item>

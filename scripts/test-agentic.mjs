@@ -71,7 +71,7 @@ try {
   assert.match(homepageHtml, /<h1[^>]*>Shubh Gupta/);
   assert.match(homepageHtml, /<h2[^>]*>History<\/h2>/);
   assert.match(homepageHtml, /working on<\/h2>/);
-  assert.match(homepageHtml, /<h2[^>]*>Writing<\/h2>/);
+  assert.match(homepageHtml, /<h2[^>]*>Essays<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Daily<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gallery<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gratitude<\/h2>/);
@@ -111,7 +111,7 @@ try {
   assert.match(notFoundMarkdown, /## Official profiles/);
   assertProfileLinks(notFoundMarkdown, "404 markdown");
 
-  for (const path of ["/about", "/contact", "/privacy", "/blog", "/daily", "/gallery", "/history", "/people"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/blog", "/essays", "/daily", "/gallery", "/history", "/people"]) {
     const response = await get(path);
     const html = await response.text();
     assert.equal(response.status, 200, `${path} must be public`);
@@ -142,6 +142,7 @@ try {
   assert.match(llms, /llms-full\.txt/);
   assert.match(llms, /people\.md/);
   assert.match(llms, /## shubhxho/);
+  assert.match(llms, /essays\.md/);
   assert.match(llms, /daily\.md/);
   assert.match(llms, /## Markdown endpoints/);
   assertProfileLinks(llms, "llms.txt");
@@ -151,6 +152,7 @@ try {
   assert.match(llmsFull, /## Agent workflow/);
   assert.match(llmsFull, /## Markdown endpoints/);
   assert.match(llmsFull, /## People/);
+  assert.match(llmsFull, /## Essays/);
   assert.match(llmsFull, /## Writing/);
   assert.match(llmsFull, /## Pages/);
   assert.match(llmsFull, /## Daily/);
@@ -166,6 +168,8 @@ try {
   await expectMarkdown("/about.md", /^# About Shubh Gupta/m);
   await expectMarkdown("/contact.md", /^# Contact Shubh Gupta/m);
   await expectMarkdown("/privacy.md", /^# Privacy/m);
+  await expectMarkdown("/essays.md", /^# Essays/m);
+  await expectMarkdown("/essays/from-khagaria.md", /^# From Khagaria/m);
   await expectMarkdown("/people.md", /^# Gratitude/m);
   await expectMarkdown("/people/hackclub.md", /^# Hack Club/m);
   await expectMarkdown("/people/hermes-mail.md", /^# Hermes Mail/m);
@@ -185,13 +189,22 @@ try {
   assert.match(feed, /<rss version="2.0"/);
 
   const sitemap = await (await get("/sitemap.xml")).text();
-  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/daily", "/people"]) {
+  for (const path of ["/about", "/contact", "/privacy", "/gallery", "/history", "/blog", "/essays", "/daily", "/people"]) {
     assert.match(sitemap, new RegExp(`https://shubhxho\\.com${path}`));
   }
-  assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hackclub/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/essays\/from-khagaria/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/essays\/from-khagaria/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/daily/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/daily\/2026-08-29/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hermes-mail/);
+
+  const essayEntry = await get("/essays/from-khagaria");
+  assert.equal(essayEntry.status, 200, "/essays/from-khagaria must be public");
+  assert.match(await essayEntry.text(), /From Khagaria/);
+
+  const essayRedirect = await get("/blog/from-khagaria", { redirect: "manual" });
+  assert.equal(essayRedirect.status, 308, "/blog/from-khagaria must redirect to /essays/from-khagaria");
+  assert.match(essayRedirect.headers.get("location") ?? "", /\/essays\/from-khagaria$/);
 
   const personEntry = await get("/people/hackclub");
   assert.equal(personEntry.status, 200, "/people/hackclub must be public");

@@ -1,5 +1,6 @@
-import { getAllPosts } from "@/lib/blog";
+import { getAllNotes, getAllPosts, getPostPath } from "@/lib/blog";
 import { getAllDaily } from "@/lib/daily";
+import { getAllEssays } from "@/lib/essays";
 import { getPages } from "@/lib/pages";
 import { getAllPeople } from "@/lib/people";
 import { site } from "@/lib/site";
@@ -23,6 +24,8 @@ function entry(
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
+  const essays = getAllEssays();
+  const notes = getAllNotes();
   const daily = getAllDaily();
   const people = getAllPeople();
   const pages = getPages();
@@ -35,13 +38,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       images: [`${site.url}/opengraph-image`],
     },
+    entry("/essays", {
+      lastModified: new Date(essays[0]?.date ?? site.lastUpdated),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    }),
+    ...essays.map((essay) =>
+      entry(getPostPath(essay), {
+        lastModified: new Date(essay.date),
+        priority: 0.75,
+      }),
+    ),
     entry("/blog", {
       lastModified: new Date(posts[0]?.date ?? site.lastUpdated),
       changeFrequency: "weekly",
       priority: 0.8,
     }),
-    ...posts.map((post) =>
-      entry(`/blog/${post.slug}`, {
+    ...notes.map((post) =>
+      entry(getPostPath(post), {
         lastModified: new Date(post.date),
         priority: 0.7,
       }),

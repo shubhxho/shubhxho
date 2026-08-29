@@ -33,7 +33,11 @@ Required: `title`, `description`, `href`. Optional: `role`, `year`, `tip`, `orde
 
 ## `content/blog/*.mdx`
 
-Required: `title`, `description`, `date` (ISO `YYYY-MM-DD`). Body is MDX via `MdxArticle`.
+Required: `title`, `description`, `date` (ISO `YYYY-MM-DD`). Optional: `kind` (`essay` or `note`, default `note`). Essays are listed at `/essays` and served at `/essays/{slug}`. Notes stay at `/blog/{slug}`. Body is MDX via `MdxArticle`.
+
+## `content/essays.md`
+
+Section copy for `/essays`: `title`, `description`, `intro`.
 
 ## `content/daily/*.mdx`
 
