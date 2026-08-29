@@ -10,6 +10,10 @@ export type HomeContent = {
   writingLabel: string;
   writingLinkLabel: string;
   writingPreviewCount: number;
+  dailyLabel: string;
+  dailyUrl: string;
+  dailyLinkLabel: string;
+  dailyPreviewCount: number;
   historyLabel: string;
   historyUrl: string;
   historyLinkLabel: string;

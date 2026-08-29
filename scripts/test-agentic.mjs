@@ -72,6 +72,7 @@ try {
   assert.match(homepageHtml, /<h2[^>]*>History<\/h2>/);
   assert.match(homepageHtml, /working on<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Writing<\/h2>/);
+  assert.match(homepageHtml, /<h2[^>]*>Daily<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gallery<\/h2>/);
   assert.match(homepageHtml, /<h2[^>]*>Gratitude<\/h2>/);
   assert.ok(textFromHtml(homepageHtml).length > 500, "homepage must have 500+ characters without JavaScript");

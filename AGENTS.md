@@ -28,17 +28,20 @@ content/
 ├── people.md         # gratitude section copy
 ├── people/*.mdx      # people I look up to
 ├── blog/*.mdx        # writing
+├── daily.md          # daily section copy
+├── daily/*.mdx       # dated notes
 ├── projects/*.md     # selected work
 └── pages/*.mdx       # about, contact, privacy
 ```
 
-Loaders: `src/lib/content.ts` · `src/lib/people.ts` · `src/lib/posts.ts` · `src/lib/pages.ts` · parser: `src/lib/markdown.ts` · types: `src/lib/content-types.ts`
+Loaders: `src/lib/content.ts` · `src/lib/people.ts` · `src/lib/posts.ts` · `src/lib/daily.ts` · `src/lib/pages.ts` · parser: `src/lib/markdown.ts` · types: `src/lib/content-types.ts`
 
 ## Common tasks
 
 | User wants | Do this |
 |------------|---------|
 | New blog post | Add `content/blog/slug.mdx` with frontmatter + body |
+| New daily note | Add `content/daily/YYYY-MM-DD.mdx` with `date` |
 | New person (gratitude) | Add `content/people/slug.mdx` with `name` / `order` |
 | New project | Add `content/projects/slug.md` with `order` |
 | Edit homepage | Edit `content/home.md` |

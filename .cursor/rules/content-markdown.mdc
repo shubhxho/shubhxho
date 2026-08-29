@@ -35,6 +35,10 @@ Required: `title`, `description`, `href`. Optional: `role`, `year`, `tip`, `orde
 
 Required: `title`, `description`, `date` (ISO `YYYY-MM-DD`). Body is MDX via `MdxArticle`.
 
+## `content/daily/*.mdx`
+
+Required: `date` (ISO `YYYY-MM-DD`). Optional: `title`, `description`. Filename is the slug (`YYYY-MM-DD.mdx`). Section copy is `content/daily.md`.
+
 ## `content/gallery.md`
 
 Frontmatter: `url`, `cloudinaryBase`, `intro`. Body lines:

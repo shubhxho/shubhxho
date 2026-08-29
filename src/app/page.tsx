@@ -6,6 +6,7 @@ import {
   getProjects,
   getTimeline,
 } from "@/lib/content";
+import { getAllDaily } from "@/lib/daily";
 import { getAllPeople } from "@/lib/people";
 import { getStructuredData } from "@/lib/site";
 
@@ -22,6 +23,13 @@ export default function Home() {
       date: post.date,
     }));
   const people = getAllPeople().slice(0, home.peoplePreviewCount);
+  const daily = getAllDaily()
+    .slice(0, home.dailyPreviewCount)
+    .map((entry) => ({
+      slug: entry.slug,
+      title: entry.title,
+      date: entry.date,
+    }));
 
   return (
     <>
@@ -30,6 +38,7 @@ export default function Home() {
         projects={projects}
         gallery={gallery}
         posts={posts}
+        daily={daily}
         timeline={timeline}
         people={people}
       />

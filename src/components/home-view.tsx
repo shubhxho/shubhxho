@@ -13,11 +13,12 @@ type HomeViewProps = {
   projects: Project[];
   gallery: GalleryContent;
   posts: BlogPostListItem[];
+  daily: BlogPostListItem[];
   timeline: TimelineEntry[];
   people: Person[];
 };
 
-export function HomeView({ home, projects, gallery, posts, timeline, people }: HomeViewProps) {
+export function HomeView({ home, projects, gallery, posts, daily, timeline, people }: HomeViewProps) {
   return (
     <main className="flex flex-1 flex-col">
       <FadeIn className="site-shell px-5 pt-16 pb-20 sm:px-0 sm:pt-24">
@@ -79,6 +80,18 @@ export function HomeView({ home, projects, gallery, posts, timeline, people }: H
             </Link>
           </div>
           <BlogPostList posts={posts} />
+        </section>
+
+        <section className="mt-16" aria-labelledby="daily-label">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <h2 id="daily-label" className="text-xl font-bold tracking-tight">
+              {home.dailyLabel}
+            </h2>
+            <Link href={home.dailyUrl} className="ink-link text-sm">
+              {home.dailyLinkLabel}
+            </Link>
+          </div>
+          <BlogPostList posts={daily} basePath="/daily" />
         </section>
 
         <section className="mt-16" aria-labelledby="gallery-label">

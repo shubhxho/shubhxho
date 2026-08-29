@@ -12,6 +12,7 @@ Personal site for **Shubh Gupta** (`shubhxho`). Next.js 16 App Router. Style: sp
 ```
 content/pages/*.mdx     → pages.ts      → /about /contact /privacy
 content/blog/*.mdx      → posts.ts      → blog.ts → /blog
+content/daily/*.mdx     → daily.ts      → /daily
 content/people/*.mdx    → people.ts     → /people (gratitude)
 content/**/*.md         → content.ts    → homepage, gallery, history
                           markdown.ts
@@ -22,6 +23,7 @@ content/**/*.md         → content.ts    → homepage, gallery, history
 | Homepage copy + labels | `content/home.md` | `getHomeContent()` |
 | Projects | `content/projects/*.md` | `getProjects()` |
 | Blog | `content/blog/*.mdx` | `getAllPosts()` / `getPost()` |
+| Daily | `content/daily/*.mdx` | `getAllDaily()` / `getDaily()` |
 | Gallery mosaic | `content/gallery.md` | `getGalleryContent()` |
 | History / timeline | `content/timeline.md` | `getTimeline()` |
 | Gratitude / people | `content/people/*.mdx` | `getAllPeople()` / `getPerson()` |
@@ -33,13 +35,13 @@ content/**/*.md         → content.ts    → homepage, gallery, history
 
 1. **Copy or new posts** → markdown in `content/` only
 2. **Layout / behavior** → `src/components/` + `src/app/`
-3. **Never** import `@/lib/content`, `@/lib/people`, `@/lib/posts`, or `@/lib/pages` in `"use client"` files — types from `@/lib/content-types` only
+3. **Never** import `@/lib/content`, `@/lib/people`, `@/lib/posts`, `@/lib/daily`, or `@/lib/pages` in `"use client"` files — types from `@/lib/content-types` only
 4. **Verify** → `npm test` (build + agentic smoke tests)
 5. **Commit** only when the user asks
 
 ## Routes
 
-`/`, `/blog`, `/blog/[slug]`, `/gallery`, `/history`, `/people`, `/people/[slug]`, `/about`, `/contact`, `/privacy`
+`/`, `/blog`, `/blog/[slug]`, `/daily`, `/daily/[slug]`, `/gallery`, `/history`, `/people`, `/people/[slug]`, `/about`, `/contact`, `/privacy`
 
 Gratitude is the public name; URLs are `/people`. Old `/gratitude` paths redirect.
 

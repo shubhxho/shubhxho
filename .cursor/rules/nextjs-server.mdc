@@ -13,7 +13,7 @@ Read `node_modules/next/dist/docs/` before changing App Router APIs — this Nex
 - **Server** (default): pages, layouts, loaders (`getHomeContent()`, `getAllPosts()`, `getAllPeople()`, `getPage()`)
 - **Client** (`"use client"`): `Header`, `HomeView`, `FadeIn`, `Tip`, `GalleryMosaic` (uses Next Image)
 - Load markdown on server → pass props to client components
-- `node:fs` only in `markdown.ts`, `content.ts`, `posts.ts`, `people.ts`, `pages.ts`
+- `node:fs` only in `markdown.ts`, `content.ts`, `posts.ts`, `daily.ts`, `people.ts`, `pages.ts`
 
 ## Adding a page
 

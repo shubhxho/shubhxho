@@ -10,6 +10,10 @@ galleryExternalUrl: https://gallery.shubhxho.com
 writingLabel: Writing
 writingLinkLabel: all writing →
 writingPreviewCount: 4
+dailyLabel: Daily
+dailyUrl: /daily
+dailyLinkLabel: all daily →
+dailyPreviewCount: 4
 historyLabel: History
 historyUrl: /history
 historyLinkLabel: full timeline →
