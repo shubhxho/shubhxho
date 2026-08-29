@@ -175,10 +175,15 @@ try {
   await expectMarkdown("/people/hermes-mail.md", /^# Hermes Mail/m);
   await expectMarkdown("/daily.md", /^# Daily/m);
   await expectMarkdown("/daily/2026-08-29.md", /^# Agent discovery and site links/m);
+  await expectMarkdown("/daily/2026-08-30.md", /^# Essays on their own page/m);
 
   const dailyEntry = await get("/daily/2026-08-29");
   assert.equal(dailyEntry.status, 200, "/daily/2026-08-29 must be public");
   assert.match(await dailyEntry.text(), /Agent discovery and site links/);
+
+  const dailyEssaysEntry = await get("/daily/2026-08-30");
+  assert.equal(dailyEssaysEntry.status, 200, "/daily/2026-08-30 must be public");
+  assert.match(await dailyEssaysEntry.text(), /Essays on their own page/);
 
   const humans = await (await get("/humans.txt")).text();
   assert.match(humans, /shubhxho/);
@@ -195,7 +200,9 @@ try {
   assert.match(sitemap, /https:\/\/shubhxho\.com\/essays\/from-khagaria/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/essays\/from-khagaria/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/daily/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/daily\/2026-08-18/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/daily\/2026-08-29/);
+  assert.match(sitemap, /https:\/\/shubhxho\.com\/daily\/2026-08-30/);
   assert.match(sitemap, /https:\/\/shubhxho\.com\/people\/hermes-mail/);
 
   const essayEntry = await get("/essays/from-khagaria");

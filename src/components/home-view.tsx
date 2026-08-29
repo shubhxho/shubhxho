@@ -71,18 +71,6 @@ export function HomeView({ home, projects, gallery, posts, daily, timeline, peop
           <BlogPostList posts={posts} />
         </section>
 
-        <section className="mt-16" aria-labelledby="history-label">
-          <div className="mb-6 flex items-baseline justify-between gap-4">
-            <h2 id="history-label" className="text-xl font-bold tracking-tight">
-              {home.historyLabel}
-            </h2>
-            <Link href={home.historyUrl} className="ink-link text-sm">
-              {home.historyLinkLabel}
-            </Link>
-          </div>
-          <TimelineList entries={timeline} />
-        </section>
-
         <section className="mt-16" aria-labelledby="daily-label">
           <div className="mb-6 flex items-baseline justify-between gap-4">
             <h2 id="daily-label" className="text-xl font-bold tracking-tight">
@@ -93,6 +81,18 @@ export function HomeView({ home, projects, gallery, posts, daily, timeline, peop
             </Link>
           </div>
           <DailyView variant="list" entries={daily} />
+        </section>
+
+        <section className="mt-16" aria-labelledby="history-label">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <h2 id="history-label" className="text-xl font-bold tracking-tight">
+              {home.historyLabel}
+            </h2>
+            <Link href={home.historyUrl} className="ink-link text-sm">
+              {home.historyLinkLabel}
+            </Link>
+          </div>
+          <TimelineList entries={timeline} />
         </section>
 
         <section className="mt-16" aria-labelledby="gallery-label">

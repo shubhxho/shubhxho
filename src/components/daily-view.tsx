@@ -4,16 +4,17 @@ import { MdxArticle } from "@/components/mdx-article";
 import type { DailyEntry } from "@/lib/content-types";
 import { formatPostDate } from "@/lib/blog";
 
-function DailyList({ entries }: { entries: DailyEntry[] }) {
+function DailyList({ entries, compact = false }: { entries: DailyEntry[]; compact?: boolean }) {
   return (
     <BlogPostList
       posts={entries.map((entry) => ({
         slug: entry.slug,
         title: entry.title,
         date: entry.date,
+        description: entry.description,
         href: `/daily/${entry.slug}`,
       }))}
-      compact
+      compact={compact}
     />
   );
 }
@@ -28,6 +29,7 @@ type DailyViewProps =
   | {
       variant: "list";
       entries: DailyEntry[];
+      compact?: boolean;
     }
   | {
       variant: "entry";
@@ -46,7 +48,7 @@ export function DailyView(props: DailyViewProps) {
   }
 
   if (props.variant === "list") {
-    return <DailyList entries={props.entries} />;
+    return <DailyList entries={props.entries} compact={props.compact} />;
   }
 
   return (
