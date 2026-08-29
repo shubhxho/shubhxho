@@ -12,7 +12,7 @@ Personal site for **Shubh Gupta** (`shubhxho`). Next.js 16 App Router. Style: sp
 ```
 content/pages/*.mdx     → pages.ts      → /about /contact /privacy
 content/blog/*.mdx      → posts.ts      → /blog (notes) and /essays
-content/daily/*.mdx     → daily.ts      → /daily
+content/daily/*.mdx     → daily.ts      → DailyView → /daily/{YYYY-MM-DD}
 content/people/*.mdx    → people.ts     → /people (gratitude)
 content/**/*.md         → content.ts    → homepage, gallery, history
                           markdown.ts

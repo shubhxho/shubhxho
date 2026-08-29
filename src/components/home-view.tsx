@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { BlogPostList, type BlogPostListItem } from "@/components/blog-post-list";
+import { DailyView } from "@/components/daily-view";
 import { FadeIn } from "@/components/fade-in";
 import { GalleryMosaic } from "@/components/gallery-mosaic";
 import { GratitudeView } from "@/components/gratitude-view";
 import { Tip } from "@/components/hover-tip";
 import { TimelineList } from "@/components/timeline-list";
-import type { GalleryContent, HomeContent, Person, Project, TimelineEntry } from "@/lib/content-types";
+import type { DailyEntry, GalleryContent, HomeContent, Person, Project, TimelineEntry } from "@/lib/content-types";
 import { getProfileLinks, site } from "@/lib/site";
 
 type HomeViewProps = {
@@ -13,7 +14,7 @@ type HomeViewProps = {
   projects: Project[];
   gallery: GalleryContent;
   posts: BlogPostListItem[];
-  daily: BlogPostListItem[];
+  daily: DailyEntry[];
   timeline: TimelineEntry[];
   people: Person[];
 };
@@ -91,7 +92,7 @@ export function HomeView({ home, projects, gallery, posts, daily, timeline, peop
               {home.dailyLinkLabel}
             </Link>
           </div>
-          <BlogPostList posts={daily} basePath="/daily" compact />
+          <DailyView variant="list" entries={daily} />
         </section>
 
         <section className="mt-16" aria-labelledby="gallery-label">

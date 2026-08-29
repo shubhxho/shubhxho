@@ -1,4 +1,4 @@
-import { getAllDaily, getDailyMarkdown } from "@/lib/daily";
+import { getAllDaily, getDaily, getDailyMarkdown, getDailyPath } from "@/lib/daily";
 import { site } from "@/lib/site";
 
 type DailyMarkdownRouteProps = {
@@ -11,9 +11,10 @@ export function generateStaticParams() {
 
 export async function GET(_request: Request, { params }: DailyMarkdownRouteProps) {
   const { slug } = await params;
+  const entry = getDaily(slug);
   const markdown = getDailyMarkdown(slug);
 
-  if (!markdown) {
+  if (!entry || !markdown) {
     return new Response("Not found", { status: 404 });
   }
 
@@ -21,7 +22,7 @@ export async function GET(_request: Request, { params }: DailyMarkdownRouteProps
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
       "Cache-Control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
-      Link: `<${site.url}/daily/${slug}>; rel="canonical"`,
+      Link: `<${site.url}${getDailyPath(entry)}>; rel="canonical"`,
       Vary: "Accept, Accept-Encoding",
       "X-Robots-Tag": "noindex, follow",
     },

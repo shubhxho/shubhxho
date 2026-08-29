@@ -8,7 +8,7 @@ import {
   site,
 } from "@/lib/site";
 import { getAllPosts, getPostPath } from "@/lib/blog";
-import { getAllDaily, getDailyDiscoveryMarkdown } from "@/lib/daily";
+import { getAllDaily, getDailyDiscoveryMarkdown, getDailyPath } from "@/lib/daily";
 import { getAllEssays, getEssaysDiscoveryMarkdown } from "@/lib/essays";
 import { getTimeline } from "@/lib/content";
 import { getPagesDiscoveryMarkdown, getPagesMarkdownEndpoints } from "@/lib/pages";
@@ -53,7 +53,7 @@ const markdownEndpoints = [
   ),
   ...getAllDaily().map(
     (entry) =>
-      `- [${entry.title}](${site.url}/daily/${entry.slug}.md): ${entry.description}`,
+      `- [${entry.title}](${site.url}${getDailyPath(entry)}.md): ${entry.description}`,
   ),
   ...getPagesMarkdownEndpoints().split("\n"),
   externalProfileEndpoints,
@@ -64,7 +64,7 @@ const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discover
 3. Use [profile.md](${site.url}/profile.md) for a homepage Markdown snapshot.
 4. Use [essays.md](${site.url}/essays.md) for essays; each essay has \`/essays/{slug}.md\`.
 5. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
-6. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{slug}.md\`.
+6. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{YYYY-MM-DD}.md\`.
 7. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
 8. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
 9. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;

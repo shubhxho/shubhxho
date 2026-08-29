@@ -43,7 +43,7 @@ Loaders: `src/lib/content.ts` · `src/lib/people.ts` · `src/lib/posts.ts` · `s
 |------------|---------|
 | New blog post | Add `content/blog/slug.mdx` with frontmatter + `kind: note` |
 | New essay | Add `content/blog/slug.mdx` with `kind: essay` |
-| New daily note | Add `content/daily/YYYY-MM-DD.mdx` with `date` |
+| New daily note | Add `content/daily/YYYY-MM-DD.mdx` with `date` / optional `slug` |
 | New person (gratitude) | Add `content/people/slug.mdx` with `name` / `order` |
 | New project | Add `content/projects/slug.md` with `order` |
 | Edit homepage | Edit `content/home.md` |

@@ -1,5 +1,5 @@
 import { getAllNotes, getAllPosts, getPostPath } from "@/lib/blog";
-import { getAllDaily } from "@/lib/daily";
+import { getAllDaily, getDailyPath } from "@/lib/daily";
 import { getAllEssays } from "@/lib/essays";
 import { getPages } from "@/lib/pages";
 import { getAllPeople } from "@/lib/people";
@@ -66,7 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }),
     ...daily.map((note) =>
-      entry(`/daily/${note.slug}`, {
+      entry(getDailyPath(note), {
         lastModified: new Date(note.date),
         changeFrequency: "yearly",
         priority: 0.6,

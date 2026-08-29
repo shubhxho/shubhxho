@@ -41,7 +41,7 @@ Section copy for `/essays`: `title`, `description`, `intro`.
 
 ## `content/daily/*.mdx`
 
-Required: `date` (ISO `YYYY-MM-DD`). Optional: `title`, `description`. Filename is the slug (`YYYY-MM-DD.mdx`). Section copy is `content/daily.md`.
+Required: `date` (ISO `YYYY-MM-DD`). Optional: `slug` (must be `YYYY-MM-DD`), `title`, `description`. URL is `/daily/{YYYY-MM-DD}` via `getAllDaily()`. Filename should match the date. Section copy is `content/daily.md`.
 
 ## `content/gallery.md`
 

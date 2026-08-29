@@ -8,14 +8,16 @@ import { site } from "@/lib/site";
 export type { DailyEntry } from "@/lib/content-types";
 
 const dailyDirectory = path.join(contentRoot, "daily");
+const dateSlug = /^\d{4}-\d{2}-\d{2}$/;
 
 function toDailyEntry(filename: string): DailyEntry | null {
   const source = fs.readFileSync(path.join(dailyDirectory, filename), "utf8");
   const { attributes, content } = parseFrontMatter(source);
-  const date = attributes.date;
-  const slug = filename.replace(/\.mdx$/, "");
+  const fileSlug = filename.replace(/\.mdx$/, "");
+  const date = attributes.date ?? fileSlug;
+  const slug = attributes.slug ?? date;
 
-  if (!date) return null;
+  if (!dateSlug.test(date) || !dateSlug.test(slug)) return null;
 
   const title = attributes.title ?? formatPostDate(date);
   const description = attributes.description ?? markdownToPlainText(content).slice(0, 160);
@@ -56,24 +58,42 @@ export function getDaily(slug: string) {
   return getAllDaily().find((entry) => entry.slug === slug);
 }
 
+export function getDailyPath(entry: Pick<DailyEntry, "slug">) {
+  return `/daily/${entry.slug}`;
+}
+
+export function toDailyListItem(entry: DailyEntry) {
+  return {
+    slug: entry.slug,
+    title: entry.title,
+    date: entry.date,
+    description: entry.description,
+    href: getDailyPath(entry),
+  };
+}
+
+function buildDailyMarkdown(entry: DailyEntry) {
+  return `# ${entry.title}\n\n${entry.content}`.trim();
+}
+
 export function getDailyMarkdown(slug: string) {
   const entry = getDaily(slug);
   if (!entry) return null;
 
-  return `# ${entry.title}\n\n${entry.content}`.trim();
+  return buildDailyMarkdown(entry);
 }
 
 export function getDailyIndexMarkdown() {
   const meta = getDailyMeta();
   const entries = getAllDaily()
-    .map((entry) => `- [${entry.title}](/daily/${entry.slug}): ${entry.description}`)
+    .map((entry) => `- [${entry.title}](${getDailyPath(entry)}.md): ${entry.description}`)
     .join("\n");
 
-  return `# ${meta.title}\n\n${meta.intro}\n\n${entries}`.trim();
+  return `# ${meta.title}\n\n> ${meta.description}\n\n${meta.intro}\n\n${entries}`.trim();
 }
 
 export function getDailyDiscoveryMarkdown() {
   return getAllDaily()
-    .map((entry) => `- [${entry.title}](${site.url}/daily/${entry.slug}): ${entry.description}`)
+    .map((entry) => `- [${entry.title}](${site.url}${getDailyPath(entry)}): ${entry.description}`)
     .join("\n");
 }

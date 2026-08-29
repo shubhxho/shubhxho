@@ -28,8 +28,9 @@ Sparse personal-site aesthetic (kdrag0n / kognise). Do not add heavy gradients, 
 | `GalleryMosaic` | Gallery grid (`compact` on home) |
 | `TimelineList` | History rows |
 | `BlogPostList` | Writing index rows |
+| `DailyView` | Daily index, homepage list, and `/daily/{YYYY-MM-DD}` MDX |
 | `PeopleView` / `GratitudeView` | Gratitude list + person MDX |
-| `MdxArticle` | Blog, people, and trust pages (about / contact / privacy) |
+| `MdxArticle` | Blog, daily, people, and trust pages (about / contact / privacy) |
 | `FadeIn` | Page enter animation (GSAP) |
 | `Tip` | Hover tips on links |
 

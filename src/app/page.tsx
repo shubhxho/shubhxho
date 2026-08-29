@@ -18,13 +18,7 @@ export default function Home() {
   const timeline = getTimeline().slice(0, home.historyPreviewCount);
   const posts = getAllEssays().slice(0, home.essaysPreviewCount).map(toEssayListItem);
   const people = getAllPeople().slice(0, home.peoplePreviewCount);
-  const daily = getAllDaily()
-    .slice(0, home.dailyPreviewCount)
-    .map((entry) => ({
-      slug: entry.slug,
-      title: entry.title,
-      date: entry.date,
-    }));
+  const daily = getAllDaily().slice(0, home.dailyPreviewCount);
 
   return (
     <>
