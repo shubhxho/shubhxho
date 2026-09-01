@@ -1,6 +1,6 @@
 import { HomeView } from "@/components/home-view";
 import { toEssayListItem } from "@/lib/essays";
-import { getAllEssays } from "@/lib/posts";
+import { getAllEssays, getAllNotes, getPostPath } from "@/lib/posts";
 import {
   getGalleryContent,
   getHomeContent,
@@ -17,6 +17,14 @@ export default function Home() {
   const gallery = getGalleryContent();
   const timeline = getTimeline().slice(0, home.historyPreviewCount);
   const posts = getAllEssays().slice(0, home.essaysPreviewCount).map(toEssayListItem);
+  const notes = getAllNotes().slice(0, home.writingPreviewCount).map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    date: post.date,
+    description: post.description,
+    readingTime: post.readingTime,
+    href: getPostPath(post),
+  }));
   const people = getAllPeople().slice(0, home.peoplePreviewCount);
   const daily = getAllDaily().slice(0, home.dailyPreviewCount);
 
@@ -27,6 +35,7 @@ export default function Home() {
         projects={projects}
         gallery={gallery}
         posts={posts}
+        notes={notes}
         daily={daily}
         timeline={timeline}
         people={people}

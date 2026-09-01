@@ -27,7 +27,7 @@ export function getNotFoundMarkdown(pathname: string) {
 ${pageSlugs.map((slug) => `- [${slug}](${site.url}/${slug}) ([Markdown](${site.url}/${slug}.md))`).join("\n")}
 - [History](${site.url}/history): chronological timeline
 - [Gallery](${site.url}/gallery): visual work
-- [Writing](${site.url}/blog): essays and notes
+- [Blog](${site.url}/blog): project notes and experiments ([Markdown](${site.url}/blog.md))
 - [Essays](${site.url}/essays): longer writing ([Markdown](${site.url}/essays.md))
 - [Sitemap](${site.url}/sitemap.xml): canonical indexable pages
 

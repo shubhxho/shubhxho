@@ -14,7 +14,7 @@ export const site = {
   copyrightName: "Shubh Gupta",
   locale: "en_US",
   language: "en-IN",
-  lastUpdated: "2026-08-30",
+  lastUpdated: "2026-09-02",
   email: "shubh@shubhxho.com",
   keywords: [
     "Shubh Gupta",

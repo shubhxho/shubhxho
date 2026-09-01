@@ -1,7 +1,7 @@
 ---
 name: Shubh Gupta
 headline: Hi. I make things.
-bio: I like solving hard problems and building robots, systems, and unusual software around them. Engineer and hacker from Khagaria.
+bio: I like solving hard problems and building robots, systems, and unusual software around them. I am very ADHD-maxxer in my projects, still figuring Git out though—let's see how that goes. Engineer and hacker from Khagaria.
 projectsLabel: What I'm working on
 galleryLabel: Gallery
 galleryUrl: /gallery
@@ -11,8 +11,8 @@ essaysLabel: Essays
 essaysUrl: /essays
 essaysLinkLabel: all essays →
 essaysPreviewCount: 4
-writingLabel: Writing
-writingLinkLabel: all writing →
+writingLabel: Blog
+writingLinkLabel: all posts →
 writingPreviewCount: 4
 dailyLabel: Daily
 dailyUrl: /daily

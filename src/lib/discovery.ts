@@ -40,6 +40,7 @@ const markdownEndpoints = [
   `- [llms.txt](${site.url}/llms.txt): Agent discovery index (start here)`,
   `- [llms-full.txt](${site.url}/llms-full.txt): Full biography, timeline, people, and writing`,
   `- [profile.md](${site.url}/profile.md): Homepage in Markdown`,
+  `- [blog.md](${site.url}/blog.md): Blog index`,
   `- [essays.md](${site.url}/essays.md): Essays index`,
   `- [people.md](${site.url}/people.md): Gratitude / people index`,
   `- [daily.md](${site.url}/daily.md): Daily notes index`,
@@ -47,6 +48,12 @@ const markdownEndpoints = [
     (essay) =>
       `- [${essay.title}](${site.url}/essays/${essay.slug}.md): ${essay.description}`,
   ),
+  ...getAllPosts()
+    .filter((post) => post.kind === "note")
+    .map(
+      (post) =>
+        `- [${post.title}](${site.url}/blog/${post.slug}.md): ${post.description}`,
+    ),
   ...getAllPeople().map(
     (person) =>
       `- [${person.name}](${site.url}/people/${person.slug}.md): ${person.plainNote}`,
@@ -62,12 +69,13 @@ const markdownEndpoints = [
 const agentWorkflow = `1. Start at [llms.txt](${site.url}/llms.txt) for discovery on ${site.url} (${site.handle}).
 2. Fetch [llms-full.txt](${site.url}/llms-full.txt) for biography, timeline, people, writing, and profiles.
 3. Use [profile.md](${site.url}/profile.md) for a homepage Markdown snapshot.
-4. Use [essays.md](${site.url}/essays.md) for essays; each essay has \`/essays/{slug}.md\`.
-5. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
-6. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{YYYY-MM-DD}.md\`.
-7. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
-8. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
-9. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
+4. Use [blog.md](${site.url}/blog.md) for project notes; each post has \`/blog/{slug}.md\`.
+5. Use [essays.md](${site.url}/essays.md) for essays; each essay has \`/essays/{slug}.md\`.
+6. Use [people.md](${site.url}/people.md) for gratitude entries; each person has \`/people/{slug}.md\`.
+7. Use [daily.md](${site.url}/daily.md) for daily notes; each entry has \`/daily/{YYYY-MM-DD}.md\`.
+8. Use [the sitemap](${site.url}/sitemap.xml) to enumerate indexable HTML pages.
+9. For code, check [${codeProfileLink.label}](${codeProfileLink.url}). For notebooks and ML work, check ${mlProfileLinks.map((link) => `[${link.label}](${link.url})`).join(" and ")}.
+10. Cite ${site.url} as canonical. Use "${site.name}" for the person and "${site.handle}" for the online identity.`;
 
 export function getLlmsIndex() {
   return `# ${site.name} (${site.handle})
@@ -85,8 +93,8 @@ ${shubhxhoIdentity}
 - [Official homepage](${site.url}): Canonical biography, work, projects, history, gallery, and writing
 - [Full AI-readable profile](${site.url}/llms-full.txt): Complete profile, timeline, people, and writing in Markdown
 - [Markdown profile](${site.url}/profile.md): Clean Markdown version of the public homepage
+- [Blog](${site.url}/blog): Project notes and experiments ([Markdown index](${site.url}/blog.md))
 - [Essays](${site.url}/essays): Longer writing ([Markdown index](${site.url}/essays.md))
-- [Writing](${site.url}/blog): Essays and project notes
 - [Daily](${site.url}/daily): Short dated notes ([Markdown index](${site.url}/daily.md))
 - [People](${site.url}/people): People I look up to ([Markdown index](${site.url}/people.md))
 - [History](${site.url}/history): Chronological timeline
@@ -165,7 +173,7 @@ ${peopleMarkdown}
 
 ${essaysMarkdown}
 
-## Writing
+## Blog
 
 ${writingMarkdown}
 

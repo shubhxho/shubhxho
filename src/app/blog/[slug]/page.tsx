@@ -20,7 +20,10 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical: path,
+      types: post.kind === "note" ? { "text/markdown": `${site.url}${path}.md` } : undefined,
+    },
     openGraph: {
       type: "article",
       url: `${site.url}${path}`,

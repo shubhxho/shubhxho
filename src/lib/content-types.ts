@@ -75,7 +75,7 @@ export type ContentPage = {
   content: string;
 };
 
-export const pageSlugs = ["about", "contact", "privacy"] as const;
+export const pageSlugs = ["about", "contact", "privacy", "readme"] as const;
 
 export type ContentPageSlug = (typeof pageSlugs)[number];
 
