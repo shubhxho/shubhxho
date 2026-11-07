@@ -1,7 +1,9 @@
 Hi I am Shubh, I love crypto - robotics 
 majority of my “research” work is public
 
-currently tinkering a lot with prediction markets etc and infra you can see the work over my github
+currently tinkering a lot with prediction markets, gpus, ml 
+i love building cool stuff in cuda/gpus/harness 
+etc and infra you can see the work over my github
 <!--
 **shubhxho/shubhxho** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
